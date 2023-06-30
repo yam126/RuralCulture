@@ -1,0 +1,85 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = RuralCultureWeb
+build_property.RootNamespace = RuralCultureWeb
+build_property.ProjectDir = D:\tianzheng\RuralCulture\RuralCultureWeb\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\tianzheng\RuralCulture\RuralCultureWeb
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/AdminHome/AdminHome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Ib21lXEFkbWluSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Article/Article.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxBcnRpY2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Article/ArticleAdminList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxBcnRpY2xlQWRtaW5MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Article/ArticleDynamics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxBcnRpY2xlRHluYW1pY3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Article/ArticlePublish.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxBcnRpY2xlUHVibGlzaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Article/ArticleView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxBcnRpY2xlVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/File/FileManage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsZVxGaWxlTWFuYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Group/GroupManage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBcR3JvdXBNYW5hZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Home/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Organization/OrganizationManage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pemF0aW9uXE9yZ2FuaXphdGlvbk1hbmFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Organization/OrganizationView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW5pemF0aW9uXE9yZ2FuaXphdGlvblZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/RuralCategor/RuralCategor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUnVyYWxDYXRlZ29yXFJ1cmFsQ2F0ZWdvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Shared/_FrontFrame.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gcm9udEZyYW1lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/Shared/_SecondLevelMenuLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TZWNvbmRMZXZlbE1lbnVMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/tianzheng/RuralCulture/RuralCultureWeb/Views/SpecialCulture/SpecialCulture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbEN1bHR1cmVcU3BlY2lhbEN1bHR1cmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

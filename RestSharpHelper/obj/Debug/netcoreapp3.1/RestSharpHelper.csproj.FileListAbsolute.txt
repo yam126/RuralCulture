@@ -1,0 +1,13 @@
+D:\SVNCodeBack\RestSharpHelper\bin\Debug\netcoreapp3.1\RestSharpHelper.deps.json
+D:\SVNCodeBack\RestSharpHelper\bin\Debug\netcoreapp3.1\RestSharpHelper.dll
+D:\SVNCodeBack\RestSharpHelper\bin\Debug\netcoreapp3.1\RestSharpHelper.pdb
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.csproj.AssemblyReference.cache
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.GeneratedMSBuildEditorConfig.editorconfig
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.AssemblyInfoInputs.cache
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.AssemblyInfo.cs
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.csproj.CoreCompileInputs.cache
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.dll
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.pdb
+D:\SVNCodeBack\RestSharpHelper\bin\Debug\netcoreapp3.1\PublicLibrary.dll
+D:\SVNCodeBack\RestSharpHelper\bin\Debug\netcoreapp3.1\PublicLibrary.pdb
+D:\SVNCodeBack\RestSharpHelper\obj\Debug\netcoreapp3.1\RestSharpHelper.csproj.CopyComplete

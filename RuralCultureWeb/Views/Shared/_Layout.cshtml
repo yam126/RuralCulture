@@ -1,0 +1,197 @@
+﻿@using RuralCultureWeb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/element-ui/theme-chalk/index.css" />
+    <link rel="stylesheet" href="~/css/custom-checkbox.css" />
+    <link rel="stylesheet" href="~/css/MainMenu.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+    <link rel="stylesheet" href="~/css/element-ui-global.css" />
+    <link rel="stylesheet" href="~/lib/jqueryAlert/alert.css" />
+    <link rel="stylesheet" href="~/lib/jqueryEject/jqueryEject.css" />
+    <script type="text/javascript" src="~/lib/vue/vue.js"></script>
+    <script type="text/javascript" src="~/lib/element-ui/index.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/jqueryAlert/alert.js"></script>
+    <script type="text/javascript" src="~/lib/jqueryEject/jqueryEject.js"></script>
+    <script type="text/javascript" src="~/js/apiHelper.js"></script>
+    @RenderSection("Head")
+    @{
+        string CurrentIndex = string.Empty;
+        string UserName = string.Empty;
+        if (ViewData["CurrentIndex"] == null)
+            CurrentIndex = "0";
+        else
+            CurrentIndex = Convert.ToString(ViewData["CurrentIndex"]);
+        if(CacheHelper.CacheValue("Account")!=null)
+           UserName = Convert.ToString(CacheHelper.CacheValue("Account"));
+    }
+    <script type="text/javascript">
+    var currentFirstMenu=null;
+    var firstMenuTemplate="";
+    var currentHref=window.location.href;
+    var allMenuData=null;
+    function LoadFirstMenu(){
+        $.getJSON("/json/MenuData.json",function(menuData){
+            allMenuData=menuData;
+            var menuHtml="";
+            if(firstMenuTemplate=="")
+               firstMenuTemplate=$("#FirstMenu").html();
+            for(var i=0;i<menuData.FirstMenu.length;i++){
+                var menuItem=menuData.FirstMenu[i];
+                var menuItemHtml=firstMenuTemplate;
+                menuItemHtml=menuItemHtml.replace("{MenuItemUrl}",menuItem.Url);
+                menuItemHtml=menuItemHtml.replace("{MenuItemName}",menuItem.MenuName);
+                menuItemHtml=menuItemHtml.replace("{Target}",menuItem.Target);
+                if(currentHref.toLowerCase().indexOf(menuItem.Url.toLowerCase())!=-1)
+                {
+                   currentFirstMenu=menuItem;
+                   menuItemHtml=menuItemHtml.replace("{MenuClass}","MenuItemClick");
+                   menuItemHtml=menuItemHtml.replace("MenuItemClick","MenuItemClick");
+                }
+                else
+                {
+                   menuItemHtml=menuItemHtml.replace("{MenuClass}","MenuItem");
+                   menuItemHtml=menuItemHtml.replace("MenuItemClick","MenuItem");
+                }
+                menuHtml+=menuItemHtml;
+            }
+            $("#FirstMenu").html(menuHtml);
+            $(".userName").html(userName);
+            $(".MenuContainer").children().each(function(index,element){
+                $(element).click(function(){
+                    currentIndex=index;
+                    var linkButton=$(element).children("a");
+                    if(linkButton!=null&&linkButton.length>0)
+                        self.location=linkButton.attr("href");
+                    $(element).attr("class","MenuItemClick");
+                    setMainMenuClass();
+                });
+            });
+            loadSecondMenu();
+            markThreeLevel();
+        });
+    }
+    </script>
+    <script type="text/javascript">       
+        //主菜单点击切换样式代码
+        var userName="@UserName";
+        var currentIndex=@CurrentIndex;//默认点击的菜单
+        $(document).ready(function(){
+            LoadFirstMenu();
+        });
+        function setMainMenuClass(){
+            $(".MenuContainer").children().each(function(index,element){
+                if(currentIndex!=index)
+                   $(element).attr("class","MenuItem");
+            });
+        }
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#LogoutIcon").click(function(){
+            //$.confirm('确定要退出系统?',
+            //          function() {
+            //             self.location="/Login/Index";
+            //          },
+            //          function() {
+            //          });
+            var Ealt=new Eject();
+            Ealt.Econfirm({
+                title:'是否退出',
+                message:'确定要退出系统?',
+                define:function(){
+                    self.location="/Login/Index";
+                },
+                cancel:function(){
+                    console.log();
+                }
+            });
+            dialogModelAutoCenter();          
+        });
+        $(window).resize(function(){
+          dialogModelAutoCenter(); 
+        });
+        $("#userInfo-container").click(function(){
+            if($("#userBubble").css("display")=="none")
+               $("#userBubble").show();
+            else
+               $("#userBubble").hide();
+        });
+        $("#TopMenu").click(function(){
+            $(".SecondMenuFoldPopMenu").hide();
+        });
+    });
+    function dialogModelAutoCenter(){
+        var Width=$(window).width();
+        var Height=$(window).height();
+        var dialogWidth=$(".dialog-modal").outerWidth();
+        var dialogHeight=$(".dialog-modal").outerHeight();
+        var left=(Width-dialogWidth)/2;
+        var top=(Height-dialogHeight)/2;
+        $(".dialog-modal").css({
+            "position":"absolute",
+            "top":left+"px",
+            "left":top+"px"
+        });
+    }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <el-container>
+            <div id="userBubble">
+                <!--/个人中心-->
+                <!--/系统设置-->
+                <div class="MenuItem">
+                    个人中心
+                </div>
+                <div class="MenuItem">
+                    系统设置
+                </div>
+            </div>
+            <div id="TopMenu">
+                <div class="SystemNameContainer">
+                    <div class="MainTitle">
+                        林雨村
+                    </div>
+                    <div class="SubTitle">
+                        数字乡村后台管理系统
+                    </div>
+                </div>
+                <!--顶部菜单容器-->
+                <div id="FirstMenu" class="MenuContainer">
+                    <!--普通菜单样式-->
+                    <div class="{MenuClass}">
+                        <a href="{MenuItemUrl}" target="{Target}" >{MenuItemName}</a>
+                    </div>
+                    <!--/普通菜单样式-->
+                </div>
+                <!--/顶部菜单容器-->
+                <!--用户信息-->
+                <div id="userInfo-container">
+                    <!--头像缩略图-->
+                    <img src="~/images/userFace.png" class="userFace" />
+                    <!--/头像缩略图-->
+                    <!--用户名-->
+                    <div id="userName" class="userName">
+                        林雨村管理员
+                    </div>
+                    <!--/用户名-->
+                </div>
+                <!--用户信息-->
+                <div id="MessageIcon" title="消息">
+                    <div class="MessageNumber"></div>
+                </div>
+                <img src="~/images/logoutIcon.png" title="退出" alt="退出" id="LogoutIcon" />
+            </div>
+            @RenderSection("Body")
+        </el-container>
+    </div>
+</body>
+@RenderSection("VueScript")
+</html>

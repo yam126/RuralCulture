@@ -1,0 +1,91 @@
+﻿#columnFieldContainer {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 0px solid red;
+}
+
+#articleVideoPlayer {
+    width: 100%;
+    height: 50vh;
+    display: none;
+    margin-top: 0px;
+    margin-left: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-bottom: 0px solid #7A7B80;
+    border-left: 0px solid #7A7B80;
+    border-right: 0px solid #7A7B80;
+    border-top: 1px solid #7A7B80;
+    float: left;
+}
+
+#myPlayer {
+    width: 98%;
+    height: 97%;
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 0px solid red;
+    float: left;
+}
+
+#uploadMessage {
+    width: 98%;
+    height: 41vh;
+    line-height: 3vh;
+    margin-top: 1%;
+    margin-left: 1%;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    text-indent: 2%;
+    color: #000000;
+    overflow: auto;
+    border: 0px solid red;
+}
+
+#buttonContainer {
+    width: 100%;
+    height: 5vh;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 0px solid red;
+}
+
+#btnSave {
+    width: 8vw;
+    margin-left: 16vw;
+    margin-top: 0.3vh;
+}
+
+#columnFieldList {
+    width: 100%;
+    min-height: 5vh;
+    height: auto !important;
+    margin-left: 0%;
+}
+
+    #columnFieldList li {
+        border-bottom: 1px solid #C3C3C3;
+    }
+
+        #columnFieldList li table {
+            width: 100%;
+            height: 5vh;
+        }
+
+            #columnFieldList li table tr td {
+                width: 5%;
+                font-family: 'Microsoft YaHei UI';
+                font-size: 0.8vw;
+                color: #4A4A4A;
+                text-align: center;
+            }
+
+            #columnFieldList li table .btnOrderMethod {
+                width:5%;
+                color: #747FFF;
+                cursor: pointer;
+                text-align: center;
+            }

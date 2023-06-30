@@ -1,0 +1,76 @@
+{
+  "FirstMenu": [
+    {
+      "ID": 0,
+      "ParentID": -1,
+      "MenuName": "网站首页",
+      "Url": "/Home/Home",
+      "Target": "_self",
+      "IsDefault": true
+    },
+    {
+      "ID": 1,
+      "ParentID": -1,
+      "MenuName": "文章管理",
+      "Url": "/Article/ArticleAdminList",
+      "Icon": "/images/leftMenuIcon01.png",
+      "Target": "_self",
+      "IsDefault": false,
+      "ChildMenu": [
+        {
+          "ID": 11,
+          "ParentID": 1,
+          "MenuName": "文章发布",
+          "Url": "/Article/ArticlePublish",
+          "Icon": "/images/leftMenuIcon01.png",
+          "Target": "_self",
+          "IsDefault": true,
+          "ChildMenu": [
+            {
+              "ID": 111,
+              "ParentID": 11,
+              "MenuName": "普通文章发布",
+              "Url": "/Article/ArticlePublish?ArticleType=NormalArticle",
+              "Icon": "/images/leftMenuIcon02.png",
+              "Target": "_self",
+              "IsDefault": true
+            },
+            {
+              "ID": 112,
+              "ParentID": 11,
+              "MenuName": "视频文章发布",
+              "Url": "/Article/ArticlePublish?ArticleType=VideoArticle",
+              "Icon": "/images/leftMenuIcon03.png",
+              "Target": "_self",
+              "IsDefault": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ID": 2,
+      "ParentID": -1,
+      "MenuName": "组织架构管理",
+      "Url": "/Organization/OrganizationManage",
+      "Target": "_self",
+      "IsDefault": false
+    },
+    {
+      "ID": 3,
+      "ParentID": -1,
+      "MenuName": "文艺小组管理",
+      "Url": "/Group/GroupManage",
+      "Target": "_self",
+      "IsDefault": false
+    },
+    {
+      "ID": 4,
+      "ParentID": -1,
+      "MenuName": "文件管理",
+      "Url": "/File/FileManage",
+      "Target": "_self",
+      "IsDefault": false
+    }
+  ]
+}

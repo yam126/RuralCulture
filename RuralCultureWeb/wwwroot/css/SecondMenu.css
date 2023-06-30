@@ -1,0 +1,433 @@
+﻿#SecondMenuNormal {
+    width: 12vw;
+    height: calc(100vh - 9vh);
+    top: 9vh;
+    left: 0vw;
+    z-index: 200;
+    background-color: #FFF;
+    position: absolute;
+}
+
+    #SecondMenuNormal .MenuList-Container {
+        width: 96%;
+        height: 40vh;
+        margin-left: 4%;
+        margin-top: 1.7vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #SecondMenuNormal .btnCloseMenu {
+        width: 66%;
+        height: 3vh;
+        margin-top: calc(100vh - 56vh);
+        margin-left: 17%;
+        margin-bottom: 2%;
+        cursor: pointer;
+        border: 0px solid red;
+        float: left;
+    }
+
+
+    #SecondMenuNormal .MenuList-Container .MenuItem-Container {
+        width: 98%;
+        height: 3.7vh;
+        margin-left: 1%;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        cursor: pointer;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #SecondMenuNormal .MenuList-Container .MenuItem-Container:hover {
+            border-radius: 5px;
+            border: 1px solid #6D79FF;
+        }
+
+        #SecondMenuNormal .MenuList-Container .MenuItem-Container .Icon {
+            width: 1vw;
+            height: 2vh;
+            margin-left: 19%;
+            margin-top: 3%;
+            float: left;
+        }
+
+        #SecondMenuNormal .MenuList-Container .MenuItem-Container .Text {
+            min-width: 4vw;
+            width: auto !important;
+            height: 3vh;
+            border: 0px solid red;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.9vw;
+            color: #0B2E88;
+            text-align: center;
+            margin-left: 3%;
+            margin-top: 1%;
+            float: left;
+        }
+
+            #SecondMenuNormal .MenuList-Container .MenuItem-Container .Text a {
+                text-decoration: none;
+                text-transform: none;
+                color: #0B2E88;
+            }
+
+            #SecondMenuNormal .MenuList-Container .MenuItem-Container .Arrow {
+                width: 1vw;
+                height: 3vh;
+                border: 0px solid red;
+                font-family: "Microsoft YaHei UI";
+                font-size: 0.9vw;
+                color: #0B2E88;
+                text-align: center;
+                margin-left: 3%;
+                margin-top: 1%;
+                float: left;
+            }
+
+    #SecondMenuNormal .MenuList-Container .MenuItem-ChildrenList-Container {
+        width: 98%;
+        /*min-height: 12vh;
+        height: auto !important;*/
+        margin-left: 2%;
+        margin-top: 2%;
+        display: none;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #SecondMenuNormal .MenuList-Container .MenuItem-ChildrenList-Container .MenuItem-Children-Item {
+            width: 98%;
+            height: 3.5vh;
+            line-height: 3.5vh;
+            margin-left: 2%;
+            margin-top: 1%;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.8vw;
+            color: #0B2E88;
+            text-align: left;
+            text-indent: 30%;
+            cursor: pointer;
+            border: 0px solid red;
+            float: left;
+        }
+
+            #SecondMenuNormal .MenuList-Container .MenuItem-ChildrenList-Container .MenuItem-Children-Item a {
+                text-decoration: none;
+                text-transform: none;
+                color: #0B2E88;
+            }
+
+            #SecondMenuNormal .MenuList-Container .MenuItem-ChildrenList-Container .MenuItem-Children-Item:hover {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border: 1px solid #0C2F89;
+            }
+
+        #SecondMenuNormal .MenuList-Container .MenuItem-ChildrenList-Container .MenuItem-Children-Item-Click {
+            width: 98%;
+            height: 3.5vh;
+            line-height: 3.5vh;
+            margin-left: 2%;
+            margin-top: 1%;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.8vw;
+            color: #0B2E88;
+            text-align: left;
+            text-indent: 30%;
+            background-color: #AEC2F7;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-right: 2px solid #0C2F89;
+            float: left;
+        }
+
+#SecondMenuFold {
+    width: 3vw;
+    height: calc(100vh - 9vh);
+    top: 9vh;
+    left: 0vw;
+    display: none;
+    z-index: 200;
+    background-color: #FFF;
+    position: absolute;
+}
+
+    #SecondMenuFold .btnCloseMenu {
+        width: 48%;
+        height: 3vh;
+        margin-top: calc(100vh - 41vh);
+        margin-left: 26%;
+        margin-bottom: 2%;
+        cursor: pointer;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #SecondMenuFold .MenuList-Container {
+        width: 96%;
+        min-height: 25vh;
+        height: auto !important;
+        margin-left: 4%;
+        margin-top: 1.7vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #SecondMenuFold .MenuList-Container .MenuItem-Container {
+            width: 78%;
+            height: 4vh;
+            cursor: pointer;
+            position: relative;
+            margin-left: 26%;
+            margin-top: 7%;
+            float: left;
+        }
+
+            #SecondMenuFold .MenuList-Container .MenuItem-Container:hover {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border: 1px solid #0C2F89;
+            }
+
+            #SecondMenuFold .MenuList-Container .MenuItem-Container .Icon {
+                width: 1vw;
+                height: 2vh;
+                margin-left: 25%;
+                margin-top: 15%;
+                float: left;
+            }
+
+        #SecondMenuFold .MenuList-Container .MenuItem-Click-Container {
+            width: 78%;
+            height: 4vh;
+            cursor: pointer;
+            background-color: #AEC2F7;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-right: 2px solid #0C2F89;
+            position: relative;
+            margin-left: 26%;
+            margin-top: 7%;
+            float: left;
+        }
+
+            #SecondMenuFold .MenuList-Container .MenuItem-Click-Container .Icon {
+                width: 1vw;
+                height: 2vh;
+                margin-left: 25%;
+                margin-top: 21%;
+                float: left;
+            }
+
+        #SecondMenuFold .MenuList-Container .MenuItem-Container:hover {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border: 1px solid #0C2F89;
+        }
+
+        #SecondMenuFold .MenuList-Container .MenuItem-Container .Icon {
+            width: 1vw;
+            height: 2vh;
+            margin-left: 25%;
+            margin-top: 21%;
+            float: left;
+        }
+
+.SecondMenuFoldPopMenu {
+    width: 6.7vw;
+    min-height: 15vh;
+    height: auto !important;
+    top: 11vh;
+    left: 3.2vw;
+    z-index: 700;
+    display: none;
+    border: 0px solid red;
+    background-color: #F1F5FF;
+    border-radius: 5px;
+    box-shadow: 6px 6px 15px #9f9999e3;
+    position: absolute;
+    float: left;
+}
+
+    .SecondMenuFoldPopMenu .MenuItem {
+        width: 85%;
+        height: 3.5vh;
+        line-height: 3.5vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #214498;
+        text-indent: 12%;
+        text-align: left;
+        cursor: pointer;
+        border: 0px solid red;
+        margin-top: 3%;
+        margin-left: 7.5%;
+        margin-bottom: 3%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float: left
+    }
+
+        .SecondMenuFoldPopMenu .MenuItem a {
+            text-transform: none;
+            text-decoration: none;
+            color: #214498;
+        }
+
+        .SecondMenuFoldPopMenu .MenuItem-Click {
+            width: 85%;
+            height: 3.5vh;
+            line-height: 3.5vh;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.8vw;
+            color: #fff;
+            text-indent: 12%;
+            text-align: left;
+            cursor: pointer;
+            background-color: #6D79FF;
+            border-radius: 6px;
+            border: 0px solid red;
+            margin-top: 3%;
+            margin-left: 7.5%;
+            margin-bottom: 3%;
+            float: left
+        }
+
+            .SecondMenuFoldPopMenu .MenuItem-Click a {
+                text-transform: none;
+                text-decoration: none;
+                color: #fff;
+            }
+
+    .SecondMenuFoldPopMenu .MenuItem:hover {
+        border-radius: 7px;
+        border: 1px solid #0C2F89;
+    }
+
+#app .ThreeLevelMenu {
+    width: 86%;
+    height: 6vh;
+    background-color: #fff;
+    border-radius: 7px;
+    margin-top: 10vh;
+    margin-left: 13%;
+    float: left;
+}
+
+@media (max-width:1920px) {
+    #app .ThreeLevelMenu {
+        margin-top: 10.3vh;
+    }
+}
+
+#app .ThreeLevelMenuMax {
+    width: 95%;
+    height: 6vh;
+    background-color: #fff;
+    border-radius: 7px;
+    margin-top: 10vh;
+    margin-left: 4%;
+    float: left;
+}
+
+@media (max-width:1920px) {
+    #app .ThreeLevelMenuMax {
+        margin-top: 10.3vh;
+    }
+}
+
+#app .MainPanel {
+    width: 86%;
+    height: 81vh;
+    border: 0px solid red;
+    margin-top: 1vh;
+    margin-left: 13%;
+    float: left;
+}
+
+#app .MainPanelMax {
+    width: 95%;
+    height: 81vh;
+    border: 0px solid red;
+    margin-top: 1vh;
+    margin-left: 4%;
+    float: left;
+}
+
+.ThreeLevelMenuItem {
+    min-width: 5vw;
+    height: 3vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #0A2F8A;
+    text-align: center;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
+    cursor: pointer;
+    border: 0px solid red;
+    float: left;
+}
+
+    .ThreeLevelMenuItem a {
+        text-transform: none;
+        text-decoration: none;
+        color: #0A2F8A;
+    }
+
+    .ThreeLevelMenuItem:hover {
+        border-bottom: 3px solid #0C2F89;
+    }
+
+.ThreeLevelMenuItemClick {
+    min-width: 5vw;
+    height: 3vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #0A2F8A;
+    text-align: center;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
+    cursor: pointer;
+    border-bottom: 3px solid #0C2F89;
+    float: left;
+}
+    .ThreeLevelMenuItemClick a {
+        text-decoration: none;
+        text-transform: none;
+        color: #0A2F8A;
+    }
+
+    @media (max-width:1593px) {
+        .ThreeLevelMenuItemClick {
+        height: 4vh;
+    }
+
+    .ThreeLevelMenuItem:hover {
+        border-bottom: 3px solid #0C2F89;
+        height: 4vh;
+    }
+}
+
+@media (max-width:1096px) {
+    .ThreeLevelMenuItemClick {
+        height: 4vh;
+    }
+
+    .ThreeLevelMenuItem:hover {
+        border-bottom: 3px solid #0C2F89;
+        height: 4vh;
+    }
+}

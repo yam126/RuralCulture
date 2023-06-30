@@ -1,0 +1,519 @@
+﻿#home {
+    width: 100%;
+    height: 83vh;
+    margin-left: 0vw;
+    margin-top: 0vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 0px solid red;
+    float: left;
+}
+
+#ArticleList {
+    width: 70vw;
+    min-height: 83vh;
+    height: auto !important;
+    margin-top: 0.5vh;
+    margin-left: 0.5vw;
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
+    border: 0px solid red;
+    float: left;
+}
+
+    #ArticleList .ListContainer {
+        width: 98%;
+        min-height: 20vh;
+        height: auto !important;
+        margin-left: 1%;
+        margin-top: 1.5vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ArticleList .btnLoad {
+        width: 98%;
+        height: 3vh;
+        margin-left: 1%;
+        margin-top: 1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.7vh;
+        color: #fff;
+        text-align: center;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #ArticleList .btnLoad:hover {
+            cursor: pointer;
+            filter: opacity(0.8);
+            background-image: linear-gradient(1deg,#033097,#105BC9);
+            border: 1px solid #0670A1;
+            border-radius: 10px;
+        }
+
+    #ArticleList .btnLoading {
+        width: 98%;
+        height: 3vh;
+        margin-left: 1%;
+        margin-top: 1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.7vh;
+        color: #fff;
+        display: none;
+        text-align: center;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #ArticleList .btnLoading .center {
+            width: 10%;
+            height: 2.8vh;
+            color: #EA68A2;
+            border: 0px solid red;
+            margin: 0 auto;
+        }
+
+            #ArticleList .btnLoading .center .Icon {
+                width: 1.2vw;
+                height: 1.5vh;
+                margin-left: 23%;
+                margin-top: 0.6vh;
+                float: left;
+            }
+
+        #ArticleList .btnLoading:hover {
+            filter: opacity(0.8);
+            background-image: linear-gradient(1deg,#033097,#105BC9);
+            border: 1px solid #0670A1;
+            border-radius: 10px;
+        }
+
+    #ArticleList .NoMore {
+        width: 98%;
+        height: 3vh;
+        margin-left: 1%;
+        margin-top: 1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.7vh;
+        color: #fff;
+        display: none;
+        text-align: center;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ArticleList .ListContainer .ItemContainer {
+        width: 98%;
+        min-height: 17.7vh;
+        height: auto !important;
+        margin-left: 1%;
+        margin-top: 0.7vh;
+        border-bottom: 1px dashed #fff;
+        float: left;
+    }
+
+@media (max-width:1081px) {
+    #ArticleList .ListContainer .ItemContainer {
+        min-height: 21vh;
+    }
+}
+
+        #ArticleList .ListContainer .ItemContainer:hover {
+            filter: opacity(0.8);
+            background-image: linear-gradient(1deg,#033097,#105BC9);
+            border: 1px solid #0670A1;
+        }
+
+        #ArticleList .ListContainer .ItemContainer .CoverImage {
+            width: 16vw;
+            height: 15vh;
+            border:0px;
+            margin-left: 1vw;
+            margin-top: 1vh;
+            float: left;
+        }
+
+@media (max-width:1081px) {
+    #ArticleList .ListContainer .ItemContainer .CoverImage {
+        margin-top: 2vh;
+        height: 16vh;
+    }
+}
+
+    #ArticleList .ListContainer .ItemContainer .InfoContainer {
+        width: 49vw;
+        height: 15vh;
+        margin-left: 0.5vw;
+        margin-top: 1.1vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #ArticleList .ListContainer .ItemContainer .InfoContainer a {
+            text-decoration: none;
+            text-transform: none;
+            color: #fff;
+        }
+
+            #ArticleList .ListContainer .ItemContainer .InfoContainer a:hover {
+                text-decoration: underline;
+                text-transform: none;
+                color: #fff;
+            }
+
+        #ArticleList .ListContainer .ItemContainer .InfoContainer .TitleTop {
+            width: 92%;
+            height: 5vh;
+            line-height: 5vh;
+            margin-left: 1%;
+            margin-top: 0.3vh;
+            font-family: "Microsoft YaHei UI";
+            color: #fff;
+            font-size: 2.5vh;
+            text-align: left;
+            text-indent: 1%;
+            border: 0px solid red;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            float: left;
+        }
+
+        #ArticleList .ListContainer .ItemContainer .InfoContainer .Title {
+            width: 98%;
+            height: 5vh;
+            line-height: 5vh;
+            margin-left: 1%;
+            margin-top: 0.3vh;
+            font-family: "Microsoft YaHei UI";
+            color: #fff;
+            font-size: 2.5vh;
+            text-align: left;
+            text-indent: 1%;
+            border: 0px solid red;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            float: left;
+        }
+
+        #ArticleList .ListContainer .ItemContainer .InfoContainer .Icon {
+            width: 5%;
+            height: 2vh;
+            margin-left: 0.7%;
+            margin-top: 1.8vh;
+            float: left;
+        }
+
+        #ArticleList .ListContainer .ItemContainer .InfoContainer .ItemInfo {
+            width: 98%;
+            height: 8vh;
+            line-height: 2.5vh;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 1.8vh;
+            color: #fff;
+            text-align: left;
+            text-indent: 1%;
+            margin-left: 1%;
+            margin-top: 0.7vh;
+            border: 0px solid red;
+            float: left;
+        }
+
+    @media (max-width:1081px) {
+        #ArticleList .ListContainer .ItemContainer .InfoContainer .ItemInfo {
+            height: 11vh;
+            line-height: 3.7vh;
+        }
+    }
+
+
+    #TopViewCount {
+        width: 27vw;
+        min-height: 23vw;
+        height: auto !important;
+        margin-top: 0.5vh;
+        margin-left: 1.1vw;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #TopViewCount .Title {
+            width: 98%;
+            height: 3vh;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 1.7vh;
+            color: #fff;
+            font-weight: 700;
+            text-align: left;
+            text-indent: 1%;
+            margin-left: 1%;
+            margin-top: 0.3vh;
+            border: 0px solid red;
+            float: left;
+        }
+
+        #TopViewCount .ContentList {
+            width: 98%;
+            min-height: 41vh;
+            height: auto !important;
+            margin-left: 1%;
+            margin-top: 0.3vh;
+            background-color: #fff;
+            border-radius: 7px;
+            float: left;
+        }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList {
+            min-height: 51vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem {
+        width: 98%;
+        min-height: 3vh;
+        height: auto !important;
+        margin-left: 1%;
+        margin-top: 0.5vh;
+        margin-bottom: 0.6vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem {
+            margin-top: 1.5vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem {
+        width: 100%;
+        height: 14vh;
+        margin-left: 0%;
+        margin-top: 0%;
+        border: 0px solid red;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem {
+            height: 18vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleImage {
+        width: 40%;
+        height: 13vh;
+        border: 0px;
+        margin-left: 2%;
+        margin-top: 3%;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleImage {
+            height: 15vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleImage a {
+        border: 0px;
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo {
+        width: 55%;
+        height: 13vh;
+        margin-left: 1%;
+        margin-top: 3%;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo {
+            height: 18vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleTitle {
+        width: 98%;
+        height: 3vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 2.2vh;
+        color: #6c404080;
+        text-align: left;
+        text-indent: 1%;
+        font-weight: 700;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleTitle a {
+            text-decoration: none;
+            text-transform: none;
+            color: #6c404080;
+        }
+
+            #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleTitle a:hover {
+                text-decoration: underline;
+                text-transform: none;
+                color: #6c404080;
+            }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleAuthor {
+        width: 43%;
+        height: 2.1vh;
+        line-height: 2.1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.5vh;
+        color: #000;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleAuthor {
+            margin-top: 1vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleType {
+        width: 54%;
+        height: 2.1vh;
+        line-height: 2.1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.5vh;
+        color: #000;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleType {
+            margin-top: 1vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleGroup {
+        width: 98%;
+        height: 2vh;
+        line-height: 2vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vh;
+        color: #000;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleGroup {
+            margin-top: 1vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleOrgName {
+        width: 98%;
+        height: 2vh;
+        line-height: 2vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vh;
+        color: #000;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleOrgName {
+            margin-top: 1vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleCreatedTime {
+        width: 98%;
+        height: 2vh;
+        line-height: 2vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vh;
+        color: #000;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 1%;
+        margin-top: 0.3vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 0px solid red;
+        float: left;
+    }
+
+    @media (max-width:1081px) {
+        #TopViewCount .ContentList .ContentItem .MaxContentItem .ArticleInfo .ArticleCreatedTime {
+            margin-top: 1vh;
+        }
+    }
+
+    #TopViewCount .ContentList .ContentItem .NormalContentItem {
+        width: 100%;
+        height: 3vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 2vh;
+        color: black;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+        text-indent: 1%;
+        margin-left: 0%;
+        margin-top: 0%;
+    }
+
+        #TopViewCount .ContentList .ContentItem .NormalContentItem a {
+            text-decoration: none;
+            text-transform: none;
+            color: #000;
+        }
+
+            #TopViewCount .ContentList .ContentItem .NormalContentItem a:hover {
+                text-decoration: underline;
+                text-transform: none;
+                color: #000;
+            }
+
+        #TopViewCount .ContentList .ContentItem .NormalContentItem .startTag {
+            color: red;
+            font-size: 2.1vh;
+        }

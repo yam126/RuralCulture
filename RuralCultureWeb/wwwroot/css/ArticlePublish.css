@@ -1,0 +1,724 @@
+﻿
+#editMainContainer {
+    width: 100%;
+    height: 81vh;
+    background-color: #FFF;
+    border-radius: 7px;
+}
+
+#mainPanel {
+    width: 98%;
+    height: 69vh;
+    margin-left: 1%;
+    margin-top: 2vh;
+    overflow: auto;
+    border: 0px solid red;
+    float: left;
+}
+
+#ArticleInfoContainer {
+    width: 100%;
+    height: 32vh;
+    margin-left: 0px;
+    margin-top: 2vh;
+    overflow: auto;
+    border: 0px solid red;
+    float: left;
+}
+
+#articleVideo {
+    width: 100%;
+    min-height: 31vh;
+    max-height: 65vh;
+    margin-top: 1%;
+    margin-left: 0px;
+    overflow: hidden;
+    border: 0px solid red;
+    display: none;
+    float: left;
+}
+
+    #articleVideo .update-video-container {
+        width: 98%;
+        height: 3.7vh;
+        margin-left: 1%;
+        margin-top: 1%;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #articleVideo .update-video-container .label {
+            width: 12%;
+            height: 3.7vh;
+            line-height: 3.7vh;
+            font-family: "Microsoft YaHei UI";
+            font-size: 1vw;
+            color: #000000;
+            text-align: center;
+            margin: 0px;
+            border: 0px solid red;
+            float: left;
+        }
+
+            #articleVideo .update-video-container .label .mustInputflag {
+                color: red;
+            }
+
+.videoPlayerContainerNomarl {
+    width: 98%;
+    height: 33vh;
+    margin-left: 1%;
+    cursor: pointer;
+    float: left;
+}
+
+    .videoPlayerContainerNomarl .myPlayer {
+        width: 98%;
+        height: 72%;
+        margin-left: 1%;
+        border: 0px solid red;
+        float: left;
+    }
+
+.videoPlayerContainerExpand {
+    width: 98%;
+    height: 79vh;
+    margin-left: 1%;
+    cursor: pointer;
+    float: left;
+}
+
+    .videoPlayerContainerExpand .myPlayer {
+        width: 98%;
+        height: 72%;
+        margin-left: 1%;
+        border: 0px solid red;
+        float: left;
+    }
+
+.articleCoverNomarl {
+    width: 98%;
+    height: 24vh;
+    margin-left: 1%;
+    cursor: pointer;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 31% 99%;
+    border: 0px solid red;
+    float: left;
+}
+
+    .articleCoverNomarl .btnPlayVideo {
+        position: absolute;
+        width: 5vw;
+        height: 9vh;
+        top: 7vh;
+        left: 44vw;
+        z-index: 100;
+        float: left;
+    }
+
+.articleCoverExpand {
+    width: 98%;
+    height: 58vh;
+    margin-left: 1%;
+    cursor: pointer;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 58% 99%;
+    border: 0px solid red;
+    float: left;
+}
+
+    .articleCoverExpand .btnPlayVideo {
+        position: absolute;
+        width: 7vw;
+        height: 12vh;
+        top: 21vh;
+        left: 42vw;
+        z-index: 100;
+        float: left;
+    }
+
+#coverImg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0vh;
+    left: 0vw;
+    z-index:2;
+    float: left;
+}
+
+
+
+    #txtVideoUrl {
+        width: 73%;
+        height: 3.5vh;
+        line-height: 3.5vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        color: #000;
+        text-indent: 1%;
+        border-radius: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(0, 0, 0);
+        border-image: initial;
+        float: left;
+    }
+
+#btnPreviewVideo {
+    width: 6%;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.8vw;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #00b4db, #0083b0);
+    border-radius: 7px;
+    border: 1px solid #5eeb25;
+    margin-left: 0.5%;
+    float: left;
+}
+
+#btnUploadVideo {
+    width: 6%;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.8vw;
+    color: #808080;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 7px;
+    border: 1px solid #808080;
+    margin-left: 0.5%;
+    float: left;
+}
+
+    #btnUploadVideo:hover {
+        color: #c34040;
+        border-radius: 7px;
+        border: 1px solid #c34040;
+    }
+
+    @media (max-width:1709px) {
+        #ArticleInfoContainer {
+        height: 28vh;
+    }
+}
+
+#btnShrinkExpandArticleInfo {
+    width: 100%;
+    height: 1.5vh;
+    line-height: 1.5vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 0.3vw;
+    text-align: center;
+    color: #808080;
+    margin-left: 0px;
+    margin-top: 0vh;
+    cursor: pointer;
+    /*border-left: 1px solid #808080;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;*/
+    float: left;
+}
+
+    #btnShrinkExpandArticleInfo:hover {
+        background-image: linear-gradient(344deg, #077ade, #1c96e3, #1db1e7, #07ceeb);
+        border: 1px solid #07ceeb;
+        border-radius: 5px;
+        color: #fff;
+    }
+
+#editMainContainer form {
+    width: 98%;
+    height: 78vh;
+    margin-left: 1%;
+    margin-top: 2vh;
+    border: 0px solid red;
+    float: left;
+}
+
+    #editMainContainer form .articleTypeSelect {
+        width: 98%;
+        height: 5vh;
+        margin-top: 1vh;
+        margin-left: 1%;
+        background-image: linear-gradient(177deg, #9eafc924 0%, #d9dce1c7 100%);
+        border: 1px solid #c3cfe2;
+        border-radius: 10px;
+    }
+
+        #editMainContainer form .articleTypeSelect .tabItemClick {
+            width: 6vw;
+            height: 4vh;
+            line-height: 4vh;
+            margin-top: 0.2%;
+            margin-left: 1%;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 0.9vw;
+            color: #fff;
+            text-indent: 3%;
+            background-color: #6D79FF;
+            border: 1px solid #808080;
+            border-radius: 5px;
+            cursor: pointer;
+            float: left;
+        }
+
+@media (max-width:1264px) {
+    #editMainContainer form .articleTypeSelect .tabItemClick {
+        width: 7vw;
+    }
+}
+
+#editMainContainer form .articleTypeSelect .tabItemClick i {
+    margin-left: 6%;
+}
+
+#editMainContainer form .articleTypeSelect .tabItemClick:hover {
+    background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
+    color: #FF6746;
+    border: 1px solid #B9B6E5;
+}
+
+#editMainContainer form .articleTypeSelect .tabItemNormal {
+    width: 6vw;
+    height: 4vh;
+    line-height: 4vh;
+    margin-top: 0.2%;
+    margin-left: 1%;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.9vw;
+    color: #000000;
+    text-indent: 3%;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    cursor: pointer;
+    float: left;
+}
+
+@media (max-width:1264px) {
+    #editMainContainer form .articleTypeSelect .tabItemNormal {
+        width: 7vw;
+    }
+}
+
+#editMainContainer form .articleTypeSelect .tabItemNormal:hover {
+    background-color: #6D79FF;
+    border: 1px solid #808080;
+    color: #fff;
+}
+
+#editMainContainer form .articleTypeSelect .tabItemNormal i {
+    margin-left: 6%;
+}
+
+#btnSaveArticle {
+    width: 6vw;
+    height: 4vh;
+    line-height: 4vh;
+    margin-top: 0.2%;
+    margin-left: 78%;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.9vw;
+    color: #000000;
+    text-indent: 3%;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    border: 1px solid #66a6ff;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    float: left;
+}
+
+@media (max-width:1264px) {
+    #btnSaveArticle {
+        width: 7vw;
+        margin-left: 74%;
+    }
+}
+
+#btnSaveArticle img {
+    width: 1vw;
+    height: 2vh;
+    margin-left: 0.7vw;
+    margin-top: 1vh;
+    float: left;
+}
+
+#btnSaveArticle:hover {
+    background-image: linear-gradient( 135deg, #FFF6B7 10%, #F6416C 100%);
+    border: 1px solid #F6416C;
+}
+
+#editMainContainer form .txt-Container {
+    width: 98%;
+    height: 4.3vh;
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 0px solid red;
+    float: left;
+}
+
+@media (max-width:1709px) {
+    #editMainContainer form .txt-Container {
+        margin-top: 0.3%;
+    }
+}
+
+#editMainContainer form .txt-Container .label {
+    width: 8%;
+    height: 4.3vh;
+    line-height: 4.3vh;
+    color: #000;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    text-align: center;
+    border: 0px solid red;
+    float: left;
+}
+
+    #editMainContainer form .txt-Container .label .mustInputflag {
+        color: red;
+    }
+
+.txtContainer {
+    width: 92%;
+    height: 4.3vh;
+    border: 0px solid red;
+    float: left;
+}
+
+    .txtContainer .txtInput {
+        width: 99%;
+        height: 3.2vh;
+        line-height: 3.2vh;
+        margin-top: 0.4vh;
+        margin-left: 0.5vw;
+        float: left;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        color: #000;
+        text-indent: 1%;
+        border-radius: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(0, 0, 0);
+        border-image: initial;
+    }
+
+        .txtContainer .txtInput:hover {
+            border-radius: 6px;
+            color: red;
+            border: 1px solid red;
+        }
+
+            .txtContainer .txtInput:hover::placeholder {
+                color: red;
+            }
+
+        .txtContainer .txtInput:active {
+            border-radius: 6px;
+            color: red;
+            border: 1px solid red;
+        }
+
+            .txtContainer .txtInput:active::placeholder {
+                color: red;
+            }
+
+        .txtContainer .txtInput::placeholder {
+            font-size: 1vw;
+            color: #000;
+        }
+
+    .txtContainer .el-input {
+        width: 100%;
+        height: 100%;
+        margin-left: -1vw;
+        margin-top: 0vh;
+        border: 0px solid red;
+    }
+
+        .txtContainer .el-input .el-input__inner {
+            width: 100%;
+            height: 100%;
+            margin-left: -1vw;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 0.9vw;
+            color: #000000;
+            border: 0px solid red;
+            background-color: transparent;
+        }
+
+            .txtContainer .el-input .el-input__inner::placeholder {
+                font-family: 'Microsoft YaHei UI';
+                font-size: 0.9vw;
+                color: #000000;
+            }
+
+            .txtContainer .el-input .el-input__inner:hover::placeholder {
+                color: red;
+            }
+
+.elSwitch span {
+    font-family: 'Microsoft YaHei UI' !important;
+    font-size: 0.9vw !important;
+    color: #000000 !important;
+}
+
+.elSwitch {
+    min-width: 3vw;
+    width: auto !important;
+    height: 3vh;
+    margin-left: 1%;
+    border: 0px solid red;
+    float: left;
+}
+
+.btnUplaod-Container {
+    width: 9vw;
+    height: 3vh;
+    line-height: 3vh;
+    margin-left: 1%;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+    border: 0px solid red;
+    float: left;
+}
+
+    .btnUplaod-Container:hover {
+        width: 9vw;
+        font-family: "Microsoft YaHei UI";
+        font-size: 1vw;
+        border-radius: 5px;
+        border: 1px solid #FF6746;
+        color: #FF6746;
+    }
+
+@media (max-width:1322px) {
+    .btnUplaod-Container {
+        height: 3vh;
+        line-height: 3vh;
+        font-size: 1.2vw;
+        margin-top: 0.3%;
+    }
+
+        .btnUplaod-Container:hover {
+            font-size: 1.2vw;
+            margin-top: 0.3%;
+        }
+
+    .previewUploadImage-Container {
+        font-size: 1.2vw;
+        margin-top: 0.3%;
+    }
+
+        .previewUploadImage-Container:hover {
+            font-size: 1.2vw;
+            margin-top: 0.3%;
+        }
+}
+
+.previewUploadImage-Container {
+    width: 12vw;
+    height: 3vh;
+    line-height: 3vh;
+    margin-left: 1%;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #000;
+    display: none;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    border: 0px solid red;
+    float: left;
+}
+
+    .previewUploadImage-Container:hover {
+        width: 12vw;
+        font-family: "Microsoft YaHei UI";
+        font-size: 1vw;
+        border-radius: 5px;
+        border: 1px solid #FF6746;
+        color: #FF6746;
+    }
+
+    .previewUploadImage-Container a {
+        text-decoration: none;
+        text-transform: none;
+        color: #000;
+    }
+
+    .previewUploadImage-Container:hover a {
+        color: #FF6746;
+    }
+
+.article-Content-Edit-Container {
+    width: 100%;
+    min-height: 31vh;
+    max-height: 65vh;
+    margin-top: 1%;
+    margin-left: 0px;
+    overflow: hidden;
+    border: 0px solid red;
+    float: left;
+}
+
+@media (max-width:1709px) {
+
+    .article-Content-Edit-Container {
+        max-height: 66vh;
+    }
+
+    #articleVideo {
+        max-height: 66vh;
+    }
+
+    .tox-tinymce {
+        height: 66vh;
+        border: 0px solid red;
+    }
+}
+
+@media (max-width:1683px) {
+    .article-Content-Edit-Container {
+        max-height: 72vh;
+    }
+
+        .article-Content-Edit-Container .tox-tinymce {
+            height: 72vh;
+            border: 0px solid red;
+        }
+
+    #articleVideo {
+        max-height: 72vh;
+    }
+}
+
+@media (max-width:1669px) {
+    .article-Content-Edit-Container {
+        width: 98%;
+        margin-left: 1%;
+        max-height: 69vh;
+    }
+
+        .article-Content-Edit-Container .tox-tinymce {
+            height: 96vh;
+            width: 98%;
+            margin-left: 1%;
+            border: 0px solid red;
+        }
+
+    #articleVideo {
+        width: 98%;
+        margin-left: 1%;
+        max-height: 69vh;
+    }
+}
+
+@media (max-width:1920px) {
+    #editHtml_ifr {
+        width: 99%;
+    }
+}
+
+@media (max-width:1359px) {
+    .article-Content-Edit-Container .tox-tinymce {
+        width: 98%;
+        margin-left: 1%;
+    }
+}
+
+.dialogUploadVideo {
+    width: 20vw;
+    height: 34vh;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.dialogPreviewCover {
+    width: 68vw;
+    height: 87vh;
+    background-color: #fff;
+}
+
+    .dialogPreviewCover img {
+        width: 98%;
+        height: 78vh;
+        margin-left: 1%;
+    }
+
+.dialogUploadCover {
+    width: 68vw;
+    height: 87vh;
+    background-color: #fff;
+}
+
+    .dialogUploadCover .el-upload-dragger {
+        margin-top: 24vh;
+        margin-left: 26vw;
+    }
+
+    .dialogUploadCover .el-upload__tip {
+        text-align: center;
+        text-indent: 8%;
+    }
+
+    .dialogUploadCover .upload-demo {
+        width: 98%;
+        height: 78vh;
+        margin-left: 1%;
+    }
+
+    .dialogUploadCover .PreviewCover {
+        width: 100%;
+        height: 78vh;
+        display: none;
+        position: relative;
+        border: 0px solid red;
+    }
+
+        .dialogUploadCover .PreviewCover .btnBack {
+            width: 100%;
+            height: 4vh;
+            line-height: 4vh;
+            top: 0px;
+            left: 0px;
+            filter: opacity(0);
+            font-family: 'Microsoft YaHei UI';
+            font-size: 1.2vw;
+            color: #fff;
+            text-align: left;
+            text-indent: 1%;
+            cursor: pointer;
+            position: absolute;
+            background-color: #07ceeb;
+        }
+
+            .dialogUploadCover .PreviewCover .btnBack:hover {
+                filter: opacity(1);
+            }
+
+        .dialogUploadCover .PreviewCover img {
+            width: 100%;
+            height: 100%;
+        }

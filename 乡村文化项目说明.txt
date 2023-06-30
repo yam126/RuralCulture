@@ -1,0 +1,6 @@
+RuralCulture.sln 是后端项目
+RuralCultureWeb.sln 是前端项目
+乡村文化目前数据库部署脚本2023-3-3.sql 包括所有存储过程包括数据和表结构
+登录界面输入用户名admin密码admin即可登录到管理页面
+启动时记得修改项目的IP地址
+启动项目根目录的sln文件即可

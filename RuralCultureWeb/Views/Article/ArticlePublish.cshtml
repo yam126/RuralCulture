@@ -1,0 +1,870 @@
+﻿@using RuralCultureWeb
+@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_SecondLevelMenuLayout.cshtml";
+}
+@{
+    //头部模块
+    string UrlScheme = Context.Request.IsHttps ? "https" : "http";
+    string UrlHost = Context.Request.Host.Host;
+    string Port = string.Empty;
+    if (Context.Request.Host.Port != null || Context.Request.Host.Port != 0)
+        Port = $":{Context.Request.Host.Port.GetValueOrDefault()}";
+    string CurrentUrl = $"{UrlScheme}://{UrlHost}{Port}";
+}
+@{
+    //初始化查询参数
+    string UserName = string.Empty;
+    string ArticleId = ViewData["ArticleId"] == null ? string.Empty : Convert.ToString(ViewData["ArticleId"]);
+    string ArticleType = ViewData["ArticleType"] == null ? string.Empty : Convert.ToString(ViewData["ArticleType"]);
+    string Action = ViewData["Action"] == null ? string.Empty : Convert.ToString(ViewData["Action"]);
+    if (CacheHelper.CacheValue("Account") != null)
+        UserName = Convert.ToString(CacheHelper.CacheValue("Account"));
+}
+@section Head {
+<link href="~/css/ArticlePublish.css" rel="stylesheet" />
+<link href="~/css/video-js.css" rel="stylesheet" />
+<script type="text/javascript" src="~/lib/tinymce_5_10_0/tinymce.min.js"></script>
+<script type="text/javascript" src="~/js/ArticleParameter.js"></script>
+<script type="text/javascript" src="~/js/HtmlUtil.js"></script>
+<script type="text/javascript" src="~/js/video.js"></script>
+<script type="text/javascript" src="~/js/videojs-contrib-hls.js"></script>
+<script type="text/javascript">
+    //普通文章HTML编辑器代码
+    $(document).ready(function(){
+        console.log("min-height="+$(".article-Content-Edit-Container").css("min-height"));
+        console.log("max-height="+$(".article-Content-Edit-Container").css("max-height"));
+        //编辑器初始化
+        tinymce.init({
+            selector: '#editHtml',
+            language_url : '/lib/tinymce_5_10_0/langs/zh_CN.js',
+            language:'zh_CN',
+            plugins: ['table','image','fullscreen','charmap','print','searchreplace','quickbars','code','insertdatetime','wordcount'],
+            toolbar: 'table image fullscreen charmap print searchreplace quickbars code insertdatetime wordcount',
+            width: "100%",
+            height: $(".article-Content-Edit-Container").height(),
+            init_instance_callback:"initTinyMCEData",//关键方法初始化编辑器数据
+            resize: false,
+            images_upload_handler: function (blobInfo, succFun, failFun) {
+                var file = blobInfo.blob();
+                apiHelper.uploadFile(
+                    file,
+                    function(response){
+                        console.log(response);
+                        if(response.data.status==0){
+                           var resultFile=response.data.result.successFiles;
+                           succFun(apiHelper.urlHost+"/"+resultFile[0]);
+                        }else{
+                           failFun(response.data.msg);
+                        }
+                    }
+                );
+            }
+        });
+    });
+    //初始化编辑器数据
+    function initTinyMCEData(instance){
+        var Ealt=new Eject();
+        var htmlUtil=new HtmlUtil();
+        var articleIdRequest="@ArticleId";
+        console.log("initTinyMCEData");
+        if(articleIdRequest!=""&&instance!=null){
+            apiHelper.getArticleContentById(
+                articleIdRequest,
+                function(response){
+                    console.log(response);
+                    if(response.data.status==0){
+                        var articleContent=response.data.result;
+                        console.log(articleContent);
+                        tinymce.activeEditor.setContent(articleContent);
+                    }
+                    else
+                    {
+                        Ealt.Ealert({
+                            title: '提示',
+                            message: "读取文章内容出错,原因["+response.data.msg+"]"
+                        });
+                    }
+               });
+        }
+    }
+</script>
+<script type="text/javascript">
+    //控制收缩展开代码
+    var shrinkExpandTimeHandle=null;
+    var shrinkExpandEditHtmlHeightHandle=null;
+    var editHtmlStepHeight=0;
+    var intervalStepTime=30;
+    var maxShrinkExpandHeight=0;
+    var shrinkExpandHeight=0;
+    var isShrinkExpandAction="";
+    var minArticleEditHeight=0;
+    var maxArticleEditHeight=0;
+    $(document).ready(function(){
+        if(maxShrinkExpandHeight==0)
+        {
+           maxShrinkExpandHeight=$("#ArticleInfoContainer").height();
+           shrinkExpandHeight=maxShrinkExpandHeight;
+        }
+        $(window).resize(function(){
+            getEditHtmlHeight();
+        });
+        $("#btnShrinkExpandArticleInfo").click(function(){
+            //shrinkExpandHeight=$("#ArticleInfoContainer").height();
+            console.log("shrinkExpandHeight="+shrinkExpandHeight);
+            console.log("maxShrinkExpandHeight="+maxShrinkExpandHeight);
+            getEditHtmlHeight();
+            if($(".article-Content-Edit-Container").css("display")!="none")
+                editHtmlStepHeight=$(".tox-tinymce").height();
+            else
+                editHtmlStepHeight=$("#articleVideo").height();
+            if(shrinkExpandTimeHandle!=null)
+               window.clearInterval(shrinkExpandTimeHandle);
+            if(shrinkExpandEditHtmlHeightHandle!=null)
+               window.clearInterval(shrinkExpandEditHtmlHeightHandle);
+            if(maxShrinkExpandHeight==shrinkExpandHeight){
+               //收缩状态
+               shrinkExpandHeight=maxShrinkExpandHeight;
+               isShrinkExpandAction="shrink";
+               $("#ArticleInfoContainer").hide();
+               $("#videoPlayerContainer").attr("class","videoPlayerContainerExpand");
+               $("#articleCover").attr("class","articleCoverExpand");
+               $("#btnShrinkExpandArticleInfo").html("&#9660;点击展开文章信息");
+            }else if(shrinkExpandHeight<=0){
+               //展开状态
+               shrinkExpandHeight=0;
+               isShrinkExpandAction="expand";
+               $("#ArticleInfoContainer").show();
+               $("#videoPlayerContainer").attr("class","videoPlayerContainerNomarl");
+               $("#articleCover").attr("class","articleCoverNomarl");
+               $("#btnShrinkExpandArticleInfo").html("&#9650;点击折叠文章信息");
+            }
+            console.log("isShrinkExpandAction="+isShrinkExpandAction);
+            console.log("shrinkExpandHeight="+shrinkExpandHeight);
+            ShrinkExpand();
+            shrinkExpandEditHtmlHeight();
+        });
+    });
+    //获得编辑器容器最小高度和最大高度(收缩和展开的高度范围)
+    function getEditHtmlHeight(){
+        minArticleEditHeight=$(".article-Content-Edit-Container").css("min-height");
+        maxArticleEditHeight=$(".article-Content-Edit-Container").css("max-height");
+        if($(".article-Content-Edit-Container").css("display")!="none")
+           $(".tox-tinymce").height($(".article-Content-Edit-Container").height());
+        if($("#ArticleInfoContainer").css("display")!="none"){
+            maxShrinkExpandHeight=$("#ArticleInfoContainer").height();
+        }
+    }
+    //收缩展开过渡动画代码
+    function shrinkExpandEditHtmlHeight(){
+        shrinkExpandEditHtmlHeightHandle=window.setInterval(function(){
+            if(isShrinkExpandAction=="shrink"){
+                editHtmlStepHeight+=1;
+                if(editHtmlStepHeight<=maxArticleEditHeight){
+                   if($(".article-Content-Edit-Container").css("display")!="none")
+                      $(".tox-tinymce").height(editHtmlStepHeight);
+                   else
+                      $("#articleVideo").height(editHtmlStepHeight);
+                   shrinkExpandEditHtmlHeight();
+                }else{
+                   editHtmlStepHeight=maxArticleEditHeight;
+                   if($(".article-Content-Edit-Container").css("display")!="none")
+                      $(".tox-tinymce").height(editHtmlStepHeight);
+                   else
+                      $("#articleVideo").height(editHtmlStepHeight);
+                   window.clearInterval(shrinkExpandEditHtmlHeightHandle);
+                   return false;
+                }
+            }else if(isShrinkExpandAction=="expand"){
+                editHtmlStepHeight-=1;
+                if(editHtmlStepHeight>minArticleEditHeight){
+                   if($(".article-Content-Edit-Container").css("display")!="none")
+                      $(".tox-tinymce").height(editHtmlStepHeight);
+                   else
+                      $("#articleVideo").height(editHtmlStepHeight);
+                   shrinkExpandEditHtmlHeight();
+                }else{
+                   editHtmlStepHeight=minArticleEditHeight;
+                   if($(".article-Content-Edit-Container").css("display")!="none")
+                      $(".tox-tinymce").height(editHtmlStepHeight);
+                   else
+                      $("#articleVideo").height(editHtmlStepHeight);
+                   window.clearInterval(shrinkExpandEditHtmlHeightHandle);
+                   return false;
+                }
+            }
+        },intervalStepTime);
+    }
+    //收缩和展开
+    function ShrinkExpand(){
+        shrinkExpandTimeHandle=window.setInterval(
+            function(){
+                if(isShrinkExpandAction=="shrink"){
+                   shrinkExpandHeight-=1;
+                   if(shrinkExpandHeight>0){
+                       $("#ArticleInfoContainer").height(shrinkExpandHeight);
+                       ShrinkExpand();
+                   }else if(shrinkExpandHeight<=0){
+                       shrinkExpandHeight=0;
+                       $("#ArticleInfoContainer").height(shrinkExpandHeight);
+                       window.clearInterval(shrinkExpandTimeHandle);
+                       return false;
+                   }
+                }else if(isShrinkExpandAction=="expand"){
+                   shrinkExpandHeight+=1;
+                   if(shrinkExpandHeight<=maxShrinkExpandHeight){
+                       $("#ArticleInfoContainer").height(shrinkExpandHeight);
+                       ShrinkExpand();
+                   }else if(shrinkExpandHeight>=maxShrinkExpandHeight){
+                       shrinkExpandHeight=maxShrinkExpandHeight;
+                       $("#ArticleInfoContainer").height(shrinkExpandHeight);
+                       window.clearInterval(shrinkExpandTimeHandle);
+                       return false;
+                   }
+                }
+            },intervalStepTime);
+    }
+</script>
+}
+
+@{
+    //内容模块
+}
+@section Body {
+<div id="editMainContainer">
+    <form method="post">
+        <div class="articleTypeSelect">
+            <div @@click="articleTypeButtonClick('0')" :class="articleType==0?'tabItemClick':'tabItemNormal'">
+                <i class="el-icon-document"></i>
+                普通文章
+            </div>
+            <div @@click="articleTypeButtonClick('2')" :class="articleType==2?'tabItemClick':'tabItemNormal'">
+                <i class="el-icon-video-camera"></i>
+                视频文章
+            </div>
+            <div @@click="saveData" id="btnSaveArticle">
+                <img src="/svg/saveIcon.svg" />保存文章
+            </div>
+        </div>
+        <div id="mainPanel">
+            <div id="ArticleInfoContainer">
+                <div class="txt-Container">
+                    <div class="label">
+                        <span class="mustInputflag">*</span>文章标题
+                    </div>
+                    <div class="txtContainer">
+                        <input type="text" v-model="articleTitle" class="txtInput" id="txtArticleTitle" placeholder="请输入文章标题" />
+                    </div>
+                </div>
+                <div class="txt-Container">
+                    <div class="label">
+                        <span class="mustInputflag">*</span>文章作者
+                    </div>
+                    <div class="txtContainer">
+                        <input type="text" v-model="articleAuthor" class="txtInput" id="txtArticleAuthor" placeholder="请输入文章作者" />
+                    </div>
+                </div>
+                <div class="txt-Container">
+                    <div id="groupName" class="label">
+                        文艺小组名称
+                    </div>
+                    <div class="txtContainer">
+                        <el-autocomplete v-model="groupName"
+                                         :fetch-suggestions="querySearchGroup"
+                                         @@select="handleSelectGroup"
+                                         class="txtInput"
+                                         placeholder="请输入文艺小组名称" />
+                    </div>
+                </div>
+                <div class="txt-Container">
+                    <div id="groupName" class="label">
+                        组织架构名称
+                    </div>
+                    <div class="txtContainer">
+                        <el-autocomplete v-model="orgName"
+                                         :fetch-suggestions="querySearchOrganization"
+                                         @@select="handleSelectOrganization"
+                                         class="txtInput"
+                                         placeholder="请输入组织架构名称" />
+                    </div>
+                </div>
+                <div class="txt-Container">
+                    <div class="elSwitch">
+                        <el-switch v-model="isSpecial" inactive-text="是否特色文化展示"></el-switch>
+                    </div>
+                    <div class="elSwitch">
+                        <el-switch v-model="isTop" inactive-text="是否置顶"></el-switch>
+                    </div>
+                    <div class="elSwitch">
+                        <el-switch v-model="state" inactive-text="是否隐藏"></el-switch>
+                    </div>
+                    <div @@click="showDialogUploadCover" class="btnUplaod-Container">
+                        <i class="el-icon-upload"></i>上传封面图片
+                    </div>
+                    <div class="previewUploadImage-Container">
+                        <i class="el-icon-picture"></i><a @@click="showPreviewCover" href="#">{{coverUrl}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="btnShrinkExpandArticleInfo">
+                &#9650;点击折叠文章信息@*&#9660;*@
+            </div>
+            <div class="article-Content-Edit-Container">
+                <textarea style="resize:none" id="editHtml">
+                </textarea>
+            </div>
+            <div id="articleVideo">
+                <div class="update-video-container">
+                    <div class="label">
+                        <span class="mustInputflag">*</span>上传或输入视频地址
+                    </div>
+                    <input type="text" v-model="videoUrl" placeholder="请输入视频地址" id="txtVideoUrl" />
+                    <div title="预览视频" @@click="videoPlay" id="btnPreviewVideo">
+                        预览视频&nbsp;&#9658;
+                    </div>
+                    <div title="上传视频" @@click="btnUploadVideoClick" id="btnUploadVideo">
+                        <i class="el-icon-video-camera-solid"></i>上传视频
+                    </div>
+                </div>
+                <div id="videoPlayerContainer" style="display:none;" class="videoPlayerContainerNomarl">
+                    <video id="myPlayer" controls="controls" preload="auto" autoplay="autoplay" class="myPlayer video-js vjs-default-skin">
+                        <source :src="videoUrl" type="video/mp4" />
+                    </video>
+                </div>
+                <div id="articleCover" class="articleCoverNomarl" @@click="videoPlay" :style="'background-image:url('+coverUrl+');'">
+                    <img id="btnPlayVideo" class="btnPlayVideo" src="~/images/playIcon.png" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--上传封面对话框-->
+    <el-dialog title="上传封面对话框" custom-class="dialogUploadCover" :visible.sync="dialogUploadCover">
+        <el-upload id="uploadControl"
+                   ref="uploadControl"
+                   class="upload-demo"
+                   drag
+                   action="https://localhost:7026/api/fileinfo/uploadfile"
+                   :before-upload="beforeUpload"
+                   :on-success="onUploadSuccess"
+                   :on-error="onUploadError"
+                   :limit="1">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+                将文件拖到此处，或<em>点击上传</em>
+            </div>
+            <div class="el-upload__tip" slot="tip">
+                只能上传jpg/png文件，且不超过30mb
+                <el-button @@click="backUploadPreviewCover" type="success" size="small" round>返回封面预览</el-button>
+            </div>
+        </el-upload>
+        <div class="PreviewCover">
+            <div @@click="backUploadCover" class="btnBack">
+                <i class="el-icon-back"></i>返回上传文件
+            </div>
+            <img :src="coverUrl" />
+        </div>
+    </el-dialog>
+    <!--/上传封面对话框-->
+    <!--封面预览对话框-->
+    <el-dialog title="封面预览对话框" custom-class="dialogPreviewCover" :visible.sync="dialogPreviewCover">
+        <img :src="coverUrl" />
+    </el-dialog>
+    <!--/封面预览对话框-->
+    <!--上传视频对话框-->
+    <el-dialog title="上传视频对话框" custom-class="dialogUploadVideo" :visible.sync="dialogUploadVideo">
+            <el-upload id="uploadVideoControl"
+                   ref="uploadVideoControl"
+                   class="upload-demo"
+                   drag
+                   action="https://localhost:7026/api/fileinfo/uploadfile"
+                   :before-upload="beforeUploadVideo"
+                   :on-success="onUploadSuccessVideo"
+                   :on-error="onUploadError"
+                   :limit="1">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+                将文件拖到此处，或<em>点击上传</em>
+            </div>
+            <div class="el-upload__tip" slot="tip">
+                只能上传mp4文件，且不超过300mb
+            </div>
+        </el-upload>
+    </el-dialog>
+    <!--/上传视频对话框-->
+</div>
+}
+
+@{
+    //脚本模块
+}
+@section VueScript {
+<script>
+    var editPanel=new Vue({
+        el:'#editMainContainer',
+        data:{
+            action:'@Action',
+            //videoUrl:'https://media.w3.org/2010/05/sintel/trailer.mp4',
+            videoUrl:'',
+            videoPlayerView:null,
+            coverUrl:'',
+            currentUrl:'@CurrentUrl',
+            isSpecial:false,
+            isTop:false,
+            state:false,
+            dialogUploadVideo:false,
+            dialogUploadCover:false,
+            dialogPreviewCover:false,
+            articleId:'@ArticleId',
+            articleTitle:'',
+            articleAuthor:'',
+            selectedGroup:null,
+            selectedOrgInfo:null,
+            articleType:'@ArticleType',
+            groupName:'',
+            orgName:'',
+            userName:{
+                userName:"@UserName"
+            },
+            windowWidth: document.body.clientWidth,
+            windowHeight: document.body.clientHeight
+        },
+        mounted:function(){
+            var _that = this;
+            var serverArticle="@ArticleType";
+            _that.windowWidth = document.body.clientWidth;
+            _that.windowHeight = document.body.clientHeight;
+            console.log("实时屏幕宽度:" + _that.windowWidth);
+            console.log("实时屏幕高度:" + _that.windowHeight);
+            _that.coverUrl=apiHelper.urlHost+'/articleDefaultCover.jpg';
+            $("#videoPlayerContainer").hide();
+            $("#articleCover").show();
+            _that.$nextTick(() => {
+                switch(serverArticle)
+                {
+                    case "0":
+                       _that.articleType="0";
+                       $(".article-Content-Edit-Container").show();
+                       $("#articleVideo").hide();
+                    break;
+                    case "2":
+                       _that.articleType="2";
+                       $(".article-Content-Edit-Container").hide();
+                       $("#articleVideo").show();
+                    break;
+                }
+            });
+            _that.readArticle();
+            window.onresize = () => {
+                return (() => {
+                    _that.windowWidth = document.body.clientWidth;
+                    _that.windowHeight = document.body.clientHeight;
+                    console.log("实时屏幕宽度:" + _that.windowWidth);
+                    console.log("实时屏幕高度:" + _that.windowHeight);
+                })();
+            };
+        },
+        methods:{
+            onUploadSuccessVideo(response){
+                var _that=this;
+                console.log(response);
+                var Ealt=new Eject();
+                if(response.status==0){
+                   _that.dialogUploadVideo=false;
+                   _that.videoUrl=apiHelper.urlHost+"/"+response.result.successFiles[0];
+                   _that.videoPlay();
+                }else{
+                   Ealt.Ealert({
+                      title: '提示',
+                      message: response.msg
+                   });
+                }
+            },
+            btnUploadVideoClick(){
+                this.dialogUploadVideo=true;
+            },
+            articleTypeButtonClick(varArticleType){
+                var _that=this;
+                console.log("_that.currentUrl="+_that.currentUrl);
+                console.log("varArticleType="+varArticleType);
+                switch(varArticleType)
+                {
+                    case '0':
+                       self.location=_that.currentUrl+"/Article/ArticlePublish?ArticleType=NormalArticle&ArticleId="+_that.articleId;
+                       break;
+                    case '2':
+                       self.location=_that.currentUrl+"/Article/ArticlePublish?ArticleType=VideoArticle&ArticleId="+_that.articleId;
+                       break;
+                }
+            },
+            videoPlay(){
+                var _that=this;
+                var Ealt=new Eject();
+                window.setTimeout(function(){
+                    _that.$nextTick(function(){
+                        if(_that.videoPlayerView==null)
+                        {
+                            _that.videoPlayerView = videojs(
+                                'myPlayer', {
+                                    //src:_that.videoUrl,
+                                    loop: true,
+                                    controls: true,
+                                    preload: 'auto',
+                                    autoplay: true
+                            });
+                        }
+                        if(_that.videoUrl!=''){
+                           $("#articleCover").hide();
+                           $("#videoPlayerContainer").show();
+                           _that.videoPlayerView.src(_that.videoUrl);
+                           _that.videoPlayerView.play();
+                        }else{
+                            Ealt.Etoast('视频播放地址为空!',3)
+                        }
+                    });
+                },300);
+            },
+            htmlEncode(htmlCode){
+                var div = document.createElement('div');
+                div.appendChild(document.createTextNode(htmlCode));
+                return div.innerHTML;
+            },
+            htmlDecode(htmlCode){
+                var div = document.createElement('div');
+                div.innerHTML = htmlCode;
+                return div.innerText || div.textContent;
+            },
+            readArticle(){
+                var Ealt=new Eject();
+                var _that=this;
+                console.log("readArticle");
+                if(_that.articleId!=""){
+                    apiHelper.getArticleId(
+                        _that.articleId,
+                        function(response){
+                            console.log(response);
+                            if(response.data.status==0){
+                                var articleInfo=response.data.result[0];
+                                _that.articleTitle=articleInfo.articleTitle;
+                                _that.articleType=articleInfo.articleType;
+                                _that.articleAuthor=articleInfo.author;
+                                if(articleInfo.coverUrl!=''&&articleInfo.articleType=="2"){
+                                   _that.coverUrl=articleInfo.coverUrl;
+                                   _that.videoUrl=articleInfo.backup01
+                                    if (articleInfo.backup01 == '') {
+                                        $("#videoPlayerContainer").hide();
+                                        $("#articleCover").show();
+                                    }
+                                    else
+                                    {
+                                        $("#videoPlayerContainer").show();
+                                        $("#articleCover").hide();
+                                    }
+                                }
+                                if(articleInfo.coverUrl!="")
+                                   $(".previewUploadImage-Container").show();
+                                _that.selectedGroup={
+                                    value:articleInfo.groupName,
+                                    id:articleInfo.groupId
+                                };
+                                _that.selectedOrgInfo={
+                                    value:articleInfo.orgName,
+                                    id:articleInfo.orgId
+                                };
+                                _that.isSpecial=articleInfo.isSpecial=="1"?true:false;
+                                _that.isTop=articleInfo.isTop=="1"?true:false;
+                                _that.state=articleInfo.state=="1"?true:false;
+                                _that.groupName=articleInfo.groupName;
+                                _that.orgName=articleInfo.orgName;
+                            }
+                            else{
+                                Ealt.Ealert({
+                                    title: '提示',
+                                    message: "读取文章内容出错,原因["+response.data.msg+"]"
+                                });
+                            }
+                        }
+                    );
+                }
+            },
+            saveData(){
+                var Ealt=new Eject();
+                var chekEmptyMessage="";
+                var _that=this;
+                var htmlCodeContent="";
+                var isSpecialValue=_that.isSpecial?"是":"否";
+                var isTopValue=_that.isTop?"是":"否";
+                var stateValue=_that.state?"隐藏":"显示";
+                var saveData=new ArticleParameter();
+                console.log("htmlCode");
+                console.log(tinymce.activeEditor.getContent());
+                htmlCodeContent=tinymce.activeEditor.getContent();
+                if(_that.articleTitle=='')
+                    chekEmptyMessage+="文章标题、";
+                if(_that.articleAuthor=='')
+                    chekEmptyMessage+="文章作者、";
+                if(htmlCodeContent==''&&_that.articleType!=2)
+                    chekEmptyMessage+="文章内容、";
+                if(chekEmptyMessage!=""){
+                   chekEmptyMessage=chekEmptyMessage.substring(0,chekEmptyMessage.length-1);
+                   Ealt.Ealert({
+                      title: '提示',
+                      message: "非空验证出错,原因["+chekEmptyMessage+"]"
+                   });
+                   return;
+                }
+                //#region 赋值
+                saveData.ArticleId=_that.articleId;
+                saveData.ArticleTitle=_that.articleTitle;
+                saveData.Content=tinymce.activeEditor.getContent();
+                saveData.GroupId=_that.selectedGroup==null?"":_that.selectedGroup.id;
+                saveData.GroupName=_that.selectedGroup==null?"":_that.selectedGroup.value;
+                saveData.Author=_that.articleAuthor;
+                saveData.OrgId=_that.selectedOrgInfo==null?"":_that.selectedOrgInfo.id;
+                saveData.OrgName=_that.selectedOrgInfo==null?"":_that.selectedOrgInfo.value;
+                saveData.IsSpecial=isSpecialValue;
+                saveData.IsTop=isTopValue;
+                saveData.State=stateValue;
+                saveData.ArticleType=_that.articleType;
+                saveData.CoverUrl=_that.coverUrl;
+                saveData.ViewCount='0';
+                saveData.Created=_that.userName.userName;
+                saveData.Modified=_that.userName.userName;
+                saveData.Backup01 = _that.videoUrl;
+                //#endregion
+                console.log("saveData");
+                console.log(saveData);
+                apiHelper.saveArticle(
+                    saveData,
+                    _that.action,
+                    function(response){
+                        console.log(response);
+                        if(response.data.status==0)
+                        {
+                            Ealt.Ealert({
+                                title: '提示',
+                                message: "文章保存成功"
+                            });
+                            Ealt.Econfirm({
+                                title:'是否跳转到列表页面',
+                                message:'是否跳转到列表页面?',
+                                define:function(){
+                                    self.location=_that.currentUrl+"/Article/ArticleAdminList";
+                                },
+                                cancel:function(){
+                                }
+                            });
+                        }
+                    }
+                );
+            },
+            //级联查询组织架构
+            querySearchOrganization(queryString, callback)
+            {
+                console.log("queryString=" + queryString);
+                var Ealt=new Eject();
+                var list = [];
+                if (queryString != "") {
+                    apiHelper.SearchOrganizationByName(queryString, function(response) {
+                        console.log(response);
+                        var resultAry = response.data.result;
+                        if (response.data.status == 0) {
+                            if (resultAry != null && resultAry.length > 0) {
+                                for (var i = 0; i < resultAry.length; i++) {
+                                    list.push({
+                                        value: resultAry[i].orgName,
+                                        id: resultAry[i].orgId,
+                                        item: resultAry[i]
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                list.push({
+                                  value:'没有数据',
+                                  id:-1,
+                                  item:null
+                                });
+                            }
+                        }
+                        else
+                        {
+                            if(response.data.msg!="")
+                            {
+                                Ealt.Etoast('查询数据出错,原因['+response.data.msg+']',3);
+                                list.push({
+                                    value:'查询数据出错,原因['+response.data.msg+']',
+                                    id:-1,
+                                    item:null
+                                });
+                            }else{
+                                Ealt.Etoast('查询数据出错,原因[没有数据]',3);
+                                list.push({
+                                    value:'查询数据出错,原因[没有数据]',
+                                    id:-1,
+                                    item:null
+                                });
+                            }
+                        }
+                    });
+                }
+                callback(list);
+            },
+            handleSelectOrganization(item)
+            {
+                this.selectedOrgInfo = item;
+                console.log(item);
+            },
+            //el-autocomplete用户输入查询事件
+            //queryString用户输入的查询字符串
+            //callback查询成功后的回调函数
+            querySearchGroup(queryString, callback)
+            {
+                console.log("queryString=" + queryString);
+                var list = [];
+                var Ealt=new Eject();
+                if (queryString != "") {
+                    apiHelper.GroupFullTextSearch(queryString, function(response) {
+                        console.log(response);
+                        var resultAry = response.data.result;
+                        if (response.data.status == 0) {
+                            if (resultAry != null && resultAry.length > 0) {
+                                for (var i = 0; i < resultAry.length; i++) {
+                                    list.push({
+                                        value: resultAry[i].groupName,
+                                        id: resultAry[i].groupId,
+                                        item: resultAry[i]
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                Ealt.Etoast('没有数据',3);
+                                list.push({
+                                  value:'没有数据',
+                                  id:-1,
+                                  item:null
+                                });
+                            }
+                        }
+                        else
+                        {
+                            Ealt.Etoast('查询数据出错,原因['+response.data.msg+']',3);
+                            list.push({
+                                value:'查询数据出错,原因['+response.data.msg+']',
+                                id:-1,
+                                item:null
+                            });
+                        }
+                    });
+                }
+                callback(list);
+            },
+            handleSelectGroup(item)
+            {
+                this.selectedGroup = item;
+                console.log(item);
+            },
+            showPreviewCover(){
+                var _that=this;
+                //alert(_that.coverUrl);
+                console.log("_that.coverUrl");
+                console.log(_that.coverUrl);
+                if(_that.coverUrl!=''){
+                   $(".previewUploadImage-Container").show();
+                   _that.dialogPreviewCover=true;
+                }
+            },
+            backUploadPreviewCover(){
+                var _that=this;
+                console.log("_that.coverUrl");
+                console.log(_that.coverUrl);
+                if(_that.coverUrl!=''){
+                    $(".upload-demo").hide();
+                    $(".PreviewCover").show();
+                }else{
+                    _that.$message.error("没有上传封面不能预览");
+                }
+            },
+            backUploadCover(){
+                var _that=this;
+                console.log("_that.coverUrl");
+                console.log(_that.coverUrl);
+                if(_that.coverUrl!=''){
+                    $(".upload-demo").show();
+                    $(".PreviewCover").hide();
+                }
+            },
+            onUploadSuccess(response) {
+                console.log(response);
+                var Ealt=new Eject();
+                var _that=this;
+                if(response.status==0){
+                   _that.coverUrl=apiHelper.urlHost+"/"+response.result.successFiles[0];
+                   console.log("_that.coverUrl="+_that.coverUrl);
+                   $(".upload-demo").hide();
+                   $(".PreviewCover").show();
+                   $(".previewUploadImage-Container").show();
+                   _that.$refs.uploadControl.clearFiles();
+                }else{
+                   $(".upload-demo").show();
+                   $(".PreviewCover").hide();
+                   $(".previewUploadImage-Container").hide();
+                   Ealt.Ealert({
+                      title: '提示',
+                      message: response.msg
+                   });
+                }
+            },
+            onUploadError(response) {
+                console.log(response);
+            },
+            beforeUploadVideo(file){
+                console.log("file.type="+file.type);
+                const isMP4=file.type=="video/mp4";
+                const is300mb = file.size/1024/1024<300;
+                var Ealt=new Eject();
+                if (!isMP4) {
+                    Ealt.Etoast("上传文件只能是 mp4 格式!",3);
+                    return false;
+                }
+                if (!is300mb) {
+                    Ealt.Etoast("上传图片大小不能超过 300mb!",3);
+                    return false;
+                }
+                return true;
+            },
+            beforeUpload(file){
+                const isJPG = file.type === "image/jpg";
+                const isPng = file.type==="image/png";
+                const isJpeg = file.type==="image/jpeg";
+
+                //1MB=1024*1024(1MB=1024KB 1KB=1024MB)
+                const is30mb = file.size/1024/1024<30;
+
+                //限制文件上传类型
+                if (!isJPG && !isPng && !isJpeg) {
+                    this.$message.error("上传文件只能是 png,jpg 格式!");
+                    return false;
+                }
+
+                //限制文件上传大小
+                if (!is30mb) {
+                    this.$message.error("上传图片大小不能超过 30mb!");
+                    return false;
+                }
+                return true;
+            },
+            showDialogUploadCover(){
+                this.dialogUploadCover=true;
+                $(".dialogUploadCover").css("margin-top","8vh");
+            },
+            autoSizeMainDiv() {
+                $("#app").css({
+                    "width": this.windowWidth,
+                    "height": this.windowHeight
+                });
+            }
+        }
+    });
+</script>
+}

@@ -1,0 +1,29 @@
+{
+  "FrontMenu": [
+    {
+      "MenuUrl": "/Home/Home",
+      "MenuText": "首&nbsp;页",
+      "MenuTarget": "_self"
+    },
+    {
+      "MenuUrl": "/RuralCategor/RuralCategor",
+      "MenuText": "文化分类",
+      "MenuTarget": "_self"
+    },
+    {
+      "MenuUrl": "/SpecialCulture/SpecialCulture",
+      "MenuText": "特色文化",
+      "MenuTarget": "_self"
+    },
+    {
+      "MenuUrl": "/Organization/OrganizationView",
+      "MenuText": "资源架构",
+      "MenuTarget": "_self"
+    },
+    {
+      "MenuUrl": "/Article/ArticleDynamics",
+      "MenuText": "文化动态",
+      "MenuTarget": "_self"
+    }
+  ]
+}

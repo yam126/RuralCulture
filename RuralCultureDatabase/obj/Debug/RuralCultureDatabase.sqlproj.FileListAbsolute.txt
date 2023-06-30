@@ -1,0 +1,10 @@
+E:\workproject\RuralCulture\RuralCultureDatabase\bin\Debug\RuralCultureDatabase.dacpac
+E:\workproject\RuralCulture\RuralCultureDatabase\bin\Debug\RuralCultureDatabase.dll
+E:\workproject\RuralCulture\RuralCultureDatabase\bin\Debug\RuralCultureDatabase.pdb
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\RuralCultureDatabase.sqlproj.AssemblyReference.cache
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\Model.xml
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\refactor.xml
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\postdeploy.sql
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\predeploy.sql
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\RuralCultureDatabase.dll
+E:\workproject\RuralCulture\RuralCultureDatabase\obj\Debug\RuralCultureDatabase.pdb

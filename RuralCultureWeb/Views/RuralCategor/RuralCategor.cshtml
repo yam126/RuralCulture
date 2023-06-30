@@ -1,0 +1,263 @@
+﻿@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    ViewData.Add("Title","乡村文化-文化分类");
+    string groupId=string.Empty;
+    if(ViewData.Keys.Contains("groupId")&&ViewData["groupId"]!=null)
+       groupId=Convert.ToString(ViewData["groupId"]);
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/RuralCategor.css" />
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <script src="~/js/ellipsis.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/js/ArticleParameter.js" ></script>
+}
+@section Body {
+    <div id="home">
+        <div class="categor">
+            <div class="classifyListContainer">
+                <div v-for="(item,index) in groupAry" :key="index" class="classifyItem">
+                    <a :href="'/RuralCategor/RuralCategor?groupId='+item.groupId" >
+                        {{item.groupName}}
+                    </a>
+                </div>
+            </div>
+            <div @@click="showAllCategor" class="classifyItem">
+                <a href="#">
+                    更多分类
+                </a>
+            </div>
+        </div>
+        <div class="focus-left">
+            <div class="focus-image">
+                 <img v-show="firstData[0].ArticleType=='2'" class="playIcon" src="~/images/playIcon.png" />
+                 <a :href="'/Article/ArticleView?ArticleId='+firstData[0].ArticleId" target="_self">
+                     <img class="coverImage" :src="firstData[0].CoverUrl" />
+                 </a>
+            </div>
+            <div class="article-info">
+                <div :title="firstData[0].ArticleTitle" class="title">
+                    <a :href="'/Article/ArticleView?ArticleId='+firstData[0].ArticleId" target="_self">
+                       {{firstData[0].ArticleTitle}}
+                    </a>
+                </div>
+                <div class="article-CreatedTime">
+                    {{firstData[0].Backup01}}-{{firstData[0].Backup02}}
+                </div>
+                <div class="article-Author">
+                    {{firstData[0].Author}}
+                </div>
+                <div v-show="firstData[0].ArticleType!='2'" class="article-brief">
+                    {{firstData[0].Content}}
+                </div>
+            </div>
+        </div>
+        <div class="focus-right">
+            <div class="focus-image">
+                 <img v-show="firstData[1].ArticleType=='2'" class="playIcon" src="~/images/playIcon.png" />
+                 <a :href="'/Article/ArticleView?ArticleId='+firstData[1].ArticleId" target="_self">
+                     <img class="coverImage" :src="firstData[1].CoverUrl" />
+                 </a>
+            </div>
+            <div class="article-info">
+                <div :title="firstData[1].ArticleTitle" class="title">
+                    <a :href="'/Article/ArticleView?ArticleId='+firstData[1].ArticleId" target="_self">
+                       {{firstData[1].ArticleTitle}}
+                    </a>
+                </div>
+                <div class="article-CreatedTime">
+                    {{firstData[1].Backup01}}-{{firstData[1].Backup02}}
+                </div>
+                <div class="article-Author">
+                    {{firstData[1].Author}}
+                </div>
+                <div v-show="firstData[1].ArticleType!='2'" class="article-brief">
+                    {{firstData[1].Content}}
+                </div>
+            </div>
+        </div>
+        <div class="article-list-container">
+            <div v-for="(item,index) in pageData" :key="index" class="item">
+                <img v-show="item.articleType=='2'" class="playIcon" src="~/images/playIcon.png" />
+                <a :href="'/Article/ArticleView?ArticleId='+item.articleId" >
+                    <img class="coverImage" :src="item.coverUrl==''?defaultCover:item.coverUrl" />
+                </a>
+                <div class="linkPanel">
+                    <a :href="'/Article/ArticleView?ArticleId='+item.articleId" >
+                        {{item.articleTitle}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="display:none" class="nodata">
+            暂无数据
+        </div>
+        <el-dialog title="全部分类" custom-class="elDialog" :visible.sync="dialogAllCategor">
+          <div class="elDialog-mainPanel">
+                <table style="height:3vh;" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                     <td colspan="1" rowspan="1" class="thead" style="width:51%">分类编号</td>
+                     <td colspan="1" rowspan="1" class="thead" style="width:49%">分类名称</td>
+                  </tr>
+                </table>
+                <table style="margin-top: -3vh;" cellpadding="0" cellspacing="0" border="0">
+                  <tr v-for="(item,index) in allGroup" :key="index" >
+                     <td class="td-id" style="width:51%">{{item.groupId}}</td>
+                     <td :title="item.groupName" @@click="groupClick(item.groupId)" class="td-content" style="width:49%">                       
+                       <a :href="'/RuralCategor/RuralCategor?groupId='+item.groupId" :title="item.groupName">    
+                         {{item.groupName}}
+                       </a>
+                     </td>
+                  </tr>
+               </table>
+          </div>
+        </el-dialog>
+    </div>
+}
+@section VueScript {
+    <script>
+        var home = new Vue({
+            el:"#home",
+            data:{
+                dialogAllCategor:false,
+                defaultCover:'/images/articleDefaultCover.jpg',
+                firstData:[
+                    new ArticleParameter(),
+                    new ArticleParameter()
+                ],
+                pageData:[],
+                groupId:'@groupId',
+                groupAry:[],
+                allGroup:[],
+                windowWidth: document.body.clientWidth,  //实时网页可视宽度
+                windowHeight: document.body.clientHeight   //实时网页可视高度
+            },
+            watch:{
+                windowHeight(val) {
+                    var that = this;
+                    console.log("实时屏幕高度:"+that.windowHeight);
+                },
+                windowWidth(val) {
+                    var that = this;
+                    console.log("实时屏幕宽度:"+that.windowWidth);
+                }
+            },
+            mounted:function(){
+                var _that = this;
+                _that.windowWidth=document.body.clientWidth;
+                _that.windowHeight=document.body.clientHeight;
+                _that.GetRuralCategorPageData();
+                _that.loadingGroup();
+                _that.QueryAllGroup();
+                window.onresize = () => {
+                    return (() => {
+                        //_that.articleBriefEllipsis();
+                        _that.windowWidth = document.body.clientWidth;
+                        _that.windowHeight = document.body.clientHeight;
+                    })();
+                };
+            },
+            methods:{
+                QueryAllGroup(){
+                    var _that=this;
+                    apiHelper.QueryAllGroup(function(response){
+                        if(response.data.status==0){
+                            _that.allGroup=response.data.result;
+                        }
+                    });
+                },
+                showAllCategor(){
+                    var _that=this;
+                    _that.dialogAllCategor=true;
+                },
+                articleBriefEllipsis(){
+                    $(".article-brief").each(function(index,element){
+                        console.log("article-brief");
+                        var fontSize=$(element).css("font-size");
+                        console.log(`fontSize=${fontSize}`);
+                        console.log(element);
+                        setEllipsis(
+                            element,
+                            {
+                                line:3,
+                                rightBlank:1,
+                                showTitle:true
+                            },
+                            null);
+                    });
+                },
+                GetRuralCategorPageData(){
+                    var _that=this;
+                    var loading = _that.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    _that.pageData=[];
+                    apiHelper.GetRuralCategorPageData(
+                        _that.groupId,
+                        function(response){
+                            if(response.data.status==0){
+                                var resultAry=response.data.result;
+                                if(resultAry!=null&&resultAry.length>0){
+                                    _that.setArticleFirstData(resultAry[0],0);
+                                    _that.setArticleFirstData(resultAry[1],1);
+                                    for(var i=2;i<resultAry.length;i++)
+                                        _that.pageData.push(resultAry[i]);
+                                }
+                                else{
+                                    _that.showNoData();
+                                }
+                            }
+                            else{
+                              _that.showNoData();
+                            }
+                            setTimeout(() => {
+                                loading.close();
+                            }, 200);
+                        });
+                },
+                showNoData(){
+                    $(".focus-left").hide();
+                    $(".focus-right").hide();
+                    $(".article-list-container").hide();
+                    $(".nodata").show();
+                },
+                setArticleFirstData(rankItem,index){
+                    var _that=this;
+                    console.log("setArticleFirstData");
+                    console.log("rankItem");
+                    console.log(rankItem);
+                    if(rankItem!=null&&typeof(rankItem)!="undefined"){
+                        _that.firstData[index].ArticleId=rankItem.articleId;
+                        _that.firstData[index].ArticleTitle=rankItem.articleTitle;
+                        _that.firstData[index].CoverUrl=rankItem.coverUrl==''?_that.defaultCover:rankItem.coverUrl;
+                        _that.firstData[index].ArticleType=rankItem.articleType;
+                        _that.firstData[index].Author=rankItem.author;
+                        _that.firstData[index].Backup01=rankItem.backup01;
+                        _that.firstData[index].Backup02=rankItem.backup02;
+                        _that.firstData[index].Content=rankItem.content;
+                    }
+                },
+                loadingGroup(){
+                    var _that=this;
+                    var loading = _that.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    apiHelper.QueryGroupTop(function(response){
+                        if(response.data.status==0){
+                            _that.groupAry=response.data.result;
+                        }
+                        setTimeout(() => {
+                            loading.close();
+                        }, 200);
+                    });
+                }
+            }
+        });
+    </script>
+}

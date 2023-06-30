@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Html
+@using RuralCultureWeb.Models
+@using System.Net
+@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    string articleInfoStr = string.Empty;
+    WebApiArticleResultItem articleInfo = new WebApiArticleResultItem();
+    if (ViewData["ArticleInfo"] != null)
+        articleInfo = (WebApiArticleResultItem)ViewData["ArticleInfo"];
+    ViewData.Add("Title",$"乡村文化-文章内容-{articleInfo.articleTitle}");
+    articleInfoStr += $"作者:{articleInfo.author}&nbsp;&nbsp;";
+    articleInfoStr += $"发布时间:{articleInfo.createdTime}&nbsp;&nbsp;";
+    if(!string.IsNullOrEmpty(articleInfo.isSpecial)&&articleInfo.isSpecial=="1")
+        articleInfoStr += $"<span class='isSpecial'>&#9672;特色文化展示</span>&nbsp;&nbsp;";
+    if(!string.IsNullOrEmpty(articleInfo.isTop)&&articleInfo.isTop=="1")
+        articleInfoStr += $"<span class='isTop'>&#8607;置顶文章</span>&nbsp;&nbsp;";
+    if (!string.IsNullOrEmpty(articleInfo.groupName))
+        articleInfoStr += $"文艺小组:{articleInfo.groupName}&nbsp;&nbsp;";
+    if (!string.IsNullOrEmpty(articleInfo.orgName))
+        articleInfoStr += $"所属组织:{articleInfo.orgName}&nbsp;&nbsp;";
+    articleInfoStr += $"浏览量:{articleInfo.viewCount}&nbsp;";
+    if (!string.IsNullOrEmpty(articleInfo.content))
+        articleInfo.content = WebUtility.HtmlDecode(articleInfo.content);
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <link rel="stylesheet" href="~/css/ArticleView.css" />
+    <link href="~/css/video-js.css" rel="stylesheet" />
+    <script src="~/js/ellipsis.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/js/video.js"></script>
+    <script type="text/javascript" src="~/js/videojs-contrib-hls.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        var articleType="@articleInfo.articleType";
+        if(articleType=="2"){
+            var videoPlayer = videojs(
+                'myPlayer', 
+                {
+                    loop: true,
+                    controls: true,
+                    preload: 'auto',
+                    autoplay: true
+                });
+            videoPlayer.play();
+        }
+    });
+    </script>
+}
+@section Body {
+    <div id="home">
+        <div id="ArticleTitle">@Html.Raw(articleInfo.articleTitle)</div>
+        <div id="ArticleInfo">@Html.Raw(articleInfoStr)</div>
+        @if(articleInfo.articleType!="2"){
+            <div id="ArticleContent">
+               @Html.Raw(articleInfo.content)
+               @(new HtmlString(articleInfo.content))
+            </div>
+        }else{
+            <div id="ArticleContent">
+                <video id="myPlayer" controls="controls" preload="auto" autoplay="autoplay" class="myPlayer video-js vjs-default-skin">
+                    <source src="@articleInfo.content" type="video/mp4" />
+                </video>
+            </div>
+        }
+    </div>
+}
+@section VueScript {
+    <script>
+        var home = new Vue({
+            el:"#home",
+            data:{
+                windowWidth: document.body.clientWidth,  //实时网页可视宽度
+                windowHeight: document.body.clientHeight   //实时网页可视高度
+            },
+            watch:{
+                windowHeight(val) {
+                    var that = this;
+                    console.log("实时屏幕高度:"+that.windowHeight);
+                },
+                windowWidth(val) {
+                    var that = this;
+                    console.log("实时屏幕宽度:"+that.windowWidth);
+                }
+            },
+            mounted:function(){
+                var _that = this;
+                _that.windowWidth=document.body.clientWidth;
+                _that.windowHeight=document.body.clientHeight;
+                window.onresize = () => {
+                    return (() => {
+                        _that.windowWidth = document.body.clientWidth;
+                        _that.windowHeight = document.body.clientHeight;
+                    })();
+                };
+            },
+            methods:{
+            }
+        });
+    </script>
+}

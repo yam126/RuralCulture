@@ -1,0 +1,168 @@
+﻿#columnFieldContainer {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 0px solid red;
+}
+
+#btnSave {
+    width: 8vw;
+    margin-left: 16vw;
+    margin-top: 0.3vh;
+}
+
+.btnDeleteSetting-Container {
+    width: 2vw;
+    height: 3vh;
+    margin-left: 70%;
+    margin-top: 2vh;
+    cursor: pointer;
+    /* border: 1px solid #0B2E88; */
+    border-right: 1px solid #0B2E88;
+    float: left;
+}
+
+@media (max-width:1591px) {
+    .btnDeleteSetting-Container {
+        margin-left: 69%;
+    }
+}
+
+@media (max-width:1436px) {
+    .btnDeleteSetting-Container {
+        width:3vw;
+        margin-left: 67%;
+    }
+}
+
+@media (max-width:1394px) {
+    .btnDeleteSetting-Container {
+        margin-left: 65%;
+    }
+}
+
+@media (max-width:1394px) {
+    .btnDeleteSetting-Container {
+        margin-left: 65%;
+    }
+}
+
+@media (max-width:1394px) {
+    .btnDeleteSetting-Container {
+        margin-left: 65%;
+    }
+}
+
+    .btnDeleteFile {
+        width: 5vw;
+        height: 4vh;
+        margin-left: 0.5vw;
+        margin-top: 1.2vh;
+        cursor: pointer;
+        border-radius: 6px;
+        background-color: #EF451E;
+        float: left;
+    }
+
+        .btnDeleteFile .Icon {
+            width: 1vw;
+            height: 2vh;
+            color: #fff;
+            margin-left: 0.7vw;
+            margin-top: 1vh;
+            float: left;
+        }
+
+        .btnDeleteFile .Text {
+            width: 2.2vw;
+            height: 3vh;
+            line-height: 3vh;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.9vw;
+            color: #fff;
+            text-align: center;
+            border: 0px solid red;
+            margin-left: 0.2vw;
+            margin-top: 0.5vh;
+            float: left;
+        }
+
+@media (max-width:1096px) {
+    .btnDeleteFile {
+        width: 7vw;
+    }
+
+        .btnDeleteFile .Text {
+            margin-left: 1.3vw;
+        }
+}
+
+@media (max-width: 1080px) {
+    .btnDeleteFile {
+        width: 9vw;
+    }
+
+    .btnDeleteFile .Text {
+        width:3vw;
+    }
+}
+
+@media (max-width: 1096px) {
+    .btnDeleteSetting-Container {
+        margin-left: 65%;
+    }
+}
+
+@media (max-width: 1096px) {
+    #ddlSearchCondition {
+        width: 9.5vw;
+        margin-top: 1.3%;
+    }
+}
+
+@media (max-width: 1080px) {
+    .btnDeleteSetting-Container {
+        margin-left: 63%;
+    }
+}
+
+    #buttonContainer {
+        width: 100%;
+        height: 5vh;
+        margin-left: 0%;
+        margin-top: 0%;
+        border: 0px solid red;
+    }
+
+    #columnFieldList {
+        width: 100%;
+        min-height: 5vh;
+        height: auto !important;
+        margin-left: 0%;
+    }
+
+        #columnFieldList li {
+            border-bottom: 1px solid #C3C3C3;
+        }
+
+            #columnFieldList li table {
+                width: 100%;
+                height: 5vh;
+            }
+
+                #columnFieldList li table tr td {
+                    width: 5%;
+                    font-family: 'Microsoft YaHei UI';
+                    font-size: 0.8vw;
+                    color: #4A4A4A;
+                    text-align: center;
+                }
+
+                #columnFieldList li table .btnOrderMethod {
+                    width: 5%;
+                    color: #747FFF;
+                    cursor: pointer;
+                    text-align: center;
+                }

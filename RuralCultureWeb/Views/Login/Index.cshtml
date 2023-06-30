@@ -1,0 +1,146 @@
+﻿@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字化乡村综合信息管理平台-系统登录</title>
+    <link rel="stylesheet" href="~/css/Login.css" />
+    <link rel="stylesheet" href="~/lib/element-ui/theme-chalk/index.css" />
+    <link rel="stylesheet" href="~/css/custom-checkbox.css" />
+    <link rel="stylesheet" href="~/lib/jqueryEject/jqueryEject.css" />
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="~/lib/vue/vue.js"></script>
+    <script type="text/javascript" src="~/lib/jqueryEject/jqueryEject.js"></script>
+</head>
+<body>
+    <div id="mainDiv">
+        <div id="loginPanel">
+            <div class="title">
+                数字化乡村综合信息管理平台
+            </div>
+            <div class="center">
+                <div class="panelTitle">
+                    登录系统
+                </div>
+                <div class="InputPanel">
+                    <!--用户名-->
+                    <div class="InputItem">
+                        <div class="IconDiv">
+                            <img class="Icon" src="~/images/icon01.png" />
+                        </div>
+                        <input type="text" id="txtAccount" v-model="Account" placeholder="请输入账号" class="TextInput" />
+                    </div>
+                    <!--/用户名-->
+                    <!--密码-->
+                    <div class="InputItem">
+                        <div class="IconDiv">
+                            <img class="Icon" src="~/images/icon03.png" />
+                        </div>
+                        <input type="password" id="txt" v-model="Password" placeholder="请输入密码" class="TextInput" />
+                    </div>
+                    <!--/密码-->
+                    <!--验证码-->
+                    <div class="InputItem">
+                        <!--验证码图片占位-->
+                        <div class="verifyCode">
+                            验证码位置
+                        </div>
+                        <!--/验证码图片占位-->
+                        <div class="IconDiv">
+                            <img class="Icon" src="~/images/icon02.png" />
+                        </div>
+                        <input type="text" v-model="CheckCode" placeholder="请输入验证码" class="TextInput" />
+                    </div>
+                    <!--/验证码-->
+                </div>
+                <div class="saveAccount-findPwd">
+                    <div class="saveAccountPanel">
+                        <input class="custom-checkbox" id="chkSaveAccnount" type="checkbox" />
+                        <label for="chkSaveAccnount">记住我</label>
+                    </div>
+                    <div class="findPwd">
+                        <a href="#">找回密码</a>
+                    </div>
+                </div>
+                <div class="submitButtonPanel">
+                    <button @@click="btnSubmitClick" class="btnSubmit">登录</button>
+                </div>
+            </div>
+        </div>
+        <div style="display:none">
+            <form method="Post" action="/Login/Index" id="subform">
+                <input type="hidden" name="Account" id="Account" v-model="Account" />
+                <input type="hidden" name="Password" id="Password" v-model="Password" />
+                <input type="hidden" name="CheckCode" id="CheckCode" v-model="CheckCode" />
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    var login = new Vue({
+        el:"#mainDiv",
+        data:{
+            Account:'',
+            Password:'',
+            CheckCode:'',
+            isSaveAccount:false,
+            windowWidth: document.body.clientWidth,  //实时屏幕宽度
+            windowHeight: document.body.clientHeight   //实时屏幕高度
+        },
+        watch:{
+            windowHeight(val) {
+                var that = this;
+                console.log("实时屏幕高度:"+that.windowHeight);
+            },
+            windowWidth(val) {
+                var that = this;
+                console.log("实时屏幕宽度:"+that.windowWidth);
+            }
+        },
+        mounted:function(){
+            var _that = this;
+            _that.windowWidth=document.body.clientWidth;
+            _that.windowHeight=document.body.clientHeight;
+            window.onresize = () => {
+                return (() => {
+                    _that.windowWidth = document.body.clientWidth;
+                    _that.windowHeight = document.body.clientHeight;
+                    _that.autoSizeMainDiv();
+                })();
+            };
+        },
+        methods:{
+            autoSizeMainDiv(){
+                $("#mainDiv").css({
+                    "width":this.windowWidth,
+                    "height":this.windowHeight
+                });
+            },
+            btnSubmitClick(){
+                var _that=this;
+                var Ealt=new Eject();
+                if(_that.Account==''){
+                    Ealt.Ealert({
+                        title:'非空出错',
+                        message:'账号不能为空'
+                    });
+                    return false;
+                }
+                if(_that.Password==''){
+                    Ealt.Ealert({
+                        title:'非空出错',
+                        message:'密码不能为空'
+                    });
+                    return false;
+                }
+                $("#Account").val(_that.Account);
+                $("#Password").val(_that.Password);
+                $("#subform").submit();
+            }
+        }
+    });
+</script>
+</html>
+

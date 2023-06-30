@@ -1,0 +1,492 @@
+﻿@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    ViewData.Add("Title","乡村文化-首页");
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <script type="text/javascript" src="~/js/getElementPos.js"></script>
+    <script type="text/javascript" src="~/js/ArticleParameter.js" />
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".hotItem").each(function(index,element){
+                $(element).mouseover(function(){
+                    $(".hotItem").each(function(idx,ele){
+                        var MaxContentItem=$(ele).children(".imageItem");
+                        var NormalContentItem=$(ele).children(".normalItem");
+                        if(index==idx){
+height                        MaxContentItem.show();
+                            NormalContentItem.hide();
+                        }else{
+                            MaxContentItem.hide();
+                            NormalContentItem.show();
+                        }
+                    });
+                });
+            });
+        });
+        function ContentItemStyle(currentIndex){
+            $(".hotItem").each(function(index,element){
+                var MaxContentItem=$(element).children(".imageItem");
+                var NormalContentItem=$(element).children(".normalItem");
+                if(currentIndex==index){
+                    MaxContentItem.show();
+                    NormalContentItem.hide();
+                }else{
+                    MaxContentItem.hide();
+                    NormalContentItem.show();
+                }
+            });
+        }
+    </script>
+}
+@section Body {
+    <div id="home">
+        <div class="focusContainer">
+            <div id="focusFirst" class="focusItemStart">
+                <img v-show="topArticle[0].ArticleType=='2'" class="focusPlayIcon" src="~/images/playIcon.png" />
+                <a :href="'/Article/ArticleView?ArticleId='+topArticle[0].ArticleId">
+                   <img class="focusImg" src="~/images/articleDefaultCover.jpg" />
+                </a>
+                <div class="focuslinkPanel">
+                     <a :href="'/Article/ArticleView?ArticleId='+topArticle[0].ArticleId">
+                        {{topArticle[0].ArticleTitle}}
+                     </a>
+                </div>
+            </div>
+            <div id="focusMiddle" class="focusItemStart">
+                <img v-show="topArticle[1].ArticleType=='2'" class="focusPlayIcon" src="~/images/playIcon.png" />
+                <a :href="'/Article/ArticleView?ArticleId='+topArticle[1].ArticleId">
+                   <img class="focusImg" src="~/images/articleDefaultCover.jpg" />
+                </a>
+                <div class="focuslinkPanel">
+                     <a :href="'/Article/ArticleView?ArticleId='+topArticle[1].ArticleId">
+                        {{topArticle[1].ArticleTitle}}
+                     </a>
+                </div>
+            </div>
+            <div id="focusEnd" class="focusItemEnd">
+                <img v-show="topArticle[2].ArticleType=='2'" class="focusPlayIcon" src="~/images/playIcon.png" />
+                <a :href="'/Article/ArticleView?ArticleId='+topArticle[2].ArticleId">
+                   <img class="focusImg" src="~/images/articleDefaultCover.jpg" />
+                </a>
+                <div class="focuslinkPanel">
+                     <a :href="'/Article/ArticleView?ArticleId='+topArticle[2].ArticleId">
+                        {{topArticle[2].ArticleTitle}}
+                     </a>
+                </div>
+            </div>
+        </div>
+        <div class="classifyContainer">
+            <div class="classifyListContainer">
+                <div v-for="(item,index) in groupAry" :key="index" class="classifyItem">
+                    <a :href="'/Article/ArticleDynamics?advancedField=GroupId&advancedValue='+item.groupId">
+                        {{item.groupName}}
+                    </a>
+                </div>
+            </div>
+            <div @@click="showAllCategor" class="classifyItem">
+                <a href="#">
+                    更多分类
+                </a>
+            </div>
+        </div>
+        <div class="moreInfo">
+            <div class="newUpload">
+                <div class="title-container">
+                    <div class="title">
+                        最新上传
+                    </div>
+                    <div class="moreAll">
+                        <a href="/Article/ArticleDynamics">
+                            查看全部&gt;
+                        </a>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <div class="firstItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[0].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[0].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[0].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[0].ArticleId">
+                               {{uploadRank[0].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="contentItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[1].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[1].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[1].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[1].ArticleId">
+                               {{uploadRank[1].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="contentItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[2].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[2].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[2].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[2].ArticleId">
+                               {{uploadRank[2].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="endItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[3].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[3].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[3].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[3].ArticleId">
+                               {{uploadRank[3].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                </div>
+            </div>            
+            <div id="hotRank" class="hotRank">
+                <div class="title">
+                    热度排行
+                </div>
+                <div style="display:none" class="noData">
+                    <img src="~/images/NoDataIcon.png" />
+                </div>
+                <div style="display:none" class="focusImage">
+                    <img src="~/images/focusHotTop.jpg" />
+                </div>
+                <div class="hotTop-Container">
+                    <div v-for="(item,index) in TopRank" :key="index" class="hotItem">
+                        <div class="imageItem">
+                            <a :href="'/Article/ArticleView?ArticleId='+item.articleId">
+                                <img :title="item.articleTitle" :alt="item.articleTitle" :src="item.coverUrl" />
+                            </a>
+                            <div :title="item.articleTitle" class="linkPanel">
+                                <a :href="'/Article/ArticleView?ArticleId='+item.articleId" >
+                                    {{item.articleTitle}}
+                                </a>
+                            </div>
+                        </div>
+                        <div :title="item.articleTitle" style="display:none" class="normalItem">
+                            <span class="star">★</span>
+                            <a :href="'/Article/ArticleView?ArticleId='+item.articleId">
+                                {{item.articleTitle}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="articleRecommend">
+                <div class="title-container">
+                    <div class="title">
+                        文章推荐
+                    </div>
+                    <div class="moreAll">
+                        <a href="/Article/ArticleDynamics">
+                            查看全部&gt;
+                        </a>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <div class="firstItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[0].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[0].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[0].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[0].ArticleId">
+                               {{uploadRank[0].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="contentItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[1].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[1].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[1].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[1].ArticleId">
+                               {{uploadRank[1].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="contentItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[2].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[2].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[2].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[2].ArticleId">
+                               {{uploadRank[2].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                    <div class="endItem">
+                        <!--显示文章内容模板-->
+                        <img v-show="uploadRank[3].ArticleType=='2'" class="newUploadplayIcon" src="~/images/playIcon.png" />
+                        <a :href="'/Article/ArticleView?ArticleId='+uploadRank[3].ArticleId">
+                            <img class="newUploadimg" :src="uploadRank[3].CoverUrl" />
+                        </a>
+                        <div class="newUploadlinkPanel">
+                            <a :href="'/Article/ArticleView?ArticleId='+uploadRank[3].ArticleId">
+                               {{uploadRank[3].ArticleTitle}}
+                            </a>
+                        </div>
+                        <!--/显示文章内容模板-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <el-dialog title="全部分类" custom-class="elDialog" :visible.sync="dialogAllCategor">
+          <div class="elDialog-mainPanel">
+                <table style="height:3vh;" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                     <td colspan="1" rowspan="1" class="thead" style="width:51%">分类编号</td>
+                     <td colspan="1" rowspan="1" class="thead" style="width:49%">分类名称</td>
+                  </tr>
+                </table>
+                <table style="margin-top: -3vh;" cellpadding="0" cellspacing="0" border="0">
+                  <tr v-for="(item,index) in allGroup" :key="index" >
+                     <td class="td-id" style="width:51%">{{item.groupId}}</td>
+                     <td :title="item.groupName" @@click="groupClick(item.groupId)" class="td-content" style="width:49%">                       
+                       <a :href="'/Article/ArticleDynamics?advancedField=GroupId&advancedValue='+item.groupId" :title="item.groupName">    
+                         {{item.groupName}}
+                       </a>
+                     </td>
+                  </tr>
+               </table>
+          </div>
+        </el-dialog>
+    </div>
+}
+@section VueScript {
+    <script>
+        var home = new Vue({
+            el:"#home",
+            data:{
+                dialogAllCategor:false,
+                defaultCover:'/images/articleDefaultCover.jpg',
+                TopRank:[],
+                uploadRank:[
+                    new ArticleParameter(),
+                    new ArticleParameter(),
+                    new ArticleParameter(),
+                    new ArticleParameter()
+                ],
+                topArticle:[
+                    new ArticleParameter(),
+                    new ArticleParameter(),
+                    new ArticleParameter()
+                ],
+                groupAry:[],
+                allGroup:[],
+                windowWidth: document.body.clientWidth,  //实时网页可视宽度
+                windowHeight: document.body.clientHeight   //实时网页可视高度
+            },
+            watch:{
+                windowHeight(val) {
+                    var that = this;
+                    console.log("实时屏幕高度:"+that.windowHeight);
+                },
+                windowWidth(val) {
+                    var that = this;
+                    console.log("实时屏幕宽度:"+that.windowWidth);
+                }
+            },
+            mounted:function(){
+                var _that = this;
+                _that.windowWidth=document.body.clientWidth;
+                _that.windowHeight=document.body.clientHeight;
+                _that.loadingData();
+                _that.focusImagefocuslinkPanel("#focusFirst");
+                _that.focusImagefocuslinkPanel("#focusMiddle");
+                _that.focusImagefocuslinkPanel("#focusEnd");
+                window.onresize = () => {
+                    return (() => {
+                        _that.focusImagefocuslinkPanel("#focusFirst");
+                        _that.focusImagefocuslinkPanel("#focusMiddle");
+                        _that.focusImagefocuslinkPanel("#focusEnd");
+                        _that.windowWidth = document.body.clientWidth;
+                        _that.windowHeight = document.body.clientHeight;
+                    })();
+                };
+            },
+            methods:{
+                groupClick(groupId){
+                    self.location="/Article/ArticleDynamics?advancedField=GroupId&advancedValue="+groupId;
+                },
+                focusImagefocuslinkPanel(focusDiv){
+                    var focusHeight=parseInt($(focusDiv).height());
+                    var focusLink=$(focusDiv).children(".focuslinkPanel");
+                    var focusLinkHeight=parseInt(focusLink.height());
+                    var top=parseInt(focusHeight-focusLinkHeight);
+                    focusLink.css({"top":top+"px","left":"0px"});
+                },
+                showAllCategor(){
+                    var _that=this;
+                    _that.dialogAllCategor=true;
+                },
+                loadingData(){
+                    var _that=this;
+                    var loading = _that.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    _that.loadingRank();
+                    _that.loadingNewUploadRank();
+                    _that.loadingArticleTop();
+                    _that.loadingGroup();
+                    _that.QueryAllGroup();
+                    setTimeout(() => {
+                        loading.close();
+                    }, 200);
+                },
+                loadingRank(){
+                    var _that=this;
+                    _that.TopRank=[];
+                    apiHelper.queryArticleViewCountTopTen(function(response){
+                        if(response.data.status==0){
+                            var resultAry=response.data.result;
+                            var len=resultAry.length>=6?6:resultAry.length;
+                            console.log("len="+len);
+                            for(var i=0;i<len;i++)
+                            {
+                                switch(resultAry[i].articleType)
+                                {
+                                    case '0':
+                                        resultAry[i].articleType='普通文章'
+                                    break;
+                                    case '1':
+                                        resultAry[i].articleType='图片文章'
+                                    break;
+                                    case '2':
+                                        resultAry[i].articleType='视频文章'
+                                    break;
+                                }
+                                if(resultAry[i].coverUrl=='')
+                                    resultAry[i].coverUrl=_that.defaultCover;
+                                _that.TopRank.push(resultAry[i]);
+                            }
+                            console.log("loadingRank");
+                            console.log("_that.TopRank");
+                            console.log(_that.TopRank);
+                            _that.registHotRankEvent();
+                            _that.$nextTick(() => { 
+                                _that.ContentItemStyle(0);
+                            });
+                        }
+                    });
+                },
+                loadingNewUploadRank(){
+                    var _that=this;
+                    var topnum=4;
+                    apiHelper.QueryArticleCreatedTimeTop(
+                        topnum,
+                        function(response){
+                            if(response.data.status==0){
+                                var resultAry=response.data.result;
+                                _that.setArticleUploadRank(resultAry[0],0);
+                                _that.setArticleUploadRank(resultAry[1],1);
+                                _that.setArticleUploadRank(resultAry[2],2);
+                                _that.setArticleUploadRank(resultAry[3],3);
+                            }   
+                        }
+                    );
+                },
+                loadingArticleTop(){
+                    var _that=this;
+                    apiHelper.QueryArticleTop(function(response){
+                        if(response.data.status==0){
+                            var resultAry=response.data.result;
+                            _that.setArticleTop(resultAry[0],0);
+                            _that.setArticleTop(resultAry[1],1);
+                            _that.setArticleTop(resultAry[2],2);
+                        }
+                    });
+                },
+                setArticleTop(rankItem,index){
+                    var _that=this;
+                    console.log("setArticleUploadRank");
+                    console.log("rankItem");
+                    console.log(rankItem);
+                    _that.topArticle[index].ArticleId=rankItem.articleId;
+                    _that.topArticle[index].ArticleTitle=rankItem.articleTitle;
+                    _that.topArticle[index].CoverUrl=rankItem.coverUrl;
+                    _that.topArticle[index].ArticleType=rankItem.articleType;
+                },
+                setArticleUploadRank(rankItem,index){
+                    var _that=this;
+                    console.log("setArticleUploadRank");
+                    console.log("rankItem");
+                    console.log(rankItem);
+                    _that.uploadRank[index].ArticleId=rankItem.articleId;
+                    _that.uploadRank[index].ArticleTitle=rankItem.articleTitle;
+                    _that.uploadRank[index].CoverUrl=rankItem.coverUrl;
+                    _that.uploadRank[index].ArticleType=rankItem.articleType;
+                },
+                ContentItemStyle(currentIndex){
+                    $(".hotItem").each(function(index,element){
+                        var MaxContentItem=$(element).children(".imageItem");
+                        var NormalContentItem=$(element).children(".normalItem");
+                        if(currentIndex==index){
+                            MaxContentItem.show();
+                            NormalContentItem.hide();
+                        }else{
+                            MaxContentItem.hide();
+                            NormalContentItem.show();
+                        }
+                    });
+                },
+                registHotRankEvent(){
+                    var _that=this;
+                    _that.$nextTick(() => { 
+                        $(".hotItem").each(function(index,element){
+                            $(element).click(function(){
+                                //_that.ContentItemStyle(index);
+                                var articleId = _that.TopRank[index].articleId;
+                                self.location='/Article/ArticleView?ArticleId=' + articleId;
+                            });
+                        });
+                    });
+                },
+                loadingGroup(){
+                    var _that=this;
+                    apiHelper.QueryGroupTop(function(response){
+                        if(response.data.status==0){
+                            _that.groupAry=response.data.result;
+                        }
+                    });
+                },
+                QueryAllGroup(){
+                    var _that=this;
+                    apiHelper.QueryAllGroup(function(response){
+                        if(response.data.status==0){
+                            _that.allGroup=response.data.result;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+}

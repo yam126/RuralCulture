@@ -1,0 +1,813 @@
+﻿#TreeControlContainer {
+    width: 15vw;
+    height: 79vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #8e8888;
+    float: left;
+}
+
+    #TreeControlContainer .ButtonContainer {
+        width: 12vw;
+        height: 5vh;
+        margin-top: 1vh;
+        margin-left: 0.5vw;
+        border: 1px solid red;
+        float: left;
+    }
+
+    #TreeControlContainer .TreeControl {
+        width: 12vw;
+        height: 77vh;
+        margin-top: 1vh;
+        margin-left: 0.5vw;
+        overflow-x: auto;
+        overflow-y: auto;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #TreeControlContainer .TreeControl .el-tree {
+            min-width: 100%;
+            display: inline-block !important;
+            border: 0px solid blue;
+        }
+
+    #TreeControlContainer .btnShrinkExpand {
+        width: 1vw;
+        height: 77vh;
+        line-height: 77vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 1.1vw;
+        color: #8e8888;
+        cursor: pointer;
+        margin-top: 1vh;
+        margin-left: 0.5vw;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #TreeControlContainer .btnShrinkExpand:hover {
+            background-image: linear-gradient(344deg, #077ade, #1c96e3, #1db1e7, #07ceeb);
+            border: 1px solid #07ceeb;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+#TreeControlExpand {
+    width: 1vw;
+    height: 79vh;
+    line-height: 79vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1.1vw;
+    color: #8e8888;
+    cursor: pointer;
+    display: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #8e8888;
+    float: left;
+}
+
+    #TreeControlExpand:hover {
+        background-image: linear-gradient(344deg, #077ade, #1c96e3, #1db1e7, #07ceeb);
+        border: 1px solid #07ceeb;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        color: #fff;
+    }
+
+.ListContainerExpand {
+    width: 81vw;
+    height: 79vh;
+    margin-left: 0.5vw;
+    margin-top: 1vh;
+    border: 0px solid red;
+    float: left;
+}
+
+.ListContainerShrink {
+    width: 95vw;
+    height: 79vh;
+    margin-left: 0.5vw;
+    margin-top: 1vh;
+    border: 0px solid red;
+    float: left;
+}
+
+#TreeNodePopMenu {
+    width: 5vw;
+    min-height: 5vh;
+    height: auto !important;
+    top: 15vh;
+    left: 20vw;
+    display: none;
+    position: absolute;
+    background: linear-gradient(to right, #dee0e1,#ffffff, #ffffff,#ffffff);
+    border: 1px solid #cbc6c6;
+}
+
+    #TreeNodePopMenu .MenuItem {
+        width: 96%;
+        height: 3vh;
+        line-height: 3vh;
+        margin-left: 2%;
+        margin-top: 1%;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #1d1e23;
+        text-align: left;
+        text-indent: 5%;
+        cursor: pointer;
+        float: left;
+    }
+
+        #TreeNodePopMenu .MenuItem:hover {
+            border-radius: 5px;
+            background-color: #1bbad7;
+            color: #fff;
+        }
+
+
+    #TreeNodePopMenu .MenuItemRed {
+        width: 96%;
+        height: 3vh;
+        line-height: 3vh;
+        margin-left: 2%;
+        margin-top: 1%;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #1d1e23;
+        text-align: left;
+        text-indent: 5%;
+        cursor: pointer;
+        float: left;
+    }
+
+        #TreeNodePopMenu .MenuItemRed:hover {
+            border-radius: 5px;
+            background-color: #d53737;
+            color: #fff;
+        }
+
+#ListContainer .Control {
+    width: 97%;
+    height: 6vh;
+    margin-top: 1%;
+    margin-left: 1.5%;
+    border-bottom: 1px solid #C4C2C5;
+    float: left;
+}
+
+.btnPageSettingShrink {
+    width: 2vw;
+    height: 3vh;
+    margin-left: 65%;
+    margin-top: 2vh;
+    border-right: 1px solid #0B2E88;
+    float: left;
+}
+
+@media (max-width:1209px) {
+    .btnPageSettingShrink {
+        margin-left: 61%;
+    }
+}
+
+    .btnPageSettingShrink .Icon {
+        width: 1.3vw;
+        height: 2.2vh;
+        cursor: pointer;
+        margin-left: 0.3vw;
+        margin-top: 0.3vh;
+        float: left;
+    }
+
+    .btnPageSettingExpand {
+        width: 2vw;
+        height: 3vh;
+        margin-left: 59%;
+        margin-top: 2vh;
+        border-right: 1px solid #0B2E88;
+        float: left;
+    }
+
+    @media (max-width:1147px) {
+        .btnPageSettingExpand {
+            margin-left: 56%;
+        }
+    }
+
+    @media (max-width:1143px) {
+        .btnPageSettingExpand {
+            margin-left: 51%;
+        }
+    }
+
+    .btnPageSettingExpand .Icon {
+        width: 1.3vw;
+        height: 2.2vh;
+        cursor: pointer;
+        margin-left: 0.3vw;
+        margin-top: 0.3vh;
+        float: left;
+    }
+
+    #btnBatchExport {
+        width: 5vw;
+        height: 4vh;
+        line-height: 4vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #fff;
+        text-align: center;
+        margin-left: 0.6vw;
+        margin-top: 1.4vh;
+        cursor: pointer;
+        border-radius: 6px;
+        background-color: #0088E8;
+        float: left;
+    }
+
+    #btnAddData {
+        width: 5vw;
+        height: 4vh;
+        margin-left: 0.6vw;
+        margin-top: 1.4vh;
+        cursor: pointer;
+        position: relative;
+        border-radius: 6px;
+        background-color: #6D79FF;
+        float: left;
+    }
+
+@media (max-width:1079px) {
+    #btnAddData {
+        width: 6vw;
+    }
+
+        #btnAddData .Text {
+            width: 3vw;
+        }
+}
+
+    #btnAddData .Icon {
+        width: 1vw;
+        height: 2vh;
+        margin-left: 0.7vw;
+        margin-top: 1vh;
+        float: left;
+    }
+
+    #btnAddData .Text {
+        width: 2.2vw;
+        height: 3vh;
+        line-height: 3vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.9vw;
+        color: #fff;
+        text-align: center;
+        border: 0px solid red;
+        margin-left: 0.2vw;
+        margin-top: 0.5vh;
+        float: left;
+    }
+
+    #btnDelete {
+        width: 5vw;
+        height: 4vh;
+        margin-left: 0.6vw;
+        margin-top: 1.4vh;
+        cursor: pointer;
+        border-radius: 6px;
+        background-color: #EF451E;
+        float: left;
+    }
+
+    @media (max-width:1209px) {
+        #btnDelete {
+            width: 6.3vw;
+        }
+    }
+
+    @media (max-width:1147px) {
+        #btnDelete {
+            width: 7vw;
+        }
+    }
+
+    #btnDelete .Icon {
+        width: 1vw;
+        height: 2vh;
+        color: #fff;
+        margin-left: 0.7vw;
+        margin-top: 1vh;
+        float: left;
+    }
+
+    @media (max-width:1209px) {
+        #btnDelete .Icon {
+            margin-top: 0.3vh;
+        }
+
+        #btnDelete .Text {
+            margin-left: 0.5vw;
+        }
+    }
+
+    #btnDelete .Text {
+        width: 2.2vw;
+        height: 3vh;
+        line-height: 3vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.9vw;
+        color: #fff;
+        text-align: center;
+        border: 0px solid red;
+        margin-left: 0.2vw;
+        margin-top: 0.5vh;
+        float: left;
+    }
+
+    @media (max-width:1147px) {
+
+        #btnDelete .Icon {
+            margin-top: 0.5vh;
+        }
+
+        #btnDelete .Text {
+            width: 3vw;
+            margin-left: 0.5vw;
+        }
+    }
+
+    #Table-Container {
+        width: 97%;
+        /* width: 84vw; */
+        height: 65vh;
+        margin-top: 1vh;
+        margin-left: 1vw;
+        display: block;
+        position: relative;
+        border: 0px solid #C4C2C5;
+        float: left;
+    }
+
+    #columnFieldContainer {
+        width: 100%;
+        height: 60vh;
+        overflow: auto;
+        margin-left: 0%;
+        margin-top: 0%;
+        border: 0px solid red;
+    }
+
+    #btnSave {
+        width: 8vw;
+        margin-left: 16vw;
+        margin-top: 0.3vh;
+    }
+
+    #columnFieldList {
+        width: 100%;
+        min-height: 5vh;
+        height: auto !important;
+        margin-left: 0%;
+    }
+
+        #columnFieldList li {
+            border-bottom: 1px solid #C3C3C3;
+        }
+
+            #columnFieldList li table {
+                width: 100%;
+                height: 5vh;
+            }
+
+                #columnFieldList li table tr td {
+                    width: 5%;
+                    font-family: 'Microsoft YaHei UI';
+                    font-size: 0.8vw;
+                    color: #4A4A4A;
+                    text-align: center;
+                }
+
+                #columnFieldList li table .btnOrderMethod {
+                    width: 5%;
+                    color: #747FFF;
+                    cursor: pointer;
+                    text-align: center;
+                }
+
+    .elEditDialog {
+        width: 26vw;
+        height: 35vh;
+        background-color: #fff;
+    }
+
+    @media (max-width:1646px) {
+        .elEditDialog {
+            width: 29vw;
+            height: 38vh;
+        }
+    }
+
+    @media (max-width:1565px) {
+        .elEditDialog {
+            width: 29vw;
+            height: 37vh;
+        }
+    }
+
+    @media (max-width:1481px) {
+        .elEditDialog {
+            width: 29vw;
+            height: 39vh;
+        }
+    }
+
+    @media (max-width:1280px) {
+        .elEditDialog {
+            width: 31vw;
+            height: 39vh;
+        }
+    }
+
+    @media (max-width:1130px) {
+        .elEditDialog {
+            width: 35vw;
+            height: 41vh;
+        }
+    }
+
+    @media (max-width:1011px) {
+        .elEditDialog {
+            width: 41vw;
+            height: 42vh;
+        }
+    }
+
+    .elEditDialog-mainPanel {
+        width: 100%;
+        height: 18vh;
+        margin-top: 1vh;
+        border: 0px solid red;
+    }
+
+        .elEditDialog-mainPanel .line {
+            width: 98%;
+            height: 5vh;
+            margin-top: 0.5vh;
+            margin-left: 1%;
+            border: 0px solid red;
+        }
+
+            .elEditDialog-mainPanel .line .label {
+                width: 25%;
+                height: 5vh;
+                line-height: 5vh;
+                text-align: center;
+                font-family: 'Microsoft YaHei UI';
+                color: #171212;
+                margin-left: 0px;
+                margin-top: 0px;
+                border: 0px solid red;
+                float: left;
+            }
+
+            .elEditDialog-mainPanel .line .input-container {
+                width: 75%;
+                height: 5vh;
+                position: relative;
+                border: 0px solid red;
+                float: left;
+            }
+
+            .elEditDialog-mainPanel .line .color-select {
+                width: 1.5vw;
+                height: 2.8vh;
+                top: 19vh;
+                left: 22.6vw;
+                z-index: 5000;
+                position: absolute;
+                border: 0px solid red;
+                float: left;
+            }
+
+                .elEditDialog-mainPanel .line .color-select .el-color-picker--mini .el-color-picker__trigger {
+                    height: 2.5vh;
+                    width: 1.3vw;
+                }
+
+    @media (max-width:2065px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 18.6vh;
+        }
+    }
+
+    @media (max-width:1913px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 18.9vh;
+        }
+    }
+
+    @media (max-width:1809px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 19.2vh;
+        }
+    }
+
+    @media (max-width:1773px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 19.5vh;
+        }
+    }
+
+    @media (max-width:1776px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 19.6vh;
+        }
+    }
+
+    @media (max-width:1739px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 19.2vh;
+        }
+    }
+
+    @media (max-width:1646px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 20.6vh;
+            left: 25vw
+        }
+    }
+
+    @media (max-width:1597px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 19.8vh;
+        }
+    }
+
+    @media (max-width:1566px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 21vh;
+            left: 25vw;
+        }
+    }
+
+    @media (max-width:1490px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 20.5vh;
+            left: 25vw;
+        }
+    }
+
+    @media (max-width:1481px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 21.2vh;
+            left: 25vw;
+        }
+    }
+
+    @media (max-width:1415px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 21vh;
+            left: 25vw;
+        }
+    }
+
+    @media (max-width:1340px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 21.1vh;
+            left: 25vw;
+        }
+    }
+
+    @media (max-width:1280px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 21.6vh;
+            left: 27vw;
+        }
+    }
+
+    @media (max-width:1195px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 22.3vh;
+            left: 27vw;
+        }
+    }
+
+    @media (max-width:1130px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 22.2vh;
+            left: 30vw;
+        }
+    }
+
+    @media (max-width:1073px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 22.5vh;
+            left: 30.1vw;
+        }
+    }
+
+    @media (max-width:1011px) {
+        .elEditDialog-mainPanel .line .color-select {
+            top: 22.8vh;
+            left: 36vw;
+        }
+    }
+
+    .elEditDialog-mainPanel .line .input-container .txtInput {
+        width: 96%;
+        height: 3.2vh;
+        line-height: 3.2vh;
+        margin-top: 0.6vh;
+        margin-left: 0.5vw;
+        float: left;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        color: #000;
+        text-indent: 2%;
+        border-radius: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(0, 0, 0);
+        border-image: initial;
+    }
+
+        .elEditDialog-mainPanel .line .input-container .txtInput::placeholder {
+            color: #000;
+        }
+
+    .elEditDialog-mainPanel .line .btnSaveContainer {
+        width: 10vw;
+        height: 3vh;
+        margin-left: 8vw;
+        margin-top: 0.5vh;
+    }
+
+    @media (max-width:1646px) {
+        .elEditDialog-mainPanel .line .btnSaveContainer {
+            margin-left: 10.3vw;
+        }
+    }
+
+    @media (max-width:1565px) {
+        .elEditDialog-mainPanel .line .btnSaveContainer {
+            margin-left: 10vw;
+        }
+    }
+
+    @media (max-width:1130px) {
+        .elEditDialog-mainPanel .line .btnSaveContainer {
+            margin-left: 12vw;
+        }
+    }
+
+    @media (max-width:1011px) {
+        .elEditDialog-mainPanel .line .btnSaveContainer {
+            margin-left: 14vw;
+        }
+    }
+
+    .elEditDialog-mainPanel .line .input-container .el-input .el-input__inner {
+        width: 100%;
+        height: 100%;
+        margin-left: -1vw;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 0.9vw;
+        color: #000000;
+        border: 0px solid red;
+        background-color: transparent;
+    }
+
+        .elEditDialog-mainPanel .line .input-container .el-input .el-input__inner::placeholder {
+            color: #000000;
+        }
+
+    /deep/.el-tree {
+        width: 100%;
+        overflow: scroll;
+    }
+
+        /deep/.el-tree > .el-tree-node {
+            display: inline-block;
+            min-width: 100%;
+        }
+
+    @media (max-width:2153px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -47px;
+        }
+    }
+
+    @media (max-width:1991px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -86px;
+        }
+    }
+
+    @media (max-width:1874px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -128px;
+        }
+    }
+
+    @media (max-width:1747px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -164px;
+        }
+    }
+
+    @media (max-width:1665px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -186px;
+        }
+    }
+
+    @media (max-width:1665px) {
+
+        #ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+            height: 3.5vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination button {
+            height: 3.5vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .el-pager .number {
+            height: 3.5vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .btn-quicknext {
+            height: 3.5vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .el-pagination__editor {
+            height: 3.5vh;
+        }
+    }
+
+    @media (max-width:1585px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -218px;
+        }
+    }
+
+    @media (max-width:1458px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -249px;
+        }
+
+        .el-pagination button, .el-pagination span:not([class*=suffix]) {
+            margin-top: -0.3vh;
+        }
+    }
+
+    @media (max-width:1321px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -307px;
+        }
+    }
+
+    @media (max-width:1194px) {
+
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -342px;
+        }
+
+        .el-pagination button, .el-pagination span:not([class*=suffix]) {
+            margin-top: -0.7vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+            height: 3.5vh;
+            margin-top: -0.2vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .btn-quicknext {
+            height: 3.5vh;
+            margin-top: -0.2vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination button {
+            height: 3.5vh;
+            margin-top: -0.2vh;
+        }
+
+        #ListPageMain .Page-Container .Pagination .el-pager .number {
+            height: 3.5vh;
+            margin-top: -0.2vh;
+        }
+    }
+
+    @media (max-width:1100px) {
+        #ListPageMain .Page-Container .Pagination .el-pagination__total {
+            margin-left: -369px;
+        }
+    }

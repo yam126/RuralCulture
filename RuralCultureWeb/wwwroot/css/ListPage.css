@@ -1,0 +1,1557 @@
+﻿#ListPageMain {
+    width: 100%;
+    height: 81vh;
+    background-color: #FFF;
+    border-radius: 7px;
+}
+
+    #ListPageMain .Control {
+        width: 97%;
+        height: 6vh;
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-bottom: 1px solid #C4C2C5;
+        float: left;
+    }
+
+#ddlSearchCondition {
+    width: 8vw;
+    height: 5vh;
+    margin-left: 0vw;
+    margin-top: 0.8vh;
+    border: 0px solid red;
+    float: left;
+}
+
+.el-input--suffix .el-input__inner::placeholder {
+    color: #fff;
+}
+
+@media (max-width:1635px) {
+    #ddlSearchCondition {
+        width: 7vw;
+    }
+}
+
+@media (max-width:1593px) {
+    #ddlSearchCondition {
+        width: 9vw;
+    }
+}
+
+@media (max-width:1410px) {
+    #ddlSearchCondition {
+        width: 7.6vw;
+    }
+}
+
+@media (max-width:1396px) {
+    #ddlSearchCondition {
+        width: 11vw;
+    }
+}
+
+@media (max-width:1102px) {
+    #ddlSearchCondition {
+        width: 10vw;
+        margin-top: 1vh;
+    }
+}
+
+@media (max-width:1096px) {
+    #ddlSearchCondition {
+        width: 10vw;
+        margin-top: 0.4vh;
+    }
+}
+
+@media (max-width:998px) {
+    #ddlSearchCondition {
+        width: 12vw;
+        margin-top: 1vh;
+    }
+}
+
+@media (max-width:1892px) {
+    .el-input--suffix .el-input__inner {
+        height: 4.1vh;
+        line-height: 4.1vh;
+    }
+}
+
+@media (max-width:1842px) {
+    .el-input--suffix .el-input__inner {
+        height: 4.5vh;
+        line-height: 4.5vh;
+    }
+}
+
+@media (max-width:1815px) {
+    .el-input--suffix .el-input__inner {
+        height: 4.5vh;
+        line-height: 4.5vh;
+    }
+}
+
+@media (max-width:1795px) {
+    .el-input--suffix .el-input__inner {
+        height: 4.5vh;
+        line-height: 4.5vh;
+    }
+}
+
+@media (max-width:1770px) {
+    .el-input--suffix .el-input__inner {
+        height: 4vh;
+        line-height: 4vh;
+    }
+}
+
+@media (max-width:1741px) {
+    #ddlSearch {
+        height: 4.2vh;
+    }
+}
+
+@media (max-width:1299px) {
+    #ddlSearchCondition {
+        width: 8vw;
+    }
+}
+
+@media (max-width:1214px) {
+    #ddlSearchCondition {
+        width: 8.5vw;
+    }
+}
+
+@media (max-width:1176px) {
+    #ddlSearchCondition {
+        width: 9vw;
+    }
+}
+
+@media (max-width:1144px) {
+    #ddlSearchCondition {
+        width: 9vw;
+    }
+
+    .el-input__suffix {
+        margin-top: -1vh;
+    }
+}
+
+@media (max-width:1110px) {
+    #ddlSearchCondition {
+        width: 9.5vw;
+    }
+
+    .el-input__suffix {
+        margin-top: -1vh;
+    }
+}
+
+@media (max-width:1096px) {
+    #ddlSearch {
+        height: 4.5vh;
+        font-size: 0.2vw;
+        line-height: 25vh;
+        margin-top: -1.1vh;
+    }
+
+    .el-input__suffix {
+        margin-top: -0.7vh;
+    }
+}
+
+#txtSearch {
+    width: 12vw;
+    height: 4.2vh;
+    margin-left: 0.4vw;
+    margin-top: 0.7vh;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #0B2E88;
+    float: left;
+}
+
+    #txtSearch .inputText {
+        width: 76%;
+        height: 3.5vh;
+        line-height: 3.5vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.5vw;
+        text-align: left;
+        text-indent: 7%;
+        color: #BBBBBB;
+        margin-left: 0.1vw;
+        margin-top: 0.2vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #txtSearch .btnSearch {
+        width: 15%;
+        height: 3vh;
+        cursor: pointer;
+        margin-left: 0.6vw;
+        margin-top: 0.5vh;
+        border-left: 1px solid #0B2E88;
+        float: left;
+    }
+
+        #txtSearch .btnSearch .Icon {
+            width: 67%;
+            height: 2vh;
+            margin-left: 25%;
+            margin-top: 0.5vh;
+            float: left;
+        }
+
+.btnSetting-Container {
+    width: 2vw;
+    height: 3vh;
+    margin-left: 51%;
+    margin-top: 2vh;
+    /* border: 1px solid #0B2E88; */
+    border-right: 1px solid #0B2E88;
+    float: left;
+}
+
+@media (max-width:1892px) {
+    .btnSetting-Container {
+        margin-left: 52.5%;
+    }
+}
+
+@media (max-width:1594px) {
+    .btnSetting-Container {
+        margin-left: 50%;
+    }
+}
+
+.btnSetting-Container-Max {
+    width: 2vw;
+    height: 3vh;
+    margin-left: 58.9%;
+    margin-top: 2vh;
+    border-right: 1px solid #0B2E88;
+    float: left;
+}
+
+@media (max-width:1634px) {
+    .btnSetting-Container-Max {
+        margin-left: 58%;
+    }
+}
+
+@media (max-width:1626px) {
+    .btnSetting-Container-Max {
+        margin-left: 58%;
+    }
+}
+
+@media (max-width:1612px) {
+    .btnSetting-Container-Max {
+        margin-left: 58%;
+    }
+}
+
+@media (max-width:1410px) {
+    .btnSetting-Container-Max {
+        margin-left: 57%;
+    }
+}
+
+@media (max-width:1409px) {
+    .btnSetting-Container-Max {
+        margin-left: 57%;
+    }
+}
+
+@media (max-width:1214px) {
+    .btnSetting-Container-Max {
+        margin-left: 56%;
+    }
+}
+
+@media (max-width:1119px) {
+    .btnSetting-Container-Max {
+        margin-left: 53%;
+    }
+}
+
+@media (max-width:1117px) {
+    .btnSetting-Container-Max {
+        margin-left: 53%;
+    }
+}
+
+@media (max-width:1110px) {
+    .btnSetting-Container-Max {
+        margin-left: 51%;
+    }
+}
+
+@media (max-width:1114px) {
+    .btnSetting-Container-Max {
+        margin-left: 51%;
+    }
+}
+
+@media (max-width:1102px) {
+    .btnSetting-Container-Max {
+        margin-left: 50%;
+    }
+}
+
+@media (max-width:1100px) {
+    .btnSetting-Container-Max {
+        margin-left: 50%;
+    }
+}
+
+@media (max-width:1083px) {
+    .btnSetting-Container-Max {
+        margin-left: 46%;
+    }
+}
+
+
+@media (max-width:1440px) {
+    .btnSetting-Container {
+        margin-left: 51%;
+    }
+}
+
+@media (max-width:1435px) {
+    .btnSetting-Container {
+        margin-left: 51%;
+    }
+}
+
+@media (max-width:1434px) {
+    .btnSetting-Container {
+        margin-left: 51%;
+    }
+}
+
+@media (max-width:1412px) {
+    .btnSetting-Container {
+        margin-left: 54%;
+    }
+}
+
+@media (max-width:1409px) {
+    .btnSetting-Container {
+        margin-left: 47%;
+    }
+}
+
+@media (max-width:1369px) {
+    .btnSetting-Container {
+        margin-left: 47%;
+    }
+}
+
+@media (max-width:1123px) {
+    .btnSetting-Container {
+        margin-left: 48%;
+    }
+}
+
+@media (max-width:1119px) {
+    .btnSetting-Container {
+        margin-left: 48%;
+    }
+}
+
+@media (max-width:1110px) {
+    .btnSetting-Container {
+        margin-left: 44%;
+    }
+}
+
+@media (max-width:1096px) {
+    .btnSetting-Container {
+        margin-left: 46%;
+    }
+}
+
+@media (max-width:1085px) {
+    .btnSetting-Container {
+        margin-left: 42%;
+    }
+}
+
+@media (max-width:1079px) {
+    .btnSetting-Container {
+        margin-left: 38%;
+    }
+}
+
+@media (max-width:1073px) {
+    .btnSetting-Container {
+        margin-left: 40%;
+    }
+}
+
+.btnSetting-Container .Icon {
+    width: 1.3vw;
+    height: 2.2vh;
+    cursor: pointer;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    float: left;
+}
+
+.btnSetting-Container-Max .Icon {
+    width: 1.3vw;
+    height: 2.2vh;
+    cursor: pointer;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    float: left;
+}
+
+.btnBatchExport {
+    width: 5vw;
+    height: 4vh;
+    line-height: 4vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 0.8vw;
+    color: #fff;
+    text-align: center;
+    margin-left: 0.6vw;
+    margin-top: 1.4vh;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #0088E8;
+    float: left;
+}
+
+.btnBatchImport {
+    width: 5vw;
+    height: 4vh;
+    line-height: 4vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 0.8vw;
+    color: #fff;
+    text-align: center;
+    margin-left: 0.6vw;
+    margin-top: 1.4vh;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #05AC92;
+    float: left;
+}
+
+.btnAddData {
+    width: 5vw;
+    height: 4vh;
+    margin-left: 0.6vw;
+    margin-top: 1.4vh;
+    cursor: pointer;
+    position: relative;
+    border-radius: 6px;
+    background-color: #6D79FF;
+    float: left;
+}
+
+.btnDelete {
+    width: 5vw;
+    height: 4vh;
+    top: 24.5vh;
+    left: 91vw;
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 6px;
+    z-index: 3000;
+    background-color: #EF451E;
+    float: left;
+}
+
+@media (max-width:1119px) {
+    .btnAddData {
+        width: 5.7vw;
+    }
+
+    .btnDelete {
+        width: 5.7vw;
+    }
+
+    .btnBatchImport {
+        width: 5.7vw;
+    }
+
+    .btnBatchExport {
+        width: 5.7vw;
+    }
+}
+
+@media (max-width:1090px) {
+
+    .btnAddData {
+        width: 6.5vw;
+    }
+
+    .btnDelete {
+        width: 6.5vw;
+    }
+}
+
+@media (max-width:1085px) {
+
+    .btnAddData {
+        width: 7vw;
+    }
+
+    .btnDelete {
+        width: 7vw;
+    }
+
+    .btnBatchImport {
+        width: 7vw;
+    }
+
+    .btnBatchExport {
+        width: 7vw;
+    }
+}
+
+@media (max-width:1079px) {
+
+    .btnAddData {
+        width: 7vw;
+    }
+
+    .btnDelete {
+        width: 7vw;
+    }
+
+    .btnBatchImport {
+        width: 7vw;
+    }
+
+    .btnBatchExport {
+        width: 7vw;
+    }
+}
+
+.btnAddData .Icon {
+    width: 1vw;
+    height: 2vh;
+    margin-left: 0.7vw;
+    margin-top: 1vh;
+    float: left;
+}
+
+.btnDelete .Icon {
+    width: 1vw;
+    height: 2vh;
+    color: #fff;
+    margin-left: 0.7vw;
+    margin-top: 1vh;
+    float: left;
+}
+
+@media (max-width:1102px) {
+    .btnAddData .Icon {
+        width: 1.3vw;
+        margin-left: 1.2vw;
+    }
+
+    .btnDelete .Icon {
+        width: 1.3vw;
+        margin-left: 1.2vw;
+    }
+}
+
+@media (max-width:1079px) {
+    .btnAddData .Icon {
+        width: 1.3vw;
+        margin-left: 0.9vw;
+    }
+
+    .btnDelete .Icon {
+        width: 1.3vw;
+        margin-left: 0.9vw;
+    }
+}
+
+.btnAddData .Text {
+    width: 2.2vw;
+    height: 3vh;
+    line-height: 3vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 0.9vw;
+    color: #fff;
+    text-align: center;
+    border: 0px solid red;
+    margin-left: 0.2vw;
+    margin-top: 0.5vh;
+    float: left;
+}
+
+.btnDelete .Text {
+    width: 2.2vw;
+    height: 3vh;
+    line-height: 3vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 0.9vw;
+    color: #fff;
+    text-align: center;
+    border: 0px solid red;
+    margin-left: 0.2vw;
+    margin-top: 0.5vh;
+    float: left;
+}
+
+@media (max-width:1090px) {
+    .btnAddData .Text {
+        width: 3vw;
+    }
+
+    .btnDelete .Text {
+        width: 3vw;
+    }
+}
+
+@media (max-width:1085px) {
+    .btnAddData .Text {
+        width: 3vw;
+    }
+
+    .btnDelete .Text {
+        width: 3vw;
+    }
+}
+
+@media (max-width:1079px) {
+    .btnAddData .Text {
+        width: 3vw;
+    }
+
+    .btnDelete .Text {
+        width: 3vw;
+    }
+}
+
+
+#ListPageMain .Table-Container {
+    width: 97%;
+    /*width:84vw;*/
+    height: 65vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    display: block;
+    position: relative;
+    border: 0px solid #C4C2C5;
+    float: left;
+}
+
+    #ListPageMain .Table-Container .Field-Container {
+        width: 100%;
+        height: 5vh;
+        margin-top: 0.3vh;
+        background-color: #909FE4;
+        border-radius: 5px;
+        float: left;
+    }
+
+        #ListPageMain .Table-Container .Field-Container td {
+            font-family: 'Microsoft YaHei UI';
+            font-size: 0.6vw;
+            color: #fff;
+            text-align: center;
+        }
+
+        #ListPageMain .Table-Container .Field-Container .btnSelectedAll {
+            width: 3vw;
+            height: 3vh;
+            line-height: 3vh;
+            margin-left: 2vw;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 0.6vw;
+            color: #fff;
+            text-align: center;
+            background-color: transparent;
+            border: 1px solid #FFF;
+            border-radius: 5px;
+            cursor: pointer;
+            float: left;
+        }
+
+    #ListPageMain .Table-Container .DataTable-Container {
+        width: 100%;
+        height: 59vh;
+        margin-top: 0.3vh;
+        overflow: auto;
+        position: relative;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation {
+            width: 5.8vw;
+            min-height: 23vh;
+            height: auto !important;
+            border: 0px solid red;
+            position: absolute;
+            background-color: white;
+            display: none;
+            top: 0vh;
+            left: 77.3vw;
+            float: left;
+        }
+
+            #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation .Table {
+                width: 100%;
+                min-height: 23vh;
+                height: auto !important;
+                border: 0px solid black;
+                background-color: white;
+                margin-top: 0px;
+                margin-left: 0px;
+                float: left;
+            }
+
+                #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation .Table .Singular {
+                    width: 100%;
+                    height: 5.6vh;
+                    font-family: "Microsoft YaHei UI";
+                    font-size: 1vh;
+                    background-color: white;
+                    display: block;
+                }
+
+                #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation .Table .EvenNumbers {
+                    width: 100%;
+                    height: 5.6vh;
+                    font-family: "Microsoft YaHei UI";
+                    font-size: 1vh;
+                    border-bottom-right-radius: 5px;
+                    border-top-right-radius: 5px;
+                    border-left: 1px solid #7A7B80;
+                    background-color: #E6E9FA;
+                    display: block;
+                }
+
+                    #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation .Table .EvenNumbers .Icon {
+                        cursor: pointer;
+                        width: 1vw;
+                        margin-left: 1.2vw;
+                        margin-top: 1.5vh;
+                        float: left;
+                    }
+
+                #ListPageMain .Table-Container .DataTable-Container .DataTable-Operation .Table .Singular .Icon {
+                    cursor: pointer;
+                    width: 1vw;
+                    margin-left: 1.2vw;
+                    margin-top: 1.5vh;
+                    float: left;
+                }
+
+        #ListPageMain .Table-Container .DataTable-Container .DataTable {
+            width: 100%;
+            min-height: 6vh;
+            height: auto !important;
+            border: 0px solid red;
+            margin-top: 0px;
+            margin-left: 0px;
+            float: left;
+        }
+
+            #ListPageMain .Table-Container .DataTable-Container .DataTable tr {
+                width: 100%;
+                height: 5.6vh;
+                line-height: 5.6vh;
+                display: table;
+            }
+
+                #ListPageMain .Table-Container .DataTable-Container .DataTable tr td {
+                    text-align: center;
+                }
+
+                    #ListPageMain .Table-Container .DataTable-Container .DataTable tr td .Icon {
+                        cursor: pointer;
+                        width: 1vw;
+                        margin-left: 0.5vw;
+                    }
+
+                #ListPageMain .Table-Container .DataTable-Container .DataTable tr:hover {
+                    border-radius: 12px;
+                    background-color: #AEC2F7;
+                }
+
+            #ListPageMain .Table-Container .DataTable-Container .DataTable .Control {
+                width: 98%;
+                height: 3.6vh;
+                margin-left: 1%;
+                margin-top: 0.3vh;
+                border: 0px solid red;
+                float: left;
+            }
+
+            #ListPageMain .Table-Container .DataTable-Container .DataTable .Control-Two {
+                width: 98%;
+                height: 3.6vh;
+                margin-left: 1%;
+                margin-top: 0.3vh;
+                border-left: 1px solid #7A7B80;
+                float: left;
+            }
+
+.thead {
+    width: 100%;
+    height: 5vh;
+    display: block;
+    background-color: #909FE4;
+    border-radius: 5px;
+}
+
+    .thead td {
+        font-family: 'Microsoft YaHei UI';
+        font-size: 0.6vw;
+        color: #fff;
+        text-align: center;
+    }
+
+.tr-two {
+    width: 100%;
+    display: block;
+    line-height: 5.6vh;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.6vw;
+    border-radius: 5px;
+    background-color: #E6E9FA;
+}
+
+    .tr-two:hover {
+        background-color: #AEC2F7;
+    }
+
+#ListPageMain .Table-Container .DataTable-Container .DataTable .Control .Icon {
+    width: 1.2vw;
+    height: 2.5vh;
+    cursor: pointer;
+    margin-left: 1.3vw;
+    margin-top: 0.3vh;
+    float: left;
+}
+
+@media (max-width:997px) {
+    #ListPageMain .Table-Container .DataTable-Container .DataTable .Control .Icon {
+        margin-left: 0.2vw;
+    }
+}
+
+#ListPageMain .Table-Container .DataTable-Container .DataTable .Control-Two .Icon {
+    width: 1.2vw;
+    height: 2.5vh;
+    cursor: pointer;
+    margin-left: 1.3vw;
+    margin-top: 0.3vh;
+    float: left;
+}
+
+#ListPageMain .Table-Container .DataTable-Container .DataTable td {
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.8vw;
+    text-align: center;
+    word-break: break-all;
+    white-space: nowrap;
+}
+
+#ListPageMain .Table-Container .DataTable-Container .DataTable .checkItem {
+    width: 2vw;
+    height: 2vh;
+    margin-left: 3vw;
+    margin-top: 0.3vh;
+    float: left;
+}
+
+    #ListPageMain .Table-Container .DataTable-Container .DataTable .checkItem label {
+        width: 2vw;
+        height: 2vh;
+        margin-left: 0px;
+        margin-top: 0px;
+        float: left;
+    }
+
+.dialogArticlePreview {
+    width: 55vw;
+    height: 81vh;
+    background-color: #fff;
+}
+
+    .dialogArticlePreview .elDialog-mainPanel {
+        width: 98%;
+        height: 71vh;
+        margin-left: 1%;
+        border: 0px solid red;
+    }
+
+        .dialogArticlePreview .elDialog-mainPanel .articleTitle {
+            width: 95%;
+            height: 4vh;
+            line-height: 4vh;
+            font-family: "Microsoft YaHei UI";
+            font-size: 1.2vw;
+            color: #0B2E88;
+            text-align: center;
+            margin-top: 1%;
+            margin-left: 2.5%;
+            border-bottom: 1px dashed #aca7a7;
+            float:left;
+        }
+
+        .dialogArticlePreview .elDialog-mainPanel .articleInfoTable {
+            width: 98%;
+            min-height: 5vh;
+            height:auto !important;
+            border: 0px solid red;
+            margin-left: 1%;
+            margin-top: 1%;
+            float: left;
+        }
+
+            .dialogArticlePreview .elDialog-mainPanel .articleInfoTable tr td {
+                text-indent: 1%;
+                font-family: "Microsoft YaHei UI";
+                font-size: 1.5vh;
+                color: #312f32;
+                text-align: left;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+            }
+
+        .dialogArticlePreview .elDialog-mainPanel .articleContent {
+            width: 95%;
+            height: 56vh;
+            margin-top: 1%;
+            margin-left: 2.5%;
+            border: 0px solid red;
+            float:left;
+        }
+
+            .dialogArticlePreview .elDialog-mainPanel .articleContent .articleContentContainer {
+                width: 100%;
+                height: 50vh;
+                margin-top: 0px;
+                margin-left: 0px;
+                overflow-x:hidden;
+                overflow-y:auto;
+                border-bottom: 0px solid #7A7B80;
+                border-left: 0px solid #7A7B80;
+                border-right: 0px solid #7A7B80;
+                border-top: 1px solid #7A7B80;
+                float: left;
+            }
+
+#articleContentContainer {
+    width: 100%;
+    height: 50vh;
+    margin-top: 0px;
+    margin-left: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-bottom: 0px solid #7A7B80;
+    border-left: 0px solid #7A7B80;
+    border-right: 0px solid #7A7B80;
+    border-top: 1px solid #7A7B80;
+    float: left;
+}
+
+                .dialogArticlePreview .elDialog-mainPanel .articleContent .articleContentContainer .topLine {
+                    width: 90%;
+                    height: 1px;
+                    border: 1px solid #7A7B80;
+                    margin-top: 0px;
+                    margin-left: 5vw;
+                    float: left;
+                }
+
+#articleCover {
+    width: 100%;
+    height: 50vh;
+    margin-top: 0px;
+    margin-left: 0px;
+    border-bottom: 0px solid #7A7B80;
+    border-left: 0px solid #7A7B80;
+    border-right: 0px solid #7A7B80;
+    border-top: 1px solid #7A7B80;
+    float: left;
+}
+
+    #articleCover img {
+        width: 98%;
+        height: 98%;
+        margin-top:1%;
+        margin-left:1%;
+        float:left;
+    }
+
+    .elDialog {
+        width: 43vw;
+        height: 82vh;
+        background-color: #fff;
+    }
+
+.elDialog-mainPanel {
+    width: 100%;
+    height: 71vh;
+    margin-top: 1vh;
+    border: 0px solid red;
+}
+
+    .elDialog-mainPanel .upload-demo .el-upload {
+        margin-left: 11vw;
+    }
+
+    .elDialog-mainPanel .upload-demo .el-upload__tip {
+        text-align: center;
+    }
+
+    .elDialog-mainPanel .mainTable {
+        width: 100%;
+        height: 5vh;
+        margin-top: 0vh;
+        border: 0px solid red;
+    }
+
+        .elDialog-mainPanel .mainTable thead tr {
+            height: 5vh;
+            display: block;
+            font-family: "Microsoft YaHei UI";
+            font-size: 0.8vw;
+            color: #FFF;
+            text-align: center;
+            background-color: #8289D9;
+            border-radius: 6px;
+        }
+
+            .elDialog-mainPanel .mainTable thead tr th {
+                width: 5%;
+                line-height: 5vh;
+                border: 0px solid red;
+                text-align: center;
+            }
+
+        .elDialog-mainPanel .mainTable tbody tr {
+            width: 100%;
+            display: inline-table;
+            border-bottom: 1px solid #C3C3C3;
+        }
+
+            .elDialog-mainPanel .mainTable tbody tr td {
+                width: 5%;
+                line-height: 5vh;
+                text-align: center;
+            }
+
+                .elDialog-mainPanel .mainTable tbody tr td .checkItem {
+                    width: 2vw;
+                    height: 4vh;
+                    border: 0px solid red;
+                    margin-left: 42%;
+                    margin-top: 0vh;
+                    float: left;
+                }
+
+                .elDialog-mainPanel .mainTable tbody tr td .btnOrder {
+                    width: 5%;
+                    height: 2vh;
+                    margin-left: 47%;
+                    margin-top: 1vh;
+                    cursor: pointer;
+                    float: left;
+                }
+
+#ListPageMain .Page-Container {
+    width: 100%;
+    height: 5vh;
+    margin-top: 0.3vh;
+    overflow: hidden;
+    border: 0px solid red;
+    float: left;
+}
+
+    #ListPageMain .Page-Container .Pagination {
+        white-space: nowrap;
+        padding: 10px 47vw;
+        color: #303133;
+        font-weight: 700;
+        border: 0px solid red;
+        height: 5vh;
+    }
+
+        #ListPageMain .Page-Container .Pagination .el-pager .number {
+            cursor: pointer;
+            color: #0B2E88;
+            border: 1px solid #284797;
+            border-radius: 3px;
+            background-color: transparent;
+            font-family: 'Microsoft YaHei UI';
+            font-size: 0.2vw;
+        }
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination .el-pager .number {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.3vw;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #6D79FF;
+    border: 1px solid #6D79FF;
+}
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination button {
+    color: #0B2E88;
+    border: 1px solid #284797;
+    border-radius: 3px;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+}
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination button {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .btn-quicknext {
+    color: #0B2E88;
+    border: 1px solid #284797;
+    border-radius: 3px;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+}
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination .btn-quicknext {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .btn-quickprev {
+    color: #0B2E88;
+    border: 1px solid #284797;
+    border-radius: 3px;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+}
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination .btn-quickprev {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .el-pagination__total {
+    color: #0B2E88;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+}
+
+@media (max-width:1920px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -2vw;
+    }
+}
+
+@media (max-width:1819px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -0.5vw;
+    }
+}
+
+@media (max-width:1754px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -1.6vw;
+    }
+}
+
+@media (max-width:1703px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -3vw;
+    }
+}
+
+@media (max-width:1649px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -4.1vw;
+    }
+}
+
+@media (max-width:1605px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -9vw;
+    }
+}
+
+@media (max-width:1450px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__total {
+        margin-left: -15vw;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .el-select .el-input .el-input__inner {
+    padding-right: 25px;
+    border-radius: 3px;
+    background-color: transparent;
+    color: #0B2E88;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+    border: 1px solid #284797;
+}
+
+@media (max-width:1892px) {
+    #ListPageMain .Page-Container .Pagination .el-select .el-input .el-input__inner {
+        height: 3.2vh;
+        line-height: 3.2vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .el-pagination__jump {
+    margin-left: 24px;
+    font-weight: 400;
+    color: #0B2E88;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+}
+
+#ListPageMain .Page-Container .Pagination .el-pagination__editor {
+    color: #0B2E88;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+    border-radius: 3px;
+    border: 1px solid #284797;
+}
+
+@media (max-width:1605px) and (max-height:753px) {
+    #ListPageMain .Page-Container .Pagination .el-pagination__editor {
+        height: 3.7vh;
+    }
+}
+
+#ListPageMain .Page-Container .Pagination .el-pagination__editor.el-input .el-input__inner {
+    height: 28px;
+    background-color: transparent;
+    color: #0B2E88;
+}
+
+#ListPageMain .Table-Container .Page-Container {
+    width: 100%;
+    height: 5vh;
+    margin-top: 0.3vh;
+    overflow: hidden;
+    border: 0px solid red;
+    float: left;
+}
+
+    #ListPageMain .Table-Container .Page-Container .center {
+        min-width: 25vw;
+        width: auto !important;
+        height: 4.3vh;
+        margin-left: 40vw;
+        margin-top: 0.3vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max {
+        min-width: 25vw;
+        width: auto !important;
+        height: 4.3vh;
+        margin-left: 49vw;
+        margin-top: 0.3vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center .pageNumber {
+        min-width: 6vw;
+        width: auto !important;
+        height: 4.2vh;
+        line-height: 4.2vh;
+        margin-left: 0vw;
+        margin-top: 0.1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        text-align: center;
+        color: #1D3C8F;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max .pageNumber {
+        min-width: 6vw;
+        width: auto !important;
+        height: 4.2vh;
+        line-height: 4.2vh;
+        margin-left: 0vw;
+        margin-top: 0.1vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        text-align: center;
+        color: #1D3C8F;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center .pageSize-Container {
+        min-width: 1vw;
+        width: auto !important;
+        height: 4.2vh;
+        line-height: 4.2vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        text-align: center;
+        color: #1D3C8F;
+        margin-left: 0.2vw;
+        margin-top: 0.1vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max .pageSize-Container {
+        min-width: 1vw;
+        width: auto !important;
+        height: 4.2vh;
+        line-height: 4.2vh;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        text-align: center;
+        color: #1D3C8F;
+        margin-left: 0.2vw;
+        margin-top: 0.1vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center .pageSize-dropdown {
+        min-width: 4.5vw;
+        width: auto !important;
+        height: 3.5vh;
+        margin-top: 0.3vh;
+        margin-left: 0.3vw;
+        border: 0px solid;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        border: 1px solid #284797;
+        border-radius: 3px;
+        color: #0B2E88;
+        float: left;
+        overflow: hidden;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max .pageSize-dropdown {
+        min-width: 4.5vw;
+        width: auto !important;
+        height: 3.5vh;
+        margin-top: 0.3vh;
+        margin-left: 0.3vw;
+        border: 0px solid;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        border: 1px solid #284797;
+        border-radius: 3px;
+        color: #0B2E88;
+        float: left;
+        overflow: hidden;
+    }
+
+#ddlPageSize {
+    margin-top: -3vh;
+}
+
+@media (max-width:1623px) {
+    #ddlPageSize {
+        margin-top: -2vh;
+        line-height: 7vh;
+    }
+}
+
+@media (max-width:1920px) {
+    #ListPageMain .Table-Container .Page-Container .center .pageSize-dropdown {
+        height: 3.8vh;
+        margin-top: 0.2vh;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max .pageSize-dropdown {
+        height: 3.8vh;
+        margin-top: 0.2vh;
+    }
+}
+
+@media (max-width:1678px) {
+    #ListPageMain .Table-Container .Page-Container .center .pageSize-dropdown {
+        height: 3.8vh;
+        margin-top: 0.2vh;
+    }
+
+    #ListPageMain .Table-Container .Page-Container .center-max .pageSize-dropdown {
+        height: 3.8vh;
+        margin-top: 0.2vh;
+    }
+}
+
+#ListPageMain .Table-Container .Page-Container .center .pageNumber-Container {
+    min-width: 7vw;
+    width: auto !important;
+    height: 4.1vh;
+    margin-left: 0.3vw;
+    margin-top: 0vh;
+    border: 0px solid red;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center-max .pageNumber-Container {
+    min-width: 7vw;
+    width: auto !important;
+    height: 4.1vh;
+    margin-left: 0.3vw;
+    margin-top: 0vh;
+    border: 0px solid red;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center .pageNumber-Container .pageNumber-Item {
+    min-width: 2vw;
+    width: auto !important;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+    cursor: pointer;
+    color: #0B2E88;
+    border: 1px solid #284797;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center-max .pageNumber-Container .pageNumber-Item {
+    min-width: 2vw;
+    width: auto !important;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.2vw;
+    cursor: pointer;
+    color: #0B2E88;
+    border: 1px solid #284797;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center .pageNumber-Container .pageNumber-Click-Item {
+    min-width: 2vw;
+    width: auto !important;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.3vw;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #6D79FF;
+    border: 1px solid #6D79FF;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center-max .pageNumber-Container .pageNumber-Click-Item {
+    min-width: 2vw;
+    width: auto !important;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.3vw;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #6D79FF;
+    border: 1px solid #6D79FF;
+    float: left;
+}
+
+.el-button--medium {
+    padding: 10px 20px;
+    font-size: 0.3vw;
+    border-radius: 4px;
+}
+
+#ListPageMain .Table-Container .Page-Container .center .txtGotoPageNumber {
+    width: 3vw;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.3vw;
+    color: #0B2E88;
+    border: 1px solid #284797;
+    float: left;
+}
+
+#ListPageMain .Table-Container .Page-Container .center-max .txtGotoPageNumber {
+    width: 3vw;
+    height: 3.5vh;
+    line-height: 3.5vh;
+    text-align: center;
+    margin-left: 0.3vw;
+    margin-top: 0.3vh;
+    border-radius: 3px;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.3vw;
+    color: #0B2E88;
+    border: 1px solid #284797;
+    float: left;
+}
+
+@media (max-width:1175px) {
+    .el-input__suffix {
+        margin-top: -1vh;
+    }
+}
+
+.checkedAll {
+    width: 3%;
+    text-align: center;
+}
+
+.fName {
+    width: 5%;
+}

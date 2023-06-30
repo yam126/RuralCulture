@@ -1,0 +1,387 @@
+﻿#TopMenu {
+    width: 100%;
+    height: 7vh;
+    top: 0vh;
+    left: 0vw;
+    background-color: #FFFDFF;
+    position: absolute;
+}
+
+#Toast {
+    width: 6vw;
+    height: 5vh;
+    top: 7vh;
+    left: 13vw;
+    display: none;
+    background-color: #FFF;
+    position: absolute;
+}
+
+#TopMenu .SystemNameContainer {
+    width: 12vw;
+    height: 10vh;
+    top: 0vh;
+    left: 0vw;
+    z-index: 300;
+    position: absolute;
+    background-color: #BBC9F0;
+    border-bottom-right-radius: 8px;
+}
+
+    #TopMenu .SystemNameContainer .MainTitle {
+        width: 98%;
+        height: 5vh;
+        line-height: 5vh;
+        margin-left: 1%;
+        margin-top: 4%;
+        text-align: left;
+        text-indent: 8%;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1.6vw;
+        color: #083088;
+        font-weight: 700;
+        border: 0px solid red;
+    }
+
+    #TopMenu .SystemNameContainer .SubTitle {
+        width: 98%;
+        height: 3vh;
+        line-height: 3vh;
+        margin-left: 1%;
+        margin-top: 1%;
+        text-align: left;
+        text-indent: 8%;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        border: 0px solid red;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #083088;
+    }
+
+#TopMenu .MenuContainer {
+    min-width: 18vw;
+    width: auto !important;
+    float: left;
+    height: 7vh;
+    margin-left: 17%;
+    margin-top: 0vh;
+    border: 0px solid red;
+}
+
+@media (max-width:1924px) {
+    #TopMenu .MenuContainer {
+        margin-left: 12%;
+        margin-top: 0vh;
+    }
+}
+
+@media (max-width:1920px) {
+    #TopMenu .MenuContainer {
+        margin-left: 12%;
+        margin-top: 0vh;
+    }
+}
+
+@media (max-width:1536px) {
+    #TopMenu .MenuContainer {
+        margin-left: 12%;
+        margin-top: 0vh;
+    }
+}
+
+@media (max-width:1496px) {
+    #TopMenu .MenuContainer {
+        margin-left: 12%;
+        margin-top: 0vh;
+    }
+}
+
+#TopMenu .MenuContainer .MenuItemClick {
+    min-width: 7vw;
+    width: auto !important;
+    height: 7vh;
+    line-height: 7vh;
+    margin-left: 0%;
+    margin-top: 0vh;
+    background-color: #6D79FF;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    float: left;
+}
+
+    #TopMenu .MenuContainer .MenuItemClick a {
+        text-decoration: none;
+        text-transform: none;
+        color: #fff;
+    }
+
+#TopMenu .MenuContainer .MenuItem {
+    min-width: 7vw;
+    width: auto !important;
+    height: 7vh;
+    line-height: 7vh;
+    margin-left: 0%;
+    margin-top: 0vh;
+    font-family: "Microsoft YaHei UI";
+    font-size: 1vw;
+    color: #0D2F88;
+    cursor: pointer;
+    text-align: center;
+    border: 0px solid red;
+    float: left;
+}
+
+    #TopMenu .MenuContainer .MenuItem a {
+        text-decoration: none;
+        text-transform: none;
+        color: #0D2F88;
+    }
+
+@media (max-width:1536px) {
+    #TopMenu #userInfo-container {
+        margin-left: 31vw;
+    }
+}
+
+#TopMenu #userInfo-container {
+    min-width: 9vw;
+    width: auto !important;
+    height: 5vh;
+    margin-left: 31vw;
+    margin-top: 1vh;
+    float: left;
+}
+
+@media (max-width:1920px) {
+    #TopMenu #userInfo-container {
+        margin-left: 38vw;
+    }
+}
+
+#TopMenu #userInfo-container:hover {
+    min-width: 9vw;
+    width: auto !important;
+    height: 5vh;
+    margin-left: 31vw;
+    margin-top: 1vh;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #6D79FF;
+    float: left;
+}
+
+@media (max-width:1920px) {
+    #TopMenu #userInfo-container:hover {
+        margin-left: 38vw;
+    }
+}
+
+@media (max-width:1121px) {
+    #TopMenu #userInfo-container {
+        min-width: 9vw;
+        width: auto !important;
+        height: 5vh;
+        margin-left: 30vw;
+        margin-top: 1vh;
+        float: left;
+    }
+
+        #TopMenu #userInfo-container:hover {
+            min-width: 9vw;
+            width: auto !important;
+            height: 5vh;
+            margin-left: 30vw;
+            margin-top: 1vh;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #6D79FF;
+            float: left;
+        }
+}
+
+@media (max-width:1040px) {
+    #TopMenu #userInfo-container {
+        min-width: 9vw;
+        width: auto !important;
+        height: 5vh;
+        margin-left: 28vw;
+        margin-top: 1vh;
+        float: left;
+    }
+
+        #TopMenu #userInfo-container:hover {
+            min-width: 9vw;
+            width: auto !important;
+            height: 5vh;
+            margin-left: 28vw;
+            margin-top: 1vh;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #6D79FF;
+            float: left;
+        }
+}
+
+#TopMenu #userInfo-container .userFace {
+    /*width: 1.5vw;*/
+    height: 2.3vh;
+    margin-left: 0.6vw;
+    margin-top: 1.3vh;
+    float: left;
+}
+
+#TopMenu #userInfo-container .userName {
+    min-width: 5vw;
+    height: 2.3vh;
+    line-height: 2.3vh;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 0.7vw;
+    color: #0D2F88;
+    text-align: center;
+    border: 0px solid red;
+    margin-left: 1vw;
+    margin-top: 1.3vh;
+    float: left;
+}
+
+@media (max-width:1215px) {
+
+    #TopMenu #userInfo-container {
+        margin-left: 35vw;
+    }
+
+        #TopMenu #userInfo-container .userFace {
+            width: 2vw;
+            height: 3.5vh;
+            margin-top: 0.6vh;
+        }
+
+        #TopMenu #userInfo-container:hover {
+            margin-left: 35vw;
+        }
+
+        #TopMenu #userInfo-container .userName {
+            font-size: 1vw;
+            margin-top: 1.7vh;
+        }
+}
+
+#TopMenu #MessageIcon {
+    width: 23.3px;
+    height: 24.2px;
+    margin-left: 1vw;
+    margin-top: 2vh;
+    cursor: pointer;
+    background-image: url(/images/messageIcon.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 99% 99%;
+    position: relative;
+    border: 0px solid red;
+    float: left;
+}
+
+@media (max-width:1920px) {
+    #TopMenu #MessageIcon {
+        width: 23.3px;
+        height: 24.2px;
+    }
+}
+
+#TopMenu #MessageIcon .MessageNumber {
+    width: 9px;
+    height: 9px;
+    left: 0.7vw;
+    top: 0.1vh;
+    position: absolute;
+    display: none;
+    border-radius: 7px;
+    background-color: red;
+}
+
+@media (max-width:1920px) {
+    #TopMenu #LogoutIcon {
+        width: 23.3px;
+        height: 24.2px;
+    }
+}
+
+#TopMenu #LogoutIcon {
+    width: 23.3px;
+    height: 24.2px;
+    margin-left: 1vw;
+    margin-top: 2vh;
+    cursor: pointer;
+    border: 0px;
+    float: left;
+}
+
+
+#userBubble {
+    width: 8vw;
+    min-height: 3vh;
+    height: auto !important;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    top: 9vh;
+    left: 86vw;
+    z-index: 500;
+    background-color: #fff;
+    position: absolute;
+    display: none;
+    box-shadow: 2px 5px 19px 0px #888888;
+    /*box-shadow: 2px 5px 19px 0px #6D79FF;*/
+    float: left;
+}
+
+    #userBubble .MenuItem {
+        width: 98%;
+        height: 3vh;
+        line-height: 3vh;
+        font-family: "Microsoft YaHei UI";
+        font-size: 1.5vh;
+        color: #888888;
+        text-align: center;
+        margin-left: 1%;
+        margin-top: 2%;
+        margin-bottom: 1%;
+        cursor: pointer;
+        /*border: 1px solid red;*/
+        border-radius: 16px;
+        float: left;
+    }
+
+        #userBubble .MenuItem:hover {
+            border: 1px solid #6D79FF;
+            border-radius: 16px;
+            box-shadow: -1px 1px 6px 0px #6d79ff59
+        }
+
+    #userBubble::before {
+        content: '';
+        width: 1vw;
+        height: 0;
+        border: 2vh solid;
+        position: absolute;
+        left: 3vw;
+        top: -4vh;
+        border-color: transparent transparent #fff transparent;
+    }
+
+    #userBubble::after {
+        content: '';
+        width: 1vw;
+        height: 0;
+        border: 2vh solid;
+        position: absolute;
+        left: 3vw;
+        top: -4vh;
+        border-color: transparent transparent transparent transparent;
+    }

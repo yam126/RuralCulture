@@ -1,0 +1,191 @@
+﻿#orgChartContainer {
+    width: 98%;
+    height: 82vh;
+    position: relative;
+    overflow: auto;
+    margin-left: 1%;
+    margin-top: 1%;
+    text-align: left;
+    border: 0px solid red;
+}
+
+#btnRefresh {
+    width: 153px;
+    height: 45px;
+    line-height: 45px;
+    top: 8.5vh;
+    left: 68vw;
+    border-radius: 10px;
+    filter: opacity(0.8);
+    text-align: center;
+    font-family: 'Microsoft YaHei UI';
+    font-size: 23px;
+    color: #fff;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, #00b4db, #0083b0);
+    border: 1px solid #0670A1;
+    position: absolute;
+}
+
+    #btnRefresh:hover {
+        background-image: linear-gradient(to bottom, #00f260, #0575e6);
+    }
+
+@media (max-width:2350px) {
+    #btnRefresh {
+        top: 7.6vh;
+        left: 62vw;
+    }
+}
+
+@media (max-width:2203px) {
+    #btnRefresh {
+        top: 7.6vh;
+        left: 64vw;
+    }
+}
+
+@media (max-width:2091px) {
+    #btnRefresh {
+        top: 7.8vh;
+        left: 66vw;
+    }
+}
+
+@media (max-width:1971px) {
+    #btnRefresh {
+        top: 7.8vh;
+        left: 67vw;
+    }
+}
+
+@media (max-width:1899px) {
+    #btnRefresh {
+        top: 8.3vh;
+        left: 68vw;
+    }
+}
+
+@media (max-width:1899px) {
+    #btnRefresh {
+        top: 8.3vh;
+        left: 68vw;
+    }
+}
+
+@media (max-width:1719px) {
+    #btnRefresh {
+        top: 8.6vh;
+        left: 67vw;
+    }
+}
+
+@media (max-width:1607px) {
+    #btnRefresh {
+        width: 153px;
+        height: 40px;
+        line-height: 40px;
+        top: 8.7vh;
+        left: 66vw;
+        font-size: 20px;
+    }
+}
+
+@media (max-width:1482px) {
+    #btnRefresh {
+        width: 153px;
+        height: 37px;
+        line-height: 37px;
+        top: 9.3vh;
+        left: 64vw;
+        font-size: 20px;
+    }
+}
+
+@media (max-width:1310px) {
+    #btnRefresh {
+        width: 153px;
+        height: 37px;
+        line-height: 37px;
+        top: 9.6vh;
+        left: 63vw;
+        font-size: 20px;
+    }
+}
+
+@media (max-width:1190px) {
+    #btnRefresh {
+        width: 145px;
+        height: 36px;
+        line-height: 36px;
+        top: 9.6vh;
+        left: 63vw;
+        font-size: 17px;
+    }
+}
+
+@media (max-width:1113px) {
+    #btnRefresh {
+        width: 126px;
+        height: 35px;
+        line-height: 35px;
+        top: 9.8vh;
+        left: 63.3vw;
+        font-size: 15px;
+    }
+}
+
+#TreeNodePopMenu {
+    width: 5vw;
+    min-height: 5vh;
+    height: auto !important;
+    top: 15vh;
+    left: 20vw;
+    display: none;
+    position: absolute;
+    background: linear-gradient(to right, #dee0e1,#ffffff, #ffffff,#ffffff);
+    border: 1px solid #cbc6c6;
+}
+
+    #TreeNodePopMenu .MenuItem {
+        width: 96%;
+        height: 3vh;
+        line-height: 3vh;
+        margin-left: 2%;
+        margin-top: 1%;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #1d1e23;
+        text-align: left;
+        text-indent: 5%;
+        cursor: pointer;
+        float: left;
+    }
+
+        #TreeNodePopMenu .MenuItem:hover {
+            border-radius: 5px;
+            background-color: #1bbad7;
+            color: #fff;
+        }
+
+
+    #TreeNodePopMenu .MenuItemRed {
+        width: 96%;
+        height: 3vh;
+        line-height: 3vh;
+        margin-left: 2%;
+        margin-top: 1%;
+        font-family: "Microsoft YaHei UI";
+        font-size: 0.8vw;
+        color: #1d1e23;
+        text-align: left;
+        text-indent: 5%;
+        cursor: pointer;
+        float: left;
+    }
+
+        #TreeNodePopMenu .MenuItemRed:hover {
+            border-radius: 5px;
+            background-color: #d53737;
+            color: #fff;
+        }

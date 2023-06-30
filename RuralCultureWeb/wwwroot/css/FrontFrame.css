@@ -1,0 +1,624 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #010127;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: url(/images/FrontFrame-Bg.jpg) no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+
+    #app #titleContainer {
+        width: 100%;
+        margin: 0;
+        background: url(/images/top.png) no-repeat center;
+        background-size: cover;
+        height: 72px;
+    }
+
+        #app #titleContainer .frameLeftDiv {
+            width: 33%;
+            height: 72px;
+            border: 0px solid red;
+            float: left;
+        }
+
+            #app #titleContainer .frameLeftDiv .Icon {
+                width: 31px;
+                height: 31px;
+                margin-top: 2vh;
+                margin-left: 1vw;
+                float: left;
+            }
+
+            #app #titleContainer .frameLeftDiv .Text {
+                width: 180px;
+                height: 20px;
+                line-height: 20px;
+                color: #60F9FF;
+                font-family: "Microsoft YaHei UI";
+                font-size: 14px;
+                text-align: center;
+                font-weight: 700;
+                border: 0px solid red;
+                margin-top: 2.5vh;
+                margin-left: 0.5vw;
+                float: left;
+            }
+
+        #app #titleContainer .frameCenterDiv {
+            width: 33%;
+            height: 72px;
+            line-height: 72px;
+            font-family: 'Microsoft YaHei';
+            color: #fff;
+            font-size: 34px;
+            text-align: center;
+            font-weight: 700;
+            border: 0px solid red;
+            float: left;
+        }
+
+        @media (max-width:1131px) {
+            #app #titleContainer .frameCenterDiv {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width:1066px) {
+            #app #titleContainer .frameCenterDiv {
+                font-size: 30px;
+            }
+        }
+
+    #app #titleContainer .frameRightDiv {
+        width: 34%;
+        height: 72px;
+        border: 0px solid red;
+        float: left;
+    }
+
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            width: 27px;
+            height: 26px;
+            cursor: pointer;
+            margin-left: 20vw;
+            margin-top: 2vh;
+            float: left;
+        }
+
+    @media (max-width:1727px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 19vw;
+        }
+    }
+
+    @media (max-width:1566px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 17.5vw;
+        }
+    }
+
+    @media (max-width:1392px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 15.5vw;
+        }
+    }
+
+    @media (max-width:1311px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 14.6vw;
+        }
+    }
+
+    @media (max-width:1234px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 13.8vw;
+        }
+    }
+
+    @media (max-width:1116px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 13vw;
+        }
+    }
+
+    @media (max-width:1083px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 12vw;
+        }
+    }
+
+    @media (max-width:1069px) {
+        #app #titleContainer .frameRightDiv .fullScreenIcon {
+            margin-left: 11.2vw;
+        }
+    }
+
+    #app #titleContainer .frameRightDiv .settingIcon {
+        width: 29px;
+        height: 28px;
+        margin-left: 1vw;
+        margin-top: 2vh;
+        float: left;
+    }
+
+    #app #titleContainer .frameRightDiv .splitLine {
+        width: 1px;
+        height: 25px;
+        background-color: #46B6CE;
+        margin-left: 1vw;
+        margin-top: 2.2vh;
+        float: left;
+    }
+
+    #app #titleContainer .frameRightDiv .userFace {
+        width: 26px;
+        height: 25px;
+        border: 1px solid #fff;
+        border-radius: 25px;
+        margin-left: 1vw;
+        margin-top: 2.2vh;
+        float: left;
+    }
+
+    #app #titleContainer .frameRightDiv .userName {
+        min-width: 12px;
+        width: auto !important;
+        font-family: 'Microsoft YaHei UI';
+        font-weight: 700;
+        font-size: 15px;
+        text-align: center;
+        color: #56DFE7;
+        height: 23px;
+        margin-left: 0.5vw;
+        margin-top: 2.3vh;
+        border: 0px solid red;
+        float: left;
+    }
+
+    #firstMenuSearchContainer {
+        width: 99.7vw;
+        height: 48px;
+        border: 0px solid red;
+        margin-left: 0.2vw;
+        margin-top: 1vh;
+        float: left;
+    }
+
+        #firstMenuSearchContainer .firstMenu {
+            min-width: 25vw;
+            width: auto !important;
+            height: 48px;
+            border: 0px solid red;
+            margin: 0px;
+            float: left;
+        }
+
+    @media (max-width:1608px) {
+        #firstMenuSearchContainer .firstMenu {
+        }
+    }
+
+    #firstMenuSearchContainer .firstMenu .menuItemClick {
+        min-width: 153px;
+        width: auto !important;
+        height: 45px;
+        line-height: 45px;
+        margin-left: 2.5vw;
+        margin-top: 0px;
+        cursor: pointer;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        filter: opacity(0.8);
+        background-image: linear-gradient(1deg,#007EC9,#05B8FE);
+        border: 1px solid #00CAD9;
+        float: left;
+    }
+
+        #firstMenuSearchContainer .firstMenu .menuItemClick a {
+            text-decoration: none;
+            text-transform: none;
+            color: #fff;
+        }
+
+        @media (max-width:1608px) {
+            #firstMenuSearchContainer .firstMenu .menuItemClick {
+            min-width: 129px;
+            width: auto !important;
+            height: 37px;
+            line-height: 37px;
+            margin-left: 0.5vw;
+            margin-top: 0px;
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width:1234px) {
+        #firstMenuSearchContainer .firstMenu .menuItemClick {
+            min-width: 118px;
+            width: auto !important;
+            height: 36px;
+            line-height: 36px;
+            margin-left: 0.5vw;
+            margin-top: 0px;
+            font-size: 17px;
+        }
+    }
+
+    #firstMenuSearchContainer .firstMenu .menuItem {
+        min-width: 153px;
+        width: auto !important;
+        height: 45px;
+        line-height: 45px;
+        margin-left: 2.5vw;
+        margin-top: 0px;
+        cursor: pointer;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        filter: opacity(0.8);
+        background-image: linear-gradient(1deg,#033097,#105BC9);
+        border: 1px solid #0670A1;
+        float: left;
+    }
+
+        #firstMenuSearchContainer .firstMenu .menuItem a {
+            text-decoration: none;
+            text-transform: none;
+            color: #fff;
+        }
+
+        @media (max-width:1608px) {
+            #firstMenuSearchContainer .firstMenu .menuItem {
+            min-width: 129px;
+            width: auto !important;
+            height: 37px;
+            line-height: 37px;
+            margin-left: 0.5vw;
+            margin-top: 0px;
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width:1234px) {
+        #firstMenuSearchContainer .firstMenu .menuItem {
+            min-width: 118px;
+            width: auto !important;
+            height: 36px;
+            line-height: 36px;
+            margin-left: 0.5vw;
+            margin-top: 0px;
+            font-size: 17px;
+        }
+    }
+
+    #firstMenuSearchContainer .searchContainer {
+        width: 22vw;
+        height: 45px;
+        margin-left: 26.2vw;
+        background-color: #061da587;
+        border: 1px solid #054A6B;
+        float: left;
+    }
+
+    @media (max-width:1861px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 24.7vw;
+        }
+    }
+
+    @media (max-width:1839px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 24.3vw;
+        }
+    }
+
+    @media (max-width:1813px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 23.7vw;
+        }
+    }
+
+    @media (max-width:1786px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 23.1vw;
+        }
+    }
+
+    @media (max-width:1760px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 22.4vw;
+        }
+    }
+
+    @media (max-width:1727px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 21.6vw;
+        }
+    }
+
+    @media (max-width:1698px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 21vw;
+        }
+    }
+
+    @media (max-width:1698px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 21vw;
+        }
+    }
+
+    @media (max-width:1679px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 20.2vw;
+        }
+    }
+
+    @media (max-width:1676px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 20.2vw;
+        }
+    }
+
+    @media (max-width:1625px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 19vw;
+        }
+    }
+
+    @media (max-width:1608px) {
+        #firstMenuSearchContainer .searchContainer {
+            width: 22vw;
+            height: 37px;
+            margin-left: 33.5vw;
+        }
+    }
+
+    @media (max-width:1566px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 32.3vw;
+        }
+    }
+
+    @media (max-width:1543px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 31.5vw;
+        }
+    }
+
+    @media (max-width:1522px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 31vw;
+        }
+    }
+
+    @media (max-width:1484px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 28.8vw;
+        }
+    }
+
+    @media (max-width:1446px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 28.5vw;
+        }
+    }
+
+    @media (max-width:1392px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 26.5vw;
+        }
+    }
+
+    @media (max-width:1351px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 25.1vw;
+        }
+    }
+
+    @media (max-width:1311px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 23.8vw;
+        }
+    }
+
+    @media (max-width:1284px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 22.8vw;
+        }
+    }
+
+    @media (max-width:1253px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 21.6vw;
+        }
+    }
+
+    @media (max-width:1234px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 25.1vw;
+        }
+    }
+
+    @media (max-width:1208px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 24vw;
+        }
+    }
+
+    @media (max-width:1199px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 23.5vw;
+        }
+    }
+
+    @media (max-width:1164px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 22.1vw;
+        }
+    }
+
+    @media (max-width:1116px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 20vw;
+        }
+    }
+
+    @media (max-width:1083px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 18.3vw;
+        }
+    }
+
+    @media (max-width:1069px) {
+        #firstMenuSearchContainer .searchContainer {
+            margin-left: 17.4vw;
+        }
+    }
+
+@media (max-width:1019px) {
+    #firstMenuSearchContainer .searchContainer {
+        margin-left: 15.4vw;
+    }
+}
+
+@media (max-width:1013px) {
+    #firstMenuSearchContainer .searchContainer {
+        margin-left: 12vw;
+        width: 24vw;
+    }
+}
+
+@media (max-width:1008px) {
+    #firstMenuSearchContainer .searchContainer {
+        margin-left: 12vw;
+        width: 24vw;
+    }
+}
+
+@media (max-width:961px) {
+    #firstMenuSearchContainer .searchContainer {
+        margin-left: 8vw;
+        width: 24vw;
+    }
+}
+
+    #firstMenuSearchContainer .searchContainer .txtSearch {
+        width: 85%;
+        height: 44px;
+        background-color: transparent;
+        border: 0px solid red;
+        font-family: "Microsoft YaHei UI";
+        font-size: 18px;
+        text-align: left;
+        color: #fff;
+        text-indent: 3%;
+        float: left;
+    }
+
+    @media (max-width:1675px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 83%;
+        }
+    }
+
+    @media (max-width:1608px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 83%;
+            height: 37px;
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width:1566px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 87%;
+        }
+    }
+
+    @media (max-width:1477px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 85%;
+        }
+    }
+
+    @media (max-width:1279px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 84%;
+        }
+    }
+
+    @media (max-width:1199px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 83%;
+        }
+    }
+
+    @media (max-width:1131px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 82%;
+        }
+    }
+
+    @media (max-width:1069px) {
+        #firstMenuSearchContainer .searchContainer .txtSearch {
+            width: 81%;
+        }
+    }
+
+    #firstMenuSearchContainer .searchContainer .txtSearch::placeholder {
+        color: #fff;
+    }
+
+    #firstMenuSearchContainer .searchContainer .btnSearch {
+        width: 41px;
+        height: 40px;
+        cursor: pointer;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 2.5px;
+        float: left;
+    }
+
+    @media (max-width:1608px) {
+        #firstMenuSearchContainer .searchContainer .btnSearch {
+            width: 28px;
+            height: 28px;
+            margin-left: 7px;
+            margin-right: 7px;
+            margin-top: 3px;
+        }
+    }
+
+    #bodyContainer {
+        width: 99.8vw;
+        min-height: 85vh;
+        height: auto !important;
+        margin-left: 0.1vw;
+        margin-top: 1vh;
+        padding: 0;
+        /*border: 1px solid red;*/
+        float: left;
+    }

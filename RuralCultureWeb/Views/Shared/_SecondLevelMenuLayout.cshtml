@@ -1,0 +1,544 @@
+﻿@{
+    //二级菜单模板页
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/SecondMenu.css" />
+    <script type="text/javascript" src="~/js/getElementPos.js"></script>
+    @RenderSection("Head")
+    <script type="text/javascript">
+        //二级菜单代码
+        var currentSecondMenuIndex=0;
+        var currentSecondMenuChildrenIndex=-1;
+        var SecondMenuFoldIsOpen=false;
+        var expandedStep=0;
+        var expandedTime=null;
+        var hideSecondMenuFoldPopMenu=null;
+        var secondMenuTemplate="";
+        var SecondMenuChildItemTemplate="";
+        var SecondMenuChildItemBatchTemplate="";
+        var SecondMenuFoldItemTemplate="";
+        var SecondMenuFoldPopMenuTemplate="";
+        var secondChildMenuData=new Array();
+        $(document).ready(function(){
+            $("#SecondMenuNormal .btnCloseMenu").click(function(){
+                $("#SecondMenuNormal").hide();
+                $("#SecondMenuFold").show();
+                $(".SecondMenuFoldPopMenu").hide();
+                SecondMenuFoldIsOpen=true;
+                RefreshSecondMenuState();
+                //RefreshSecondMenuFoldState();
+                currentSecondMenuChildrenIndex=-1;
+                //RefreshSecondMenuFoldPopMenuState();
+                ChangeClass();
+            });
+            $("#SecondMenuFold .btnCloseMenu").click(function(){
+                $("#SecondMenuNormal").show();
+                $("#SecondMenuFold").hide();
+                $(".SecondMenuFoldPopMenu").hide();
+                RefreshSecondMenuState();
+                SecondMenuFoldIsOpen=false;
+                ChangeClass();
+            });
+            $(".ThreeLevelMenuMax").click(function(){
+                 $(".SecondMenuFoldPopMenu").hide();
+            });
+            $(".ThreeLevelMenu").click(function(){
+                $(".SecondMenuFoldPopMenu").hide();
+            });
+        });
+        //读取二级菜单
+        function loadSecondMenu(){
+            var htmlCode="";
+            var htmlMenuFold="";
+            secondChildMenuData=new Array();
+            if(secondMenuTemplate=="")
+               secondMenuTemplate=$("#SecondMenuItemTemplate").html();
+            if(SecondMenuChildItemTemplate=="")
+               SecondMenuChildItemTemplate=$("#SecondMenuChildItemTemplateContainer").html();
+            if(SecondMenuChildItemBatchTemplate=="")
+               SecondMenuChildItemBatchTemplate=$("#SecondMenuChildItemBatchTemplateContainer").html();
+            if(SecondMenuFoldItemTemplate=="")
+               SecondMenuFoldItemTemplate=$("#SecondMenuFold .MenuList-Container").html();
+            if(currentFirstMenu!=null){
+                if(currentFirstMenu.ChildMenu!=null&&currentFirstMenu.ChildMenu.length>0){
+                    for(var s=0;s<currentFirstMenu.ChildMenu.length;s++){
+                        var secondMenuItem=currentFirstMenu.ChildMenu[s];
+                        var secondMenuItemHtml=secondMenuTemplate;
+                        var secondMenuFoldItemHtml=SecondMenuFoldItemTemplate;
+                        if(secondChildMenuData.some(queryItem=>queryItem.ID==secondMenuItem.ID)==false)
+                           secondChildMenuData.push(secondMenuItem);
+                        secondMenuItemHtml=secondMenuItemHtml.replace("{MenuName}",secondMenuItem.MenuName);
+                        secondMenuItemHtml=secondMenuItemHtml.replace("{Target}",secondMenuItem.Target);
+                        secondMenuItemHtml=secondMenuItemHtml.replace("{MenuUrl}",secondMenuItem.Url);
+                        if(secondMenuItem.Icon!=null&&typeof(secondMenuItem.Icon)!="undefiend")
+                        {
+                           secondMenuFoldItemHtml=secondMenuFoldItemHtml.replace("{MenuIcon}",secondMenuItem.Icon);
+                           secondMenuItemHtml=secondMenuItemHtml.replace("{MenuIcon}",secondMenuItem.Icon);
+                        }
+                        if(secondMenuItem.ChildMenu!=null&&secondMenuItem.ChildMenu.length>0){
+                            var secondMenuChildItemHtml=SecondMenuChildItemTemplate;
+                            var SecondMenuChildItemBatchTemplateHtml="";
+                            var threeLevelHtml="";
+                            for(var c=0;c<secondMenuItem.ChildMenu.length;c++){
+                                var childMenu=secondMenuItem.ChildMenu[c];
+                                SecondMenuChildItemBatchTemplateHtml=SecondMenuChildItemBatchTemplate;
+                                SecondMenuChildItemBatchTemplateHtml=SecondMenuChildItemBatchTemplateHtml.replace("{MenuItemChildrenName}",childMenu.MenuName);
+                                SecondMenuChildItemBatchTemplateHtml=SecondMenuChildItemBatchTemplateHtml.replace("{MenuItemChildrenUrl}",childMenu.Url);
+                                SecondMenuChildItemBatchTemplateHtml=SecondMenuChildItemBatchTemplateHtml.replace("{MenuItemChildrenTarget}",childMenu.Target);
+                                threeLevelHtml+=SecondMenuChildItemBatchTemplateHtml;
+                            }
+                            secondMenuChildItemHtml=secondMenuChildItemHtml.replace("{MenuItemChildrenItemTemplate}",threeLevelHtml);
+                            secondMenuItemHtml+=secondMenuChildItemHtml;
+                        }
+                        htmlCode+=secondMenuItemHtml;
+                        htmlMenuFold+=secondMenuFoldItemHtml;
+                    }
+                    $("#SecondMenuNormal .MenuList-Container").html(htmlCode);
+                    $("#SecondMenuFold .MenuList-Container").html(htmlMenuFold);
+                    RefreshSecondMenuState();
+                    $("#SecondMenuNormal .MenuList-Container .MenuItem-Container").each(function(index,element){
+                        $(element).click(function(){
+                            currentSecondMenuIndex=index;
+                            RefreshSecondMenuState();
+                        });
+                    });
+                    $("#SecondMenuFold .MenuList-Container").children().each(function(index,element){
+                          $(element).click(function(){
+                              currentSecondMenuIndex=index;
+                              currentSecondMenuChildrenIndex=0;
+                              showMenuFoldPopData();
+                              $(".SecondMenuFoldPopMenu").hide();
+                              RefreshSecondMenuFoldState();
+                              RefreshSecondMenuFoldPopMenuState();
+                          });
+                    });
+                }
+                else
+                {
+                    $("#SecondMenuNormal .MenuList-Container").html("");
+                    $("#SecondMenuNormal").hide();
+                    var ThreeLevelMenu=$("#app .ThreeLevelMenu").length<=0?$("#app .ThreeLevelMenuMax"):$("#app .ThreeLevelMenu");
+                    var MainPanel=$("#app .MainPanel").length<=0?$("#app .MainPanelMax"):$("#app .MainPanel");
+                    MainPanel.attr("class","MainPanelMax");
+                    ThreeLevelMenu.attr("class","ThreeLevelMenuMax");
+                    ThreeLevelMenu.css({
+                        "width":"98%",
+                        "margin-left":"1%"
+                    });
+                    MainPanel.css({
+                        "width":"98%",
+                        "margin-left":"1%"
+                    });
+                }
+            }
+            else{
+                var ThreeLevelMenu=$("#app .ThreeLevelMenu").length<=0?$("#app .ThreeLevelMenuMax"):$("#app .ThreeLevelMenu");
+                var MainPanel=$("#app .MainPanel").length<=0?$("#app .MainPanelMax"):$("#app .MainPanel");
+                MainPanel.attr("class","MainPanelMax");
+                ThreeLevelMenu.attr("class","ThreeLevelMenuMax");
+                $("#SecondMenuNormal").hide();
+                ThreeLevelMenu.css({"width":"98%","margin-left":"1%"});
+                MainPanel.css({"width":"98%","margin-left":"1%"});
+            }
+        }
+        function RefreshSecondMenuState(){
+            $("#SecondMenuNormal .MenuList-Container .MenuItem-Container").each(function(index,element){
+                var MenuChildren=$(element).next();
+                if(currentSecondMenuIndex==index){
+                    $(element).children(".Arrow").html("&or;");
+                    currentSecondMenuChildrenIndex=0;
+                    MenuChildren.show();
+                    expandedStep=0;
+                    expandedMenuChildren(MenuChildren,22);
+                    RefreshSecondMenuChildrenState(MenuChildren);
+                }else{
+                    $(element).children(".Arrow").html("&gt;");
+                    currentSecondMenuChildrenIndex=-1;
+                    MenuChildren.css("min-height","0vh");
+                    MenuChildren.hide();
+                }
+                MenuChildren.children().each(function(index,element){
+                    $(element).click(function(){
+                        currentSecondMenuChildrenIndex=index;
+                        RefreshSecondMenuChildrenState(MenuChildren);
+                    });
+                });
+            });
+        }
+        function expandedMenuChildren(MenuChildren,maxHeight)
+        {
+            expandedTime=window.setTimeout(function(){
+                expandedStep+=1;
+                if(expandedStep>=maxHeight)
+                {
+                   expandedStep=maxHeight;
+                   window.clearTimeout(expandedTime);
+                   MenuChildren.css("height",expandedStep+"vh");
+                   return false;
+                }
+                else
+                   MenuChildren.css("height",expandedStep+"vh");
+                expandedMenuChildren(MenuChildren,maxHeight);
+            },3);         
+        }
+        function RefreshSecondMenuFoldState(){            
+            $("#SecondMenuFold .MenuList-Container").children().each(function(index,element){  
+                if(currentSecondMenuIndex==index)
+                  {
+                     var elementTop=getElementPos($(element)[0]).y;
+                     $(element).attr("class","MenuItem-Click-Container");
+                     $(".SecondMenuFoldPopMenu").css({"top":elementTop+"px"});                                                              
+                     if($(".SecondMenuFoldPopMenu").css("display")=="none")
+                        $(".SecondMenuFoldPopMenu").show();
+                     RefreshSecondMenuFoldPopMenuState();
+                  }
+                  else
+                  {
+                     $(element).attr("class","MenuItem-Container");                    
+                  }
+            });
+
+        }
+        function showMenuFoldPopData(){
+            if(SecondMenuFoldPopMenuTemplate=="")
+            {
+               SecondMenuFoldPopMenuTemplate=$(".SecondMenuFoldPopMenu").html();
+               $(".SecondMenuFoldPopMenu").html("");
+            }
+            if(secondChildMenuData!=null&&secondChildMenuData.length>0)
+            {
+                var menuData=secondChildMenuData[currentSecondMenuIndex];
+                var popMenuHtml="";                
+                if(menuData.ChildMenu!=null&&menuData.ChildMenu.length>0){
+                    for(var i=0;i<menuData.ChildMenu.length;i++){
+                        var menuItem=menuData.ChildMenu[i];
+                        var menuItemHtml=SecondMenuFoldPopMenuTemplate;
+                        menuItemHtml=menuItemHtml.replace("{MenuNameTitle}",menuItem.MenuName);
+                        menuItemHtml=menuItemHtml.replace("{MenuName}",menuItem.MenuName);
+                        menuItemHtml=menuItemHtml.replace("{MenuUrl}",menuItem.Url);
+                        menuItemHtml=menuItemHtml.replace("{MenuTarget}",menuItem.Target);
+                        popMenuHtml+=menuItemHtml;
+                    }
+                    $(".SecondMenuFoldPopMenu").html(popMenuHtml);
+                    $(".SecondMenuFoldPopMenu div").each(function(index,element){
+                        $(element).click(function(){
+                            currentSecondMenuChildrenIndex=index;
+                            RefreshSecondMenuFoldPopMenuState();
+                            $(".SecondMenuFoldPopMenu").hide();
+                        });
+                    });
+                }
+            }
+        }
+        function RefreshSecondMenuFoldPopMenuState(){
+            $(".SecondMenuFoldPopMenu div").each(function(index,element){
+                if(currentSecondMenuChildrenIndex==index)
+                    $(element).attr("class","MenuItem-Click");
+                else
+                    $(element).attr("class","MenuItem");               
+            });
+        }
+        function RefreshSecondMenuChildrenState(childrenContainer){
+            childrenContainer.children().each(function(index,element){
+                if(currentSecondMenuChildrenIndex==index)
+                    $(element).attr("class","MenuItem-Children-Item-Click");
+                else
+                    $(element).attr("class","MenuItem-Children-Item");
+            });
+        }
+        function ChangeClass(){
+            var ThreeLevelMenu=$("#app .ThreeLevelMenu").length<=0?$("#app .ThreeLevelMenuMax"):$("#app .ThreeLevelMenu");
+            var MainPanel=$("#app .MainPanel").length<=0?$("#app .MainPanelMax"):$("#app .MainPanel");
+            if(SecondMenuFoldIsOpen)
+            {
+               MainPanel.attr("class","MainPanelMax");
+               ThreeLevelMenu.attr("class","ThreeLevelMenuMax");
+            }
+            else
+            {
+               MainPanel.attr("class","MainPanel");
+               ThreeLevelMenu.attr("class","ThreeLevelMenu");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var threeMenuPathData=[];
+        var ThreeMenuTemplate="";
+        function markThreeLevel(){
+            threeMenuPathData=[];
+            var htmlCode="";
+            var currentMenu=recurrenceFindMenu(allMenuData.FirstMenu);
+            var currentHref=self.location.href;
+            if(ThreeMenuTemplate==""){
+               ThreeMenuTemplate=$("#ThreeLevelMenu").html();
+               console.log("ThreeMenuTemplate");
+               console.log(ThreeMenuTemplate);
+            }
+            threeMenuPathData.push(currentMenu);
+            console.log(threeMenuPathData);
+            if(threeMenuPathData!=null&&threeMenuPathData.length>0){
+                for(var i=0;i<threeMenuPathData.length;i++){
+                    var threeItemCode=ThreeMenuTemplate;
+                    var threeMenuItem=threeMenuPathData[i];
+                    var className="";
+                    threeItemCode=threeItemCode.replace("{MenuNameTitle}",threeMenuItem.MenuName);
+                    threeItemCode=threeItemCode.replace("{MenuName}",threeMenuItem.MenuName);
+                    threeItemCode=threeItemCode.replace("{MenuUrl}",threeMenuItem.Url);
+                    threeItemCode=threeItemCode.replace("{MenuTarget}",threeMenuItem.Target);
+                    if(currentHref.indexOf(threeMenuItem.Url)!=-1)
+                       className="ThreeLevelMenuItemClick";
+                    else
+                       className="ThreeLevelMenuItem";
+                    threeItemCode=threeItemCode.replace("{$Class}",className);
+                    htmlCode+=threeItemCode;
+                }
+            }
+            else{
+                if(currentMenu!=null){
+                    var htmlItemCode=ThreeMenuTemplate;
+                    htmlItemCode=htmlItemCode.replace("{MenuNameTitle}",currentMenu.MenuName);
+                    htmlItemCode=htmlItemCode.replace("{MenuName}",currentMenu.MenuName);
+                    htmlItemCode=htmlItemCode.replace("{MenuUrl}",currentMenu.Url);
+                    htmlItemCode=htmlItemCode.replace("{MenuTarget}",currentMenu.Target);
+                    if(currentHref.indexOf(currentMenu.Url)!=-1)
+                       className="ThreeLevelMenuItemClick";
+                    else
+                       className="ThreeLevelMenuItem";
+                    htmlItemCode=htmlItemCode.replace("{$Class}",className);
+                    htmlCode=htmlItemCode;
+                }
+            }
+            console.log("htmlCode="+htmlCode);
+            $("#ThreeLevelMenu").html(htmlCode);
+        }
+        function recurrenceFindMenu(MenuData){
+            var currentHref=self.location.href;
+            var result=null;
+            console.log("MenuData");
+            console.log(MenuData);
+            if(MenuData!=null)
+            {
+                for(var i=0;i<MenuData.length;i++){
+                    if(currentHref.toLowerCase().indexOf(MenuData[i].Url.toLowerCase())!=-1){
+                        result=MenuData[i];
+                        recurrenceThreeMenuPath(allMenuData.FirstMenu,MenuData[i].ParentID);
+                        break;
+                    }
+                    else if(MenuData[i].ChildMenu!=null&&MenuData[i].ChildMenu.length>0){
+                        result=recurrenceFindMenu(MenuData[i].ChildMenu);
+                    }
+                }
+            }
+            return result;
+        }
+        function recurrenceThreeMenuPath(MenuData,ParentID){
+            if(MenuData!=null)
+            {
+                for(var i=0;i<MenuData.length;i++){
+                    if(MenuData[i].ID==ParentID)
+                    {
+                       threeMenuPathData.push(MenuData[i]);
+                       ParentID=MenuData[i].ParentID;
+                       if(ParentID==-1){
+                          break;
+                       }else if(MenuData[i].ChildMenu!=null&&MenuData[i].ChildMenu.length>0){
+                          recurrenceThreeMenuPath(MenuData[i].ChildMenu,ParentID);
+                       }
+                    }
+                    else if(MenuData[i].ChildMenu!=null&&MenuData[i].ChildMenu.length>0){
+                        recurrenceThreeMenuPath(MenuData[i].ChildMenu,ParentID);
+                    }
+                }
+            }
+        }
+    </script>
+}
+@section Body {
+    <div id="SecondMenuNormal">
+        @*<div class="MenuList-Container">
+            <!--二级菜单项-->
+            <div class="MenuItem-Container">
+                <img class="Icon" src="~/images/leftMenuIcon01.png" />
+                <div class="Text">
+                    基层党建
+                </div>
+                <div class="Arrow">
+                    <!--向右箭头&gt;-->
+                    <!--向下箭头&or;-->
+                    &gt;
+                </div>
+            </div>
+            <!--/二级菜单项-->
+            <!--二级菜单子菜单项-->
+            <div class="MenuItem-ChildrenList-Container">
+                <div class="MenuItem-Children-Item">党员管理</div>
+                <div class="MenuItem-Children-Item">党组织管理</div>
+                <div class="MenuItem-Children-Item">学习与培训</div>
+                <div class="MenuItem-Children-Item">信息公告</div>
+                <div class="MenuItem-Children-Item">党组织换届</div>
+                <div class="MenuItem-Children-Item">党员评价</div>
+            </div>
+            <!--/二级菜单子菜单项-->
+            <!--二级菜单项-->
+            <div class="MenuItem-Container">
+                <img class="Icon" src="~/images/leftMenuIcon02.png" />
+                <div class="Text">
+                    乡村政务
+                </div>
+                <div class="Arrow">
+                    <!--向右箭头&gt;-->
+                    <!--向下箭头&or;-->
+                    &gt;
+                </div>
+            </div>
+            <!--/二级菜单项-->
+            <!--二级菜单子菜单项-->
+            <div class="MenuItem-ChildrenList-Container">
+                <div class="MenuItem-Children-Item">党员管理</div>
+                <div class="MenuItem-Children-Item">党组织管理</div>
+                <div class="MenuItem-Children-Item">学习与培训</div>
+                <div class="MenuItem-Children-Item">信息公告</div>
+                <div class="MenuItem-Children-Item">党组织换届</div>
+                <div class="MenuItem-Children-Item">党员评价</div>
+            </div>
+            <!--/二级菜单子菜单项-->
+            <!--二级菜单项-->
+            <div class="MenuItem-Container">
+                <img class="Icon" src="~/images/leftMenuIcon03.png" />
+                <div class="Text">
+                    村务管理
+                </div>
+                <div class="Arrow">
+                    <!--向右箭头&gt;-->
+                    <!--向下箭头&or;-->
+                    &gt;
+                </div>
+            </div>
+            <!--/二级菜单项-->
+            <!--二级菜单子菜单项-->
+            <div class="MenuItem-ChildrenList-Container">
+                <div class="MenuItem-Children-Item">党员管理</div>
+                <div class="MenuItem-Children-Item">党组织管理</div>
+                <div class="MenuItem-Children-Item">学习与培训</div>
+                <div class="MenuItem-Children-Item">信息公告</div>
+                <div class="MenuItem-Children-Item">党组织换届</div>
+                <div class="MenuItem-Children-Item">党员评价</div>
+            </div>
+            <!--/二级菜单子菜单项-->
+            <!--二级菜单项-->
+            <div class="MenuItem-Container">
+                <img class="Icon" src="~/images/leftMenuIcon04.png" />
+                <div class="Text">
+                    矛盾纠纷
+                </div>
+                <div class="Arrow">
+                    <!--向右箭头&gt;-->
+                    <!--向下箭头&or;-->
+                    &gt;
+                </div>
+            </div>
+            <!--/二级菜单项-->
+            <!--二级菜单子菜单项-->
+            <div class="MenuItem-ChildrenList-Container">
+                <div class="MenuItem-Children-Item">党员管理</div>
+                <div class="MenuItem-Children-Item">党组织管理</div>
+                <div class="MenuItem-Children-Item">学习与培训</div>
+                <div class="MenuItem-Children-Item">信息公告</div>
+                <div class="MenuItem-Children-Item">党组织换届</div>
+                <div class="MenuItem-Children-Item">党员评价</div>
+            </div>
+            <!--/二级菜单子菜单项-->
+        </div>*@
+        <div class="MenuList-Container">
+            <!--二级菜单项-->
+            <div class="MenuItem-Container">
+                <img class="Icon" src="~/images/leftMenuIcon01.png" />
+                <div class="Text">
+                    {MenuName}
+                </div>
+                <div class="Arrow">
+                    <!--向右箭头&gt;-->
+                    <!--向下箭头&or;-->
+                    &gt;
+                </div>
+            </div>
+            <!--/二级菜单项-->
+            <!--二级菜单子菜单项-->
+            <div class="MenuItem-ChildrenList-Container">
+                <div class="MenuItem-Children-Item">
+                    {MenuItemChildrenName}
+                </div>
+            </div>
+            <!--/二级菜单子菜单项-->
+        </div>
+        <div id="SecondMenuTemplate" style="display:none">
+            <div id="SecondMenuItemTemplate" style="display:none">
+                <!--二级菜单项-->
+                <div class="MenuItem-Container">
+                    <img class="Icon" src="{MenuIcon}" />
+                    <div class="Text">
+                        <a href="{MenuUrl}" target="{Target}" >
+                            {MenuName}
+                        </a>
+                    </div>
+                    <div class="Arrow">
+                        <!--向右箭头&gt;-->
+                        <!--向下箭头&or;-->
+                        &gt;
+                    </div>
+                </div>
+                <!--/二级菜单项-->
+            </div>
+            <div id="SecondMenuChildItemTemplate" style="display:none">
+                <!--二级菜单子菜单项-->
+                <div id="SecondMenuChildItemTemplateContainer">
+                    <div class="MenuItem-ChildrenList-Container">
+                        {MenuItemChildrenItemTemplate}
+                    </div>
+                </div>
+                <div id="SecondMenuChildItemBatchTemplateContainer">
+                    <div class="MenuItem-Children-Item">
+                        <a href="{MenuItemChildrenUrl}" target="{MenuItemChildrenTarget}">
+                            {MenuItemChildrenName}
+                        </a>                        
+                    </div>
+                </div>
+                <!--/二级菜单子菜单项-->
+            </div>
+        </div>
+        <img class="btnCloseMenu" src="~/images/PutAway.png" />
+    </div>
+    <div id="SecondMenuFold">
+        <div class="MenuList-Container">
+            <div class="MenuItem-Container">
+                <img class="Icon" src="{MenuIcon}" />
+            </div>
+        </div>
+        <img class="btnCloseMenu" src="~/images/leftOpenMenuIcon.png" />
+    </div>
+    <div class="SecondMenuFoldPopMenu">
+        <div class="MenuItem" title="{MenuNameTitle}" >
+            <a href="{MenuUrl}" target="{MenuTarget}">
+                {MenuName}
+            </a>
+        </div>
+    </div>
+    <div id="ThreeLevelMenu" class="ThreeLevelMenu">
+        @*<div class="ThreeLevelMenuItemClick">党员信息</div>*@
+        @*<div class="ThreeLevelMenuItem">流动党员</div>*@
+        <div class="{$Class}" title="{MenuNameTitle}" >
+            <a href="{MenuUrl}" target="{MenuTarget}">
+                {MenuName}
+            </a>
+            @*&gt;&gt;*@
+        </div>
+    </div>
+    <div class="MainPanel">
+        @RenderSection("Body")
+    </div>   
+}
+@section VueScript {
+    @RenderSection("VueScript")
+}

@@ -1,0 +1,279 @@
+﻿#columnFieldContainer {
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 0px solid red;
+}
+
+#buttonContainer {
+    width: 100%;
+    height: 5vh;
+    margin-left: 0%;
+    margin-top: 0%;
+    border: 0px solid red;
+}
+
+#btnSave {
+    width: 8vw;
+    margin-left: 16vw;
+    margin-top: 0.3vh;
+}
+
+#columnFieldList {
+    width: 100%;
+    min-height: 5vh;
+    height: auto !important;
+    margin-left: 0%;
+}
+
+    #columnFieldList li {
+        border-bottom: 1px solid #C3C3C3;
+    }
+
+        #columnFieldList li table {
+            width: 100%;
+            height: 5vh;
+        }
+
+            #columnFieldList li table tr td {
+                width: 5%;
+                font-family: 'Microsoft YaHei UI';
+                font-size: 0.8vw;
+                color: #4A4A4A;
+                text-align: center;
+            }
+
+            #columnFieldList li table .btnOrderMethod {
+                width: 5%;
+                color: #747FFF;
+                cursor: pointer;
+                text-align: center;
+            }
+
+.elEditDialog {
+    width: 21vw;
+    height: 21vh;
+    background-color: #fff;
+}
+
+@media (max-width:1292px) {
+    .elEditDialog {
+        width: 21vw;
+        height: 26vh;
+    }
+}
+
+    .elEditDialog-mainPanel {
+        width: 100%;
+        height: 11vh;
+        margin-top: 1vh;
+        border: 0px solid red;
+    }
+
+    .elGroupImportDialog {
+        width: 25vw;
+        height: 39vh;
+        background-color: #fff;
+    }
+
+        .elGroupImportDialog .elDialog-mainPanel .upload-demo .el-upload {
+            margin-left: 2vw;
+        }
+
+    .txtGroupName {
+        width: 85%;
+        height: 4vh;
+        float: left;
+        font-family: 'Microsoft YaHei UI';
+        font-size: 1vw;
+        color: #000;
+        margin-left: 7.5%;
+        margin-top: 4%;
+        text-indent: 2%;
+        text-align: left;
+        border-radius: 6px;
+        border: 1px solid #000;
+    }
+
+        .txtGroupName::placeholder {
+            font-family: 'Microsoft YaHei UI';
+            font-size: 1vw;
+            color: #000;
+        }
+
+    .btnSubmitGroupData {
+        width: 10vw;
+        height: 4vh;
+        margin-top: 0.7vh;
+        margin-left: 4vw;
+        border-radius: 10px;
+        float: left;
+    }
+
+@media (max-width:1292px) {
+    .btnSubmitGroupData {
+        height: 6vh;
+    }
+}
+
+@media (max-width:1765px) {
+    #ddlSearchCondition {
+        width: 10vw;
+    }
+}
+
+@media (max-width:1738px) {
+    #ddlSearchCondition {
+        width: 13vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 52%;
+    }
+}
+
+@media (max-width:1719px) {
+    #ddlSearchCondition {
+        width: 13vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 50%;
+    }
+}
+
+@media (max-width:1685px) {
+    #ddlSearchCondition {
+        width: 10vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 55%;
+    }
+}
+
+@media (max-width:1243) {
+    #ddlSearchCondition {
+        width: 12vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 52%;
+    }
+}
+
+@media (max-width:1088) {
+    #btnSettingContainer {
+        margin-left: 49%;
+    }
+}
+
+@media (max-width:1058) {
+    #btnSettingContainer {
+        margin-left: 45%;
+    }
+}
+
+@media (max-width:1486) {
+
+    .el-pagination__sizes {
+        margin-top: -0.2vh;
+    }
+
+    #ListPageMain .Page-Container .Pagination button {
+        height: 3.7vh;
+        margin-top: -0.2vh;
+    }
+
+    #ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+        height: 3.7vh;
+        margin-top: -0.2vh;
+    }
+}
+
+@media (max-width:1381) {
+
+    .el-pagination button, .el-pagination span:not([class*=suffix]) {
+        margin-top: -1.2vh;
+    }
+
+    #ListPageMain .Page-Container .Pagination button {
+        margin-top: -0.6vh;
+    }
+
+    #ListPageMain .Page-Container .Pagination .el-pager li:not(.disabled).active {
+        margin-top: -0.7vh;
+    }
+}
+
+@media (max-width:1347) {
+    #btnSettingContainer {
+        margin-left: 54%;
+    }
+}
+
+@media (max-width:1215px) {
+    #ddlSearchCondition {
+        width: 12vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 52%;
+    }
+}
+
+
+
+@media (max-width:1118px) {
+    #ddlSearchCondition {
+        width: 13vw;
+    }
+
+    #btnSettingContainer {
+        margin-left: 48%;
+    }
+}
+
+@media (max-width:1112px) {
+    #btnSettingContainer {
+        margin-left: 48%;
+    }
+}
+
+@media (max-width:1083px) {
+    #btnSettingContainer {
+        margin-left: 44%;
+    }
+}
+
+
+@media (max-width:1596px) {
+    #ListPageMain .Table-Container .el-table {
+        height: 62vh;
+    }
+}
+
+@media (max-width:1293px) {
+    #ListPageMain .Table-Container .el-table {
+        height: 62vh;
+    }
+}
+
+@media (max-width:1214px) {
+    #ListPageMain .Table-Container .el-table {
+        height: 60vh;
+    }
+
+    #ListPageMain .Page-Container .Pagination {
+        height: 7vh;
+        margin-top: -1.3vh;
+    }
+}
+
+@media (max-width:1077px) {
+    #btnSettingContainer {
+        margin-left: 44%;
+    }
+}

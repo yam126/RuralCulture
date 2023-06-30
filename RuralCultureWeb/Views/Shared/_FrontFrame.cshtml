@@ -1,0 +1,194 @@
+﻿@using RuralCultureWeb
+<!DOCTYPE html>
+<html lang="en">
+@{
+    string UrlScheme = Context.Request.IsHttps?"https":"http";
+    string UrlHost = Context.Request.Host.Host;    
+    string Port = string.Empty;
+    string UserName = string.Empty;
+    if (Context.Request.Host.Port != null || Context.Request.Host.Port != 0)
+        Port = $":{Context.Request.Host.Port.GetValueOrDefault()}";
+    string CurrentUrl = $"{UrlScheme}://{UrlHost}{Port}";
+    if(CacheHelper.CacheValue("Account")!=null)
+       UserName = Convert.ToString(CacheHelper.CacheValue("Account"));
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/element-ui/theme-chalk/index.css" />
+    <link rel="stylesheet" href="~/css/custom-checkbox.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+    <link rel="stylesheet" href="~/css/element-ui-global.css" />
+    <link rel="stylesheet" href="~/css/FrontFrame.css" />   
+    <script type="text/javascript" src="~/lib/vue/vue.js"></script>
+    <script type="text/javascript" src="~/lib/element-ui/index.js"></script>
+    <script type="text/javascript" src="~/lib/jqueryEject/jqueryEject.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/js/apiHelper.js"></script>
+    <script type="text/javascript" src="~/js/GroupParameter.js"></script>
+    @RenderSection("Head")
+    <script type="text/javascript">
+        var timeClockHandle=null;
+        var htmlTemplate="";
+        $(document).ready(function(){
+            AppDivAutoResize();            
+            $(document).resize(function(){
+                AppDivAutoResize();
+            });
+        });
+        function AppDivAutoResize() {
+            var clientWidth=document.body.clientWidth;
+            var clientHeight=document.body.clientHeight;
+            $("#app").css({
+                "width":clientWidth,
+                "height":clientHeight
+            });
+        }
+        function timeClock(){
+            var nowDate = new Date();
+            var year = nowDate.getFullYear();
+            var month = fixLeadingZero(nowDate.getMonth()+1,2);
+            var day = fixLeadingZero(nowDate.getDate(),2);
+            var hours = fixLeadingZero(nowDate.getHours(), 2);
+            var minutes = fixLeadingZero(nowDate.getMinutes(), 2);
+            var seconds = fixLeadingZero(nowDate.getSeconds(), 2);
+            if(htmlTemplate=="")
+               htmlTemplate=$("#dateTimeClock").html();
+            var htmlCode=htmlTemplate;
+            htmlCode=htmlCode.replace("yyyy",year);
+            htmlCode=htmlCode.replace("MM",month);
+            htmlCode=htmlCode.replace("dd",day);
+            htmlCode=htmlCode.replace("hh",hours);
+            htmlCode=htmlCode.replace("mm",minutes);
+            htmlCode=htmlCode.replace("ss",seconds);
+            $("#dateTimeClock").html(htmlCode);
+            timeClockHandle=window.setInterval(function() {
+                    window.clearInterval(timeClockHandle);
+                    timeClock();
+            }, 1000);
+        }
+        function fixLeadingZero(value, fixLength) {
+            var str = value.toString();
+            if (str.length < fixLength) {
+                var len = fixLength - str.length;
+                var tempStr = "";
+                for (var i = 0; i < len; i++)
+                    tempStr += "0";
+                str = tempStr + str;
+            }
+            return str;
+        }
+        $(function() {
+            timeClock();
+            $(window).on('resize', AppDivAutoResize).trigger('resize');
+        });
+    </script>
+    <script type="text/javascript">
+        //首页导航代码
+        var frontMenuData=null;
+        var frontMenuTemplate="";
+        var CurrentUrl=self.location.href;
+        $(function(){
+            LoadFrontMenu();
+        }); 
+        function LoadFrontMenu(){
+            $.getJSON("/json/FrontMenu.json",function(jsonData){
+                var menuHtml="";
+                if(frontMenuTemplate=="")
+                   frontMenuTemplate=$("#firstMenuSearchContainer .firstMenu").html();
+                frontMenuData=jsonData.FrontMenu;
+                console.log("frontMenuData");
+                console.log(frontMenuData);
+                console.log("CurrentUrl.toLowerCase()");
+                console.log(CurrentUrl.toLowerCase());
+                for(var i=0;i<frontMenuData.length;i++)
+                {
+                    var menuItem=frontMenuData[i];
+                    var menuItemHtml=frontMenuTemplate;
+                    var MenuClass="";
+                    var MenuStyle="margin-left: 0.5vw";
+                    console.log("menuItem.MenuUrl.toLowerCase()");
+                    console.log(menuItem.MenuUrl.toLowerCase());
+                    if(CurrentUrl.toLowerCase().indexOf(menuItem.MenuUrl.toLowerCase())!=-1)
+                       MenuClass="menuItemClick";
+                    else
+                       MenuClass="menuItem";
+                    menuItemHtml=menuItemHtml.replace("{MenuStyle}",MenuStyle);
+                    menuItemHtml=menuItemHtml.replace("{MenuItemClass}",MenuClass);
+                    menuItemHtml=menuItemHtml.replace("{MenuUrl}",menuItem.MenuUrl);
+                    menuItemHtml=menuItemHtml.replace("{MenuText}",menuItem.MenuText);
+                    menuItemHtml=menuItemHtml.replace("{MenuTarget}",menuItem.MenuTarget);
+                    menuHtml+=menuItemHtml;
+                }
+                $("#firstMenuSearchContainer .firstMenu").html(menuHtml);
+                $("#firstMenuSearchContainer .firstMenu div:eq(0)").css("margin-left","0.5vw");
+            });
+        }
+    </script>
+    <script type="text/javascript">
+       function firstMenuItemClick(element){
+           var linkHref=$(element).children("a").attr("href");
+           //console.log(`linkHref=${linkHref}`);
+           self.location=linkHref;
+       }
+    </script>
+    <script type="text/javascript">
+        var searchCallBack=null;
+        $(function(){
+            $("#btnSearch").click(function(){
+                console.log("btnSearchclick"); 
+                var locationHref=self.location.href;
+                if(locationHref.toLowerCase().indexOf("/article/articledynamics")==-1){
+                    var txtSearckKeyWord=$("#txtSearch").val();
+                    self.location="/Article/ArticleDynamics?keyword="+txtSearckKeyWord;
+                }
+                if(searchCallBack!=null)
+                   searchCallBack();
+            });
+        });    
+    </script>
+</head>
+<body>
+    <div id="app">
+        <el-container>
+            <div id="titleContainer">
+                <div class="frameLeftDiv">
+                    <img class="Icon" src="~/images/homeIcon.png" />
+                    <div id="dateTimeClock" class="Text">
+                        yyyy年MM月dd日&nbsp;hh:mm:ss
+                    </div>
+                </div>
+                <div class="frameCenterDiv">
+                    林雨村乡村文化建设园地
+                </div>
+                <div class="frameRightDiv">
+                    <img class="fullScreenIcon" src="~/images/fullScreenIcon.png" />
+                    <a href="/Article/ArticleAdminList">
+                       <img class="settingIcon" src="~/images/settingIcon.png" />
+                    </a>
+                    <div class="splitLine"></div>
+                    <img class="userFace" src="~/images/userFace.png" />
+                    <div class="userName">@UserName</div>
+                </div>
+            </div>
+            <div id="firstMenuSearchContainer">
+                <div class="firstMenu">
+                    <div onclick="firstMenuItemClick(this)" class="{MenuItemClass}" >
+                        <a href="{MenuUrl}" target="{MenuTarget}" >{MenuText}</a>
+                    </div>
+                </div>
+                <div class="searchContainer">
+                    <input type="text" id="txtSearch" placeholder="内容搜索..." class="txtSearch" />
+                    <img id="btnSearch" class="btnSearch" src="~/images/search-Icon.png" />
+                </div>
+            </div>
+            <div id="bodyContainer">
+                @RenderSection("Body")
+            </div>
+        </el-container>
+    </div>
+</body>
+@RenderSection("VueScript")
+</html>

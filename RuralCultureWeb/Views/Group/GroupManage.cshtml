@@ -1,0 +1,679 @@
+﻿@using RuralCultureWeb
+@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_SecondLevelMenuLayout.cshtml";
+}
+@{
+    //头部模块
+    string UrlScheme = Context.Request.IsHttps?"https":"http";
+    string UrlHost = Context.Request.Host.Host;
+    string Port = string.Empty;
+    if (Context.Request.Host.Port != null || Context.Request.Host.Port != 0)
+        Port = $":{Context.Request.Host.Port.GetValueOrDefault()}";
+    string CurrentUrl = $"{UrlScheme}://{UrlHost}{Port}";
+    string UserName = string.Empty;
+    if(CacheHelper.CacheValue("Account")!=null)
+       UserName = Convert.ToString(CacheHelper.CacheValue("Account"));
+}
+@section Head {
+    <link href="~/css/ListPage.css" rel="stylesheet" />
+    <link href="~/css/GroupManage.css" rel="stylesheet" />
+    <style type="text/css">
+      #btnSettingContainer {
+          margin-left: 58%;
+      }
+    </style>
+    <script src="~/lib/SortableMaster/Sortable.js" type="text/javascript" ></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".btnAddData").mouseover(function(){
+            var elementTop=getElementPos($(".btnAddData")[0]).y;
+            var elementLeft=getElementPos($(".btnAddData")[0]).x;
+            elementTop=elementTop+$(".btnAddData").height()+3;
+            $(".btnDelete").css({"top":elementTop,"left":elementLeft});
+            $(".btnDelete").show();
+        });
+        $("#ListPageMain").click(function(){
+            $(".btnDelete").hide();
+        });
+    });
+    </script>
+}
+
+@{
+    //内容模块
+}
+@section Body {
+    <div id="ListPageMain">
+        <div class="Control">
+            <div id="ddlSearchCondition">
+                <el-select id="ddlSearch" v-model="searchCondition" placeholder="请选择">
+                    <el-option v-for="item in options"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+            <div id="txtSearch">
+                <input type="text" v-model="searchWhere" placeholder="请输入关键字" class="inputText" />
+                <div title="点击搜索" @@click="search" class="btnSearch">
+                    <img class="Icon" src="~/images/searchIcon.png" />
+                </div>
+            </div>
+            <div @@click="showDialog" class="btnSetting-Container">
+                <img class="Icon" src="~/images/setting.png" />
+            </div>
+            <!--批量导出按钮-->
+            <div @@click="exportExcel" class="btnBatchExport">批量导出</div>
+            <!--/批量导出按钮-->
+            <!--批量导入按钮-->
+            <div @@click="showBatchImport" class="btnBatchImport">批量导入</div>
+            <!--/批量导入按钮-->
+            <!--添加按钮-->
+            <div @@click="showEditGroupDialog" title="添加数据" class="btnAddData">
+                <img class="Icon" src="~/images/addIcon.png" />
+                <div class="Text">新增</div>
+            </div>
+            <!--/添加按钮-->
+            <!--删除按钮-->
+            <div @@click="batchDelete" title="批量删除数据" class="btnDelete">
+                <i class="el-icon-delete Icon"></i>
+                <div class="Text">删除</div>
+            </div>
+            <!--/删除按钮-->
+        </div>
+        <div class="Table-Container">
+            <el-table 
+                :data="pageData"
+                :empty-text="emptyText"
+                ref="multipleTable" 
+                @@selection-change="handleSelectionChange"
+                height="65vh" 
+                style="width: 100%" >
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column 
+                   v-for="(item, index) in dynamicColumns"
+                   :key="index"
+                   :prop="item.prop"
+                   :label="item.label"
+                >
+                    <template slot="header" slot-scope="scope">
+                        {{item.label}}{{item.orderMethod=='ASC'?'&#8593;':item.orderMethod=='DESC'?'&#8595;':''}}
+                    </template>
+                    <template slot-scope="scope">
+                        <el-tooltip :content="scope.row[item.prop]" placement="top" effect="light">
+                            <span style="display: -webkit-box;text-overflow: ellipsis;overflow: hidden;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: pre-line;">
+                                {{ scope.row[item.prop] }}
+                            </span>
+                        </el-tooltip>
+                    </template>
+                </el-table-column>
+               <el-table-column fixed="left" label="操作" width="160">
+                   <template slot-scope="scope">
+                       <el-button title="编辑" @@click="editData(scope.row)" size="mini" type="primary" icon="el-icon-edit" circle></el-button>
+                       <el-button title="删除" @@click="deleteGroup(scope.row)" size="mini" type="danger" icon="el-icon-delete" circle></el-button>
+                   </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div class="Page-Container">
+            <el-pagination
+               class="Pagination"
+               background
+               :total="recordCount"
+               :page-size="pageSize"
+               :page-count="pageCount"
+               :current-page="pageIndex"
+               @@current-change="changePage"
+               @@size-change="changePageSize"
+               layout="total, sizes, prev, pager, next, jumper"
+            >
+            </el-pagination>
+        </div>
+        <!--弹出对话框-->
+        <el-dialog title="属性调整" custom-class="elDialog" :visible.sync="dialogIsShow">
+            <div class="elDialog-mainPanel">
+                <table class="mainTable">
+                    <thead>
+                        <tr>
+                            <th>属性名称</th>
+                            <th>显示/隐藏</th>
+                            <th>排序</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div id="columnFieldContainer">
+                    <ul id="columnFieldList" ref="columnFieldList">
+                        <li v-for="(item,index) in editTableColumns" :key="index" >
+                            <table>
+                                <tr>
+                                    <td>
+                                        {{item.showName}}
+                                        <input type="hidden" class="hideColumnJson" :value="item.recordId" />
+                                    </td>
+                                    <td>
+                                        <div class="checkItem">
+                                            <input class="custom-checkbox" @@click="changePageTableColumnIsShow(index)" :id="'chkDialogItem'+index" :checked="item.isShow=='1'?'checked':''" type="checkbox" />                                        
+                                            <label :for="'chkDialogItem'+index"></label>
+                                        </div>
+                                    </td>
+                                    <td v-if="item.backup03.indexOf('ASC')!=-1" @@click="changeOrderMethod(index)" :id="'btnOrderMethod'+index" class="btnOrderMethod" >
+                                        &#8593;
+                                    </td>
+                                    <td v-else-if="item.backup03.indexOf('DESC')!=-1" @@click="changeOrderMethod(index)" :id="'btnOrderMethod'+index" class="btnOrderMethod" >
+                                        &#8595;
+                                    </td>
+                                    <td v-else @@click="changeOrderMethod(index)" :id="'btnOrderMethod'+index" class="btnOrderMethod" >
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                <div id="buttonContainer">
+                    <el-button id="btnSave" @@click="savePageTableColumn" type="primary" round >保存设置</el-button>
+                </div>
+            </div>
+        </el-dialog>
+        <!--/弹出对话框-->
+        <!--导入对话框-->
+        <el-dialog title="导入对话框" custom-class="elGroupImportDialog" :visible.sync="dialogBatchImport" >
+            <div class="elDialog-mainPanel">
+                <el-upload 
+                    class="upload-demo" 
+                    drag 
+                    action="https://localhost:7026/api/group/import/excel"
+                    :data="userName"
+                    :before-upload="beforeExcelUpload"
+                    :on-success="onUploadSuccess"
+                    :on-error="onUploadError"
+                    :limit="1" >
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">
+                        <a href="/template/groupTemplate.xls">点此下载模板文件</a><br/>
+                        请根据模板上传,只能上传普通文章,只能上传xls/xlsx文件，且不超过30mb                    
+                    </div>
+                </el-upload>
+            </div>
+        </el-dialog>
+        <!--/导入对话框-->
+        <el-dialog title="文艺小组编辑" custom-class="elEditDialog" :visible.sync="dialogEditHandle">
+            <div class="elEditDialog-mainPanel">
+                <input type="text" v-model="groupInfo.groupName"  placeholder="请输入文艺小组名称" class="txtGroupName" />
+                <el-button @@click="saveGroupInfo" class="btnSubmitGroupData" type="primary">保存数据</el-button>
+            </div>
+        </el-dialog>
+        <iframe :src="exportSrc==''?'about:blank':exportSrc" style="display:none"></iframe>
+    </div>
+}
+
+@{
+    //脚本模块
+}
+@section VueScript {
+<script>
+    var listPage=new Vue({
+        el: "#ListPageMain",
+        data:{
+            userName:'@UserName',
+            dialogBatchImport:false,
+            dialogEditHandle:false,
+            actionMethod:'Add',
+            exportSrc:'',
+            SelectionIDStr:'',
+            dialogIsShow:false,
+            condition:'',
+            searchWhere:'',
+            emptyText:'暂无数据',
+            searchCondition:'',
+            recordCount:0,
+            pageSize:10,
+            pageIndex:1,
+            tableColumns:[],
+            editTableColumns:[],
+            dynamicColumns:[],
+            pageCount:0,
+            excelFile:[],
+            sortField:'modifiedTime',
+            sortMethod:'desc',
+            pageData:[],
+            pageName:'GroupManage.cshtml',
+            tableName:'Group',
+            windowWidth: document.body.clientWidth,
+            windowHeight: document.body.clientHeight,
+            groupInfo:{
+                groupId:'',
+                groupName:''
+            },
+            options:[
+                {
+                    label:"文艺小组名称",
+                    value:"groupName"
+                },
+                {
+                    label:"创建人",
+                    value:"created"
+                },
+                {
+                    label:"修改人",
+                    value:"modified"
+                }
+            ]
+        },
+        mounted:function(){
+            var _that = this;
+            _that.windowWidth = document.body.clientWidth;
+            _that.windowHeight = document.body.clientHeight;
+            console.log("实时屏幕宽度:" + _that.windowWidth);
+            console.log("实时屏幕高度:" + _that.windowHeight);
+            _that.refreshPage();
+            window.onresize = () => {
+                return (() => {
+                    _that.windowWidth = document.body.clientWidth;
+                    _that.windowHeight = document.body.clientHeight;
+                    _that.autoSizeMainDiv();
+                    $(".btnDelete").hide();
+                    console.log("实时屏幕宽度:" + _that.windowWidth);
+                    console.log("实时屏幕高度:" + _that.windowHeight);
+                })();
+            };
+        },
+        methods:{
+            //判断文件类型并且限制上传文件的大小
+            beforeExcelUpload(file) {
+                const isXLS = file.type === "application/vnd.ms-excel";
+                const isXLSX = file.type==="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                //1MB=1024*1024(1MB=1024KB 1KB=1024MB)
+                const is30mb = file.size/1024/1024<30;
+
+                //限制文件上传类型
+                if (!isXLS && !isXLSX) {
+                    this.$message.error("上传文件只能是 xls,xlsx 格式!");
+                    return false;
+                }
+
+                //限制文件上传大小
+                if (!is30mb) {
+                    this.$message.error("上传图片大小不能超过 30mb!");
+                    return false;
+                }
+                return true;
+            },
+            onUploadSuccess(response) { 
+                console.log(response);
+                var _that = this;
+                var Ealt=new Eject();
+                if (response.status != 0) {
+                    var errorMsg = response.msg;
+                    Ealt.Etoast('导入数据失败,原因['+errorMsg+']',3);
+                }
+                else
+                {
+                    _that.refreshPage();
+                    _that.dialogBatchImport = false;
+                }
+            },
+            onUploadError(response) {
+                console.log(response);
+            },
+            editData(dataInfo){
+                var _that=this;
+                _that.actionMethod="Edit";
+                _that.dialogEditHandle=true;
+                _that.groupInfo.groupId=dataInfo.groupId;
+                _that.groupInfo.groupName=dataInfo.groupName;
+            },
+            saveGroupInfo(){
+                var _that=this;
+                var Ealt=new Eject();
+                apiHelper.saveGroupInfo(
+                    {
+                        groupId:_that.groupInfo.groupId,
+                        groupName:_that.groupInfo.groupName,
+                        backup01: "",
+                        backup02: "",
+                        backup03: "",
+                        created: _that.userName,
+                        createdTime: "",
+                        modified: _that.userName,
+                        modifiedTime: ""
+                    },
+                    _that.actionMethod,
+                    function(response){
+                        if(response.data.status==0)
+                        {
+                           _that.dialogEditHandle=false;
+                           _that.refreshPage();
+                        }
+                        else
+                        {
+                           _that.dialogEditHandle=false;
+                           Ealt.Etoast('保存数据失败,原因['+response.data.msg+']!',3);
+                        }
+                    }
+                );
+            },
+            showEditGroupDialog(){
+                var _that=this;
+                _that.actionMethod="Add";
+                _that.groupInfo.groupId="";
+                _that.groupInfo.groupName="";
+                _that.dialogEditHandle=true;
+            },
+            handleSelectionChange(val){
+                var _that = this;
+                _that.SelectionIDStr = "";
+                for (var i = 0; i < val.length; i++) {
+                    _that.SelectionIDStr += val[i].groupId + "-";
+                }
+                if (_that.SelectionIDStr != "")
+                    _that.SelectionIDStr = _that.SelectionIDStr.substr(0, _that.SelectionIDStr.length - 1);
+            },
+            autoSizeMainDiv() {
+                $("#app").css({
+                    "width": this.windowWidth,
+                    "height": this.windowHeight
+                });
+                //if(typeof($(".el-table__empty-block")[0].length)!="undefined"&&$(".el-table__empty-block")[0].length>0)
+                //{
+                //    $(".el-table__empty-block").css({
+                //        "width":"100%",
+                //        "height":"100%"
+                //    });
+                //}
+            },
+            refreshPage(){
+                var _that = this;
+                _that.pageIndex=1;
+                _that.tableColumns=[];
+                _that.editTableColumns=[];
+                _that.dynamicColumns=[];
+                _that.pageData=[];
+                _that.initEditPageColumn();
+                _that.initPageData();               
+            },
+            initEditPageColumn(){
+                var _that=this;
+                apiHelper.getDataByPageNameAndTableName({
+                    PageName:_that.pageName,
+                    TableName:_that.tableName
+                },
+                function(response){
+                    if (response.status == 0) {
+                        var columnData=response.data.result;
+                        for(var i=0;i<columnData.length;i++){
+                            if(columnData[i].backup03!=""){
+                                _that.sortField=columnData[i].fieldName;
+                                _that.sortMethod=columnData[i].backup03;
+                            }
+                        }
+                        _that.editTableColumns=columnData;
+                    }
+                });
+            },
+            setFieldTips() {
+                var _that=this;
+                $("th .cell").each(function(index, element) {
+                    console.log(element);
+                    var tips = $(element).html();
+                    $(element).attr("title", tips);
+                });
+            },
+            changePageSize(pageSize) {
+                this.pageIndex = 1;
+                this.pageSize = pageSize;
+                this.getPageData();
+            },
+            changePage(pageIndex) {
+                this.pageIndex = pageIndex;
+                this.getPageData();
+            },
+            getPageData() {
+                var _that=this;
+                apiHelper.queryPageGroup({
+                    where: _that.searchWhere,
+                    pageName:_that.pageName,
+                    tableName:_that.tableName,
+                    condition:_that.condition,
+                    pageIndex: _that.pageIndex,
+                    pageSize: _that.pageSize,
+                    sortField: _that.sortField,
+                    sortMethod: _that.sortMethod
+                }, function(response) {
+                    if (response.status == 0) {
+                        _that.recordCount = response.recordCount;
+                        _that.pageCount = response.pageCount;
+                        _that.pageData = response.result;
+                        _that.tableColumns=response.tableColumn;
+                        _that.dynamicColumns=[];
+                        if(_that.tableColumns!=null&&_that.tableColumns.length!=null&&_that.tableColumns.length>0)
+                        {
+                            for(var i=0;i<_that.tableColumns.length;i++){
+                                var colItem=_that.tableColumns[i];
+                                _that.dynamicColumns.push({
+                                    prop:colItem.fieldName,
+                                    label:colItem.showName,
+                                    orderMethod:colItem.backup03
+                                });
+                            }
+                        }
+                        console.log("_that.dynamicColumns");
+                        console.log(_that.dynamicColumns);
+                        console.log("_that.pageData");
+                        console.log(_that.pageData);
+                        console.log("_that.tableColumns");
+                        console.log(_that.tableColumns);
+                        console.log("_that.recordCount=" + _that.recordCount);
+                        console.log("_that.pageCount=" + _that.pageCount);
+                    }
+                });
+            },
+            initPageData(){
+                var _that = this;
+                this.getPageData();
+                this.$nextTick(() => { 
+                    _that.setFieldTips();
+                });               
+            },
+            changePageTableColumnIsShow(index){
+                var Ealt=new Eject();
+                var IsChecked=$("#chkDialogItem"+index)[0].checked;
+                if(this.editTableColumns[index].backup02=='PRIMARY_KEY'){
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '主键字段必须显示'
+                    });
+                    $("#chkDialogItem"+index)[0].checked=true;
+                    return false;
+                }
+                this.editTableColumns[index].isShow=IsChecked?'1':'0';
+            },
+            changeOrderMethod(index){
+                var _that=this;
+                var orderMethod=this.editTableColumns[index].backup03;
+                var columnClickItem=this.editTableColumns[index];
+                console.log("orderMethod="+orderMethod);
+                var Ealt=new Eject();
+                console.log("columnClickItem.isShow="+columnClickItem.isShow);
+                if(columnClickItem.isShow=="0"||columnClickItem.isShow=="")
+                {
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '只有显示的字段才能排序'
+                    });
+                    return false;
+                }
+                if(orderMethod.indexOf("ASC")!=-1){
+                   $("#btnOrderMethod"+index).html("&#8595;");
+                   this.editTableColumns[index].backup03="DESC";
+                }
+                else if(orderMethod.indexOf("DESC")!=-1){
+                   $("#btnOrderMethod"+index).html("&#8593;");
+                   this.editTableColumns[index].backup03="ASC";
+                }
+                else{
+                   $("#btnOrderMethod"+index).html("&#8593;");
+                   this.editTableColumns[index].backup03="ASC";
+                }
+                for(var i=0;i<_that.editTableColumns.length;i++){
+                    if(i!=index)
+                    {
+                       $("#btnOrderMethod"+i).html("&nbsp;");
+                       _that.editTableColumns[i].backup03="";
+                    }
+                }
+                _that.sortField=_that.editTableColumns[index].fieldName;
+                _that.sortMethod=_that.editTableColumns[index].backup03;
+                for(var j=0;j<_that.dynamicColumns.length;j++){
+                    if(_that.dynamicColumns[j].prop.toLowerCase().trim()==_that.sortField.toLowerCase().trim())
+                       _that.dynamicColumns[j].orderMethod=_that.sortMethod;
+                    else
+                       _that.dynamicColumns[j].orderMethod="";
+                }
+                _that.savePageTableColumn();
+            },
+            savePageTableColumn(){
+                this.updatePageTableColumn();
+                self.location.reload();
+            },
+            updatePageTableColumn(){
+                var _that=this;
+                _that.$nextTick(() => {
+                    var newArray=[];
+                    $(".hideColumnJson").each(function(index,element){
+                        var recordId=$(element).val();
+                        for(var i=0;i<_that.editTableColumns.length;i++){
+                            var columnItem=_that.editTableColumns[i];
+                            if(columnItem.recordId==recordId)
+                            {
+                                console.log("showName:"+columnItem.showName);
+                                console.log("isShow:"+columnItem.isShow);
+                                columnItem.orderSequence=index.toString();
+                                newArray.push(columnItem);
+                            }
+                        }
+                    });
+                    console.log("newArray");
+                    console.log(newArray);
+                    apiHelper.savePageTableColumn(
+                        newArray,
+                        function(response){
+                            console.log(response);
+                            if(response.data.status==0){
+                                _that.dialogIsShow=false;
+                                _that.refreshPage();
+                            }
+                        }
+                    );
+                });
+            },
+            search() {
+                var Ealt=new Eject();
+                if (this.searchWhere != '') {
+                    this.pageIndex = 1;
+                    this.condition = this.searchCondition;
+                    this.initPageData();
+                } else {
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '请输入搜索内容'
+                    });
+                }
+            },
+            showDialog(){
+                this.dialogIsShow=true;
+                this.initSortable();
+            },
+            initSortable(){
+                var _that=this;
+                if(_that.editTableColumns!=null&&_that.editTableColumns.length>0){                           
+                    _that.$nextTick(() => {
+                        console.log("_that.$refs");
+                        console.log(_that.$refs);
+                        var columnFieldListObj=_that.$refs.columnFieldList;
+                        console.log("columnFieldListObj");
+                        console.log(columnFieldListObj);
+                        new Sortable(columnFieldListObj,{
+                            animation: 150,
+                            ghostClass: 'blue-background-class',
+                            onEnd:function(evt){}
+                        });
+                    });
+                }
+            },
+            batchDelete(){
+                var _that=this;
+                var Ealt=new Eject();
+                if(_that.SelectionIDStr==''){
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '没有选中数据不能删除'
+                    });
+                }else{
+                    _that.deleteGroupFinal(_that.SelectionIDStr);
+                }
+            },
+            deleteGroup(groupInfo){
+                var _that=this;
+                var Ealt=new Eject();
+                if(groupInfo==null){
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '数据为空不能删除'
+                    });
+                    return;
+                }else{
+                    _that.deleteGroupFinal(groupInfo.groupId);
+                }
+            },
+            deleteGroupFinal(Ids){
+                var _that=this;
+                var Ealt=new Eject();
+                Ealt.Econfirm({
+                    title:'是否删除',
+                    message:'确定要删除选中的数据吗?',
+                    define:function(){
+                        apiHelper.deleteGroup(
+                            Ids,
+                            function(response){
+                                if(response.data.status==0){
+                                    Ealt.Etoast('删除成功',3);
+                                    _that.refreshPage();
+                                }else{
+                                    Ealt.Etoast('删除失败,原因['+response.data.msg+']',3);
+                                }
+                            });
+                    },
+                    cancel:function(){}
+                });
+            },
+            exportExcel() {
+                var _that=this;
+                var selectedIDStr = _that.SelectionIDStr==''?'null':_that.SelectionIDStr;
+                var searchWhere = _that.searchWhere==''?'null':_that.searchWhere;
+                var searchCond=_that.searchCondition==''?'null':_that.searchCondition;
+                var PName=_that.pageName==''?'null':_that.pageName;
+                var tbName=_that.tableName==''?'null':_that.tableName;
+                var Ealt=new Eject();
+                if (_that.recordCount <= 0) 
+                {
+                    Ealt.Ealert({
+                        title: '提示',
+                        message: '没有数据不能导出'
+                    });
+                    return false;
+                }
+                _that.exportSrc = apiHelper.urlBase + '/group/export/excel?selectedIDStr=' + selectedIDStr + '&where=' + searchWhere+'&condition='+searchCond+'&pageName='+PName+'&tableName='+tbName;
+                console.log(_that.exportSrc);
+            },
+            showBatchImport(){
+                this.dialogBatchImport=true;
+            }
+        }
+    });
+</script>
+}

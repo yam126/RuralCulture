@@ -1,0 +1,348 @@
+﻿@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    ViewData.Add("Title", "乡村文化-文化动态");
+    string keyword = string.Empty;
+    string advancedField = string.Empty;
+    string advancedValue = string.Empty;
+    if (ViewData.Keys.Contains("keyword") && ViewData["keyword"] != null)
+        keyword = Convert.ToString(ViewData["keyword"]);
+    if (ViewData.Keys.Contains("advancedField") && ViewData["advancedField"] != null)
+        advancedField = Convert.ToString(ViewData["advancedField"]);
+    if (ViewData.Keys.Contains("advancedValue") && ViewData["advancedValue"] != null)
+        advancedValue = Convert.ToString(ViewData["advancedValue"]);
+}
+@section Head {
+<link rel="stylesheet" href="~/css/ArticleDynamics.css" />
+<script type="text/javascript">
+            $(document).ready(function(){
+                var top = $('#TopViewCount').offset().top;
+                console.log("top="+top);
+                //topViewCountFloat(top);
+                toolbarFixedId("home","TopViewCount");                
+                $(".ContentItem").each(function(index,element){
+                    $(element).mouseover(function(){
+                        ContentItemStyle(index);
+                    });
+                });
+            });
+            function ContentItemStyle(currentIndex){
+                $(".ContentItem").each(function(index,element){
+                    var MaxContentItem=$(element).children(".MaxContentItem");
+                    var NormalContentItem=$(element).children(".NormalContentItem");
+                    if(currentIndex==index){
+                        MaxContentItem.show();
+                        NormalContentItem.hide();
+                    }else{
+                        MaxContentItem.hide();
+                        NormalContentItem.show();
+                    }
+                });
+            }
+            function toolbarFixedId(scrollId,btnId) {
+                var $obj = $("#"+scrollId);
+                var height = $obj.offset().top;
+                var containerWidth=$obj.width();
+                var $btn = $("#"+btnId)
+                var width = $btn.innerWidth();
+                var height = $btn.innerHeight();
+                $obj.scroll(function () {
+                    topViewCountScroll(scrollId,btnId);
+                });
+            }
+            function topViewCountScroll(scrollId,btnId){
+                var $obj = $("#"+scrollId);
+                var height = $obj.offset().top;
+                var containerWidth=$obj.width();
+                var $btn = $("#"+btnId)
+                var width = $btn.innerWidth();
+                var height = $btn.innerHeight();
+                var left=containerWidth-width-32;                   
+                var scrollTop = $obj.scrollTop();
+                console.log("scrollTop="+scrollTop);
+                if (scrollTop < height) {
+                    $btn.css('position','');
+                } else {
+                    $btn.css({'position':'fixed',
+                              'width':width,
+                              'top':'9rem',
+                              'left':left+'px'
+                             });
+                }
+            }
+            function topViewCountFloat(top){
+                $(document).scroll(function(){
+                    var scrTop = $(window).scrollTop();
+                    if(scrTop >= top){
+                        $('#TopViewCount').css({
+                            'position':'fixed',
+                            'top':'0'
+                        });
+                    }else{
+                        $('#TopViewCount').css({
+                            'position':'',
+                            'top':''
+                        });
+                    }
+                });
+            }
+</script>
+}
+@section Body {
+<div id="home">
+    <div id="ArticleList">
+        <div class="ListContainer">
+            <div v-for="(item,index) in PageData" :key="index" class="ItemContainer">
+                <a :href="'/Article/ArticleView?ArticleId='+item.articleId">
+                    <img class="CoverImage" :src="item.coverUrl" />
+                </a>
+                <div class="InfoContainer">
+                    <img :style="item.backup01" class="Icon" src="~/images/TopTagIcon.png" />
+                    <div :class="item.backup02" :title="item.articleTitle">
+                        <a :href="'/Article/ArticleView?ArticleId='+item.articleId">{{item.articleTitle}}</a>
+                    </div>
+                    <div class="ItemInfo">
+                        作者:{{item.author}}&nbsp;&nbsp;文艺小组名称:{{item.groupName}}&nbsp;&nbsp;组织架构名:{{item.orgName}}<br />
+                        &nbsp;&nbsp;文章类型:{{item.articleType}}&nbsp;&nbsp;创建人:{{item.created}}&nbsp;&nbsp;创建时间:{{item.createdTime}}<br />
+                        &nbsp;&nbsp;修改人:{{item.modified}}&nbsp;&nbsp;修改时间:{{item.modifiedTime}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div @@click='loadingDataClick' class="btnLoad">
+            <i class="el-icon-caret-bottom"></i>加载更多<i class="el-icon-caret-bottom"></i>
+        </div>
+        <div class="btnLoading">
+            <div class="center">
+                <img class="Icon" src="~/images/loading01.gif" />加载中...
+            </div>
+        </div>
+        <div class="NoMore">
+            已经加载全部
+        </div>
+    </div>
+    <div id="TopViewCount">
+        <div class="Title">
+            热点排行
+        </div>
+        <div class="ContentList">
+            <div v-for="(item,index) in TopRank" :key="index" class="ContentItem">
+                <div class="MaxContentItem">
+                    <a :href="'/Article/ArticleView?ArticleId='+item.articleId">
+                        <img :src="item.coverUrl" class="ArticleImage" />
+                    </a>
+                    <div class="ArticleInfo">
+                        <div :title="item.articleTitle" class="ArticleTitle">
+                            <a :href="'/Article/ArticleView?ArticleId='+item.articleId">{{item.articleTitle}}</a>
+                        </div>
+                        <div class="ArticleAuthor">
+                            作者:{{item.author}}
+                        </div>
+                        <div class="ArticleType">
+                            文章类型:{{item.articleType}}
+                        </div>
+                        <div class="ArticleGroup">
+                            文艺小组名称:{{item.groupName}}
+                        </div>
+                        <div class="ArticleOrgName">
+                            组织架构名称:{{item.orgName}}
+                        </div>
+                        <div class="ArticleCreatedTime">
+                            发布时间:{{item.createdTime}}
+                        </div>
+                    </div>
+                </div>
+                <div :title="item.articleTitle" style="display:none" class="NormalContentItem">
+                    <span class="startTag">★</span>
+                    <a :href="'/Article/ArticleView?ArticleId='+item.articleId">{{item.articleTitle}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+@section VueScript {
+<script>
+    var home = new Vue({
+        el:"#home",
+        data:{
+            SqlWhere:'@keyword',
+            advancedField:'@advancedField',
+            advancedValue:'@advancedValue',
+            advancedWhere:'',
+            PageIndex:1,
+            PageSize:10,
+            PageData:[],
+            PageCount:0,
+            defaultCover:'/images/articleDefaultCover.jpg',
+            TopRank:[],
+            windowWidth: document.body.clientWidth,  //实时网页可视宽度
+            windowHeight: document.body.clientHeight   //实时网页可视高度
+        },
+        watch:{
+            windowHeight(val) {
+                var that = this;
+                console.log("实时屏幕高度:"+that.windowHeight);
+            },
+            windowWidth(val) {
+                var that = this;
+                console.log("实时屏幕宽度:"+that.windowWidth);
+            }
+        },
+        mounted:function(){
+            var _that = this;
+            _that.windowWidth=document.body.clientWidth;
+            _that.windowHeight=document.body.clientHeight;
+            _that.loadingPageData();
+            _that.queryArticleViewCountTopTen();
+            if(_that.SqlWhere!="")
+               $("#txtSearch").val(_that.SqlWhere);
+            searchCallBack=()=>{
+                _that.searhArticle();
+            };
+            window.onresize = () => {
+                return (() => {
+                    _that.windowWidth = document.body.clientWidth;
+                    _that.windowHeight = document.body.clientHeight;
+                    topViewCountScroll("home","TopViewCount");
+                })();
+            };
+        },
+        methods:{
+            searhArticle(){
+                var _that=this;
+                _that.SqlWhere=$("#txtSearch").val();
+                if(_that.SqlWhere=="")
+                   _that.SqlWhere="null";
+                _that.PageIndex=1;
+                _that.PageData=[];
+                _that.loadingPageData();
+            },
+            queryArticleViewCountTopTen(){
+                var _that=this;
+                apiHelper.queryArticleViewCountTopTen(function(response){
+                    if(response.data.status==0){
+                        var resultAry=response.data.result;
+                        for(var i=0;i<resultAry.length;i++)
+                        {
+                            switch(resultAry[i].articleType)
+                            {
+                                case '0':
+                                    resultAry[i].articleType='普通文章'
+                                break;
+                                case '1':
+                                    resultAry[i].articleType='图片文章'
+                                break;
+                                case '2':
+                                    resultAry[i].articleType='视频文章'
+                                break;
+                            }
+                            if(resultAry[i].coverUrl=='')
+                                resultAry[i].coverUrl=_that.defaultCover;
+                        }
+                        _that.TopRank=resultAry;
+                        _that.$nextTick(() => {
+                            ContentItemStyle(0);
+                        });
+                    }
+                });
+            },
+            loadingPageData(){
+                var _that=this;
+                var Ealt=new Eject();
+                $(".btnLoading").hide();
+                $(".btnLoad").show();
+                $(".NoMore").hide();
+                if(_that.advancedField!=''&&_that.advancedValue!='')
+                   _that.advancedWhere=_that.advancedField+'|'+_that.advancedValue;
+                apiHelper.queryAdvanceArticlePage(
+                    _that.SqlWhere,
+                    _that.advancedWhere,
+                    _that.PageIndex,
+                    _that.PageSize,
+                    function(){
+                        $(".btnLoading").show();
+                        $(".btnLoad").hide();
+                    },
+                    function(response){
+                        $(".btnLoading").hide();
+                        $(".btnLoad").show();
+                        if(response.data.status==0)
+                        {
+                            _that.PageCount=response.data.pageCount;
+                            var resultAry=response.data.result;
+                            console.log(resultAry);
+                            if(_that.PageIndex<_that.PageCount){
+                               for(var i=0;i<resultAry.length;i++)
+                               {
+                                   switch(resultAry[i].articleType)
+                                   {
+                                       case '0':
+                                          resultAry[i].articleType='普通文章'
+                                       break;
+                                       case '1':
+                                          resultAry[i].articleType='图片文章'
+                                       break;
+                                       case '2':
+                                          resultAry[i].articleType='视频文章'
+                                       break;
+                                   }
+                                   if(resultAry[i].coverUrl=='')
+                                      resultAry[i].coverUrl=_that.defaultCover;
+                                   if(resultAry[i].isTop=="否")
+                                   {
+                                      resultAry[i].backup01="display:none;";
+                                      resultAry[i].backup02="Title";
+                                   }
+                                   else if(resultAry[i].isTop=="是")
+                                   {
+                                      resultAry[i].backup01="";
+                                      resultAry[i].backup02="TitleTop";
+                                   }
+                                   else
+                                   {
+                                      resultAry[i].backup01="display:none;";
+                                      resultAry[i].backup02="Title";
+                                   }
+                                   _that.PageData.push(resultAry[i]);
+                               }
+                            }else if(_that.PageIndex==_that.PageCount){
+                                $(".btnLoading").hide();
+                                $(".btnLoad").hide();
+                                $(".NoMore").show();
+                                console.log("1");
+                            }else{
+                                if(_that.PageCount!=0){
+                                    $(".btnLoading").hide();
+                                    $(".btnLoad").hide();
+                                    $(".NoMore").show();
+                                    $(".NoMore").html("已经加载全部数据");
+                                }
+                                else{
+                                    $(".btnLoading").hide();
+                                    $(".btnLoad").hide();
+                                    $(".NoMore").show();
+                                    $(".NoMore").html("没有任何数据");
+                                }
+                            }
+                        }
+
+                    }
+                )
+            },
+            loadingDataClick(){
+                this.PageIndex+=1;
+                if(this.PageIndex<this.PageCount)
+                   this.loadingPageData();
+                else
+                {
+                   this.PageIndex=this.PageCount;
+                   $(".btnLoading").hide();
+                   $(".btnLoad").hide();
+                   $(".NoMore").show();
+                }
+            }
+        }
+    });
+</script>
+}

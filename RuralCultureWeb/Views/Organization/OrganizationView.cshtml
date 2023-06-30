@@ -1,0 +1,123 @@
+﻿@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    ViewData.Add("Title","乡村文化-组织架构");
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/OrganizationView.css" />
+    <link rel="stylesheet" href="~/lib/orgchart/css/jquery.orgchart.css" />
+    <script type="text/javascript" src="~/lib/orgchart/js/jquery.orgchart.js"></script>
+    <script type="text/javascript" src="~/js/apiHelper.js"></script>
+}
+@section Body {
+    <div id="home">
+        <div id="orgChartContainer"></div>
+    </div>
+    <div id="btnRefresh">
+        <i class="el-icon-refresh"></i>刷新页面
+    </div>
+}
+@section VueScript {
+    <script>
+        var loadMaxLevel=1;
+        var home = new Vue({
+            el:"#home",
+            data:{
+                windowWidth: document.body.clientWidth,  //实时网页可视宽度
+                windowHeight: document.body.clientHeight,   //实时网页可视高度
+                treeData:{
+                    'orgId':'0',
+                    'orgName':'组织架构',
+                    'fontColor':'',
+                    'relationship':'001',
+                    'children':[]
+                },
+                loadMaxLevel:loadMaxLevel,//读取树形目录的最高层数
+                ajaxOrgChartURLs:{
+                    'children':function(nodeData){
+                        var _that=this;
+                        console.log('loadMaxLevel='+loadMaxLevel);
+                        console.log('nodeData');
+                        console.log(nodeData);
+                        if (nodeData.fontColor != '') 
+                            $("#" + nodeData.orgId + " .content").css("color", nodeData.fontColor);
+                        return apiHelper.urlBase + "/organization/recurrence?OrgId=" + nodeData.orgId + "&level=" +loadMaxLevel;
+                    }
+                }
+            },
+            watch:{
+                windowHeight(val) {
+                    var that = this;
+                    console.log("实时屏幕高度:"+that.windowHeight);
+                },
+                windowWidth(val) {
+                    var that = this;
+                    console.log("实时屏幕宽度:"+that.windowWidth);
+                }
+            },
+            mounted:function(){
+                var _that = this;
+                _that.windowWidth=document.body.clientWidth;
+                _that.windowHeight=document.body.clientHeight;
+                _that.initOrgChart();
+                window.onresize = () => {
+                    return (() => {
+                        _that.windowWidth = document.body.clientWidth;
+                        _that.windowHeight = document.body.clientHeight;
+                    })();
+                };
+            },
+            methods:{
+                homeMouseDown(event){
+                    var top=event.offsetX;
+                    var left=event.offsetY;
+                    //$("#TreeNodePopMenu").css({'top':top+'px','left':left+'px'});
+                    //$("#TreeNodePopMenu").show();
+                },
+                popMenuRefreshTree(){
+                    console.log("刷新树形控件");
+                    this.orgChartControl.init({
+                        'data' : apiHelper.urlBase + "/organization/recurrence?OrgId=0&level=" +loadMaxLevel,
+                        'ajaxURL': this.ajaxOrgChartURLs,
+                        'toggleSiblingsResp':true,
+                        'direction':'l2r',                            
+                        'nodeContent': 'orgName',
+                        'nodeTitle':'orgName',
+                        'nodeId': 'orgId',
+                        'nodeTemplate': this.setNodeTemplate
+                    });
+                    //$("#TreeNodePopMenu").hide();
+                },
+                setNodeTemplate(data){
+                    var str = "";
+                    if(data.fontColor==""){
+                        str += '<div class="title">'+data.orgName+'</div>' ;
+                        str += '<div class="content">'+data.orgName+'</div>';
+                    }else{
+                        str += '<div class="title">'+data.orgName+'</div>' ;
+                        str += '<div class="content" style="color:'+data.fontColor+';">'+data.orgName+'</div>';
+                    }
+                    return str;
+                },
+                initOrgChart(){
+                    var _that=this;
+                    _that.$nextTick(()=>{
+                        _that.orgChartControl=$('#orgChartContainer').orgchart({
+                            'data' : apiHelper.urlBase + "/organization/recurrence?OrgId=0&level=" +loadMaxLevel,
+                            'ajaxURL': _that.ajaxOrgChartURLs,
+                            'toggleSiblingsResp':true,
+                            'direction':'l2r',                            
+                            'nodeContent': 'orgName',
+                            'nodeTitle':'orgName',
+                            'nodeId': 'orgId',
+                            'nodeTemplate': _that.setNodeTemplate
+                        });
+                        $("#btnRefresh").click(function(){
+                            _that.popMenuRefreshTree();
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+}

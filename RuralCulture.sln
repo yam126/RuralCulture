@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuralCultureWebApi", "RuralCultureWebApi\RuralCultureWebApi.csproj", "{8163992C-EF2F-4571-966D-3CFA632F1736}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RuralCultureDatabase", "RuralCultureDatabase\RuralCultureDatabase.sqlproj", "{C2025F78-9BE5-4109-896F-DB846BA5518D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{0951192E-4E0B-45EC-81AB-1DA6EF64037A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snowflake.Net", "Snowflake.Net\Snowflake.Net.csproj", "{BB21A8AC-2AA7-491E-A13F-8AC2D6D22601}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuralCultureDataAccess", "RuralCultureDataAccess\RuralCultureDataAccess.csproj", "{B89921D9-5CA8-4276-9BEB-2ACF4463FF0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{62DA9B5B-5114-48C4-BCCD-B22BD51DF22F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8163992C-EF2F-4571-966D-3CFA632F1736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8163992C-EF2F-4571-966D-3CFA632F1736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8163992C-EF2F-4571-966D-3CFA632F1736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8163992C-EF2F-4571-966D-3CFA632F1736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2025F78-9BE5-4109-896F-DB846BA5518D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0951192E-4E0B-45EC-81AB-1DA6EF64037A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0951192E-4E0B-45EC-81AB-1DA6EF64037A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0951192E-4E0B-45EC-81AB-1DA6EF64037A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0951192E-4E0B-45EC-81AB-1DA6EF64037A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB21A8AC-2AA7-491E-A13F-8AC2D6D22601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB21A8AC-2AA7-491E-A13F-8AC2D6D22601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB21A8AC-2AA7-491E-A13F-8AC2D6D22601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB21A8AC-2AA7-491E-A13F-8AC2D6D22601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B89921D9-5CA8-4276-9BEB-2ACF4463FF0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89921D9-5CA8-4276-9BEB-2ACF4463FF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89921D9-5CA8-4276-9BEB-2ACF4463FF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89921D9-5CA8-4276-9BEB-2ACF4463FF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62DA9B5B-5114-48C4-BCCD-B22BD51DF22F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62DA9B5B-5114-48C4-BCCD-B22BD51DF22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62DA9B5B-5114-48C4-BCCD-B22BD51DF22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62DA9B5B-5114-48C4-BCCD-B22BD51DF22F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CFAA8A5-7724-4394-A931-CEDA40FB1CFD}
+	EndGlobalSection
+EndGlobal

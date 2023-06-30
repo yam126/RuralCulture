@@ -1,0 +1,154 @@
+﻿@{
+    //引用的模板页地址
+    Layout = "~/Views/Shared/_FrontFrame.cshtml";
+    ViewData.Add("Title","乡村文化-特色文化");
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/Home.css" />
+    <link rel="stylesheet" href="~/css/SpecialCulture.css" />
+    <script type="text/javascript" src="~/js/ArticleParameter.js" ></script>
+    <script type="text/javascript" src="~/js/video.js"></script>
+    <script type="text/javascript" src="~/js/videojs-contrib-hls.js"></script>
+}
+@section Body {
+    <div id="home">
+        <div id="focusContainer">
+            <a v-if="specialArticle.ArticleType!='2'" :title="specialArticle.ArticleTitle" :href="'/Article/ArticleView?ArticleId='+specialArticle.ArticleId">
+                <img class="focusImage" :src="specialArticle.CoverUrl" />
+            </a>
+            <div v-if="specialArticle.ArticleType=='2'" id="videoContainer">
+                <video id="myPlayer" controls="controls" preload="auto" autoplay="autoplay" class="myPlayer video-js vjs-default-skin">
+                    <source :src="specialArticle.Content" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+        <div id="infoContainer">
+            <div class="focusArticleInfoContainer">
+                <div class="articleTitle">
+                    <a :title="specialArticle.ArticleTitle" :href="'/Article/ArticleView?ArticleId='+specialArticle.ArticleId">
+                        {{specialArticle.ArticleTitle}}
+                    </a>
+                </div>
+                <div class="articleTimeAndAuthor">
+                    <div class="articleTime">
+                        时间:{{specialArticle.ModifiedTime}}
+                    </div>
+                    <div class="articleAuthor">
+                        作者:{{specialArticle.Author}}
+                    </div>
+                </div>
+                <div v-if="specialArticle.ArticleType!='2'" class="articleContent">
+                    {{specialArticle.Content}}
+                </div>
+            </div>
+            <div class="keywordContainer">
+                <div class="leftContainer">
+                    <div class="titleContainer">
+                        <div class="title">乡村风俗</div>
+                        <div class="morelink">全部&gt;</div>
+                    </div>
+                    <div class="keywordListContainer">
+                        &nbsp;庙会&nbsp;&nbsp;舞龙&nbsp;&nbsp;舞狮<br/>
+                        &nbsp;填仓节&nbsp;&nbsp;篝火节&nbsp;&nbsp;民俗
+                    </div>
+                </div>
+                <div class="rightContainer">
+                    <div class="titleContainer">
+                        <div class="title">村民风采</div>
+                        <div class="morelink">全部&gt;</div>
+                    </div>
+                    <div class="keywordListContainer">
+                        &nbsp;五好家庭&nbsp;&nbsp;2022&nbsp;&nbsp;节目表演<br/>
+                        &nbsp;生在林雨&nbsp;&nbsp;红人&nbsp;&nbsp;喜事
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="articleRecommend">
+            <div class="Title">文章推荐</div>
+            <div class="articleList">
+                <div v-for="(item,index) in articleRecommend" :key="index" class="articleItem">
+                    <img v-if="item.articleType=='2'" class="playIcon" src="~/images/playIcon.png" />
+                    <a :href="'/Article/ArticleView?ArticleId='+item.articleId" >
+                        <img class="articleCover" src="~/images/articleDefaultCover.jpg" />
+                    </a>
+                    <div :title="item.articleTitle" class="linkPanel">
+                        <a :href="'/Article/ArticleView?ArticleId='+item.articleId" >
+                            {{item.articleTitle}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section VueScript {
+    <script>
+        var home = new Vue({
+            el:"#home",
+            data:{
+                videoUrl:'',
+                specialArticle:new ArticleParameter(),
+                articleRecommend:[],
+                windowWidth: document.body.clientWidth,  //实时网页可视宽度
+                windowHeight: document.body.clientHeight   //实时网页可视高度
+            },
+            watch:{
+                windowHeight(val) {
+                    var that = this;
+                    console.log("实时屏幕高度:"+that.windowHeight);
+                },
+                windowWidth(val) {
+                    var that = this;
+                    console.log("实时屏幕宽度:"+that.windowWidth);
+                }
+            },
+            mounted:function(){
+                var _that = this;
+                _that.windowWidth=document.body.clientWidth;
+                _that.windowHeight=document.body.clientHeight;
+                _that.loadingArticleRecommend();
+                _that.loadingSpecialArticle();
+                window.onresize = () => {
+                    return (() => {
+                        _that.windowWidth = document.body.clientWidth;
+                        _that.windowHeight = document.body.clientHeight;
+                    })();
+                };
+            },
+            methods:{
+                loadingArticleRecommend(){
+                    var _that=this;
+                    var topnum=5;
+                    apiHelper.QueryArticleCreatedTimeTop(
+                        topnum,
+                        function(response){
+                            if(response.data.status==0){
+                                var resultAry=response.data.result;
+                                _that.articleRecommend=resultAry;
+                            }   
+                        }
+                    );
+                },
+                loadingSpecialArticle(){
+                    var _that=this;
+                    apiHelper.QueryArticleIsSpecial(function(response){
+                        console.log("QueryArticleIsSpecial");
+                        console.log(response);
+                        if(response.data.status==0){
+                            var result=response.data.result[0];
+                            _that.specialArticle.ArticleId=result.articleId;
+                            _that.specialArticle.ArticleTitle=result.articleTitle;
+                            _that.specialArticle.Author=result.author;
+                            _that.specialArticle.Content=result.content;
+                            _that.specialArticle.ArticleType=result.articleType;
+                            _that.specialArticle.CoverUrl=result.coverUrl;
+                            _that.specialArticle.CreatedTime=result.createdTime;
+                            _that.specialArticle.ModifiedTime=result.modifiedTime;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+}
