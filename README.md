@@ -8,3 +8,4 @@ edit this file cropsTraceApi/appsettings.json change yours database connection s
 the project name cropsTrace is front project <br/>
 warning: you created database before must run DatabaseDeploymentScript-2023-6-30.sql is init database example data <br/>
 the home page preview <br/>
+<img src="https://github.com/yam126/RuralCulture/blob/main/homepage-2023-06-30.png?raw=true" />
